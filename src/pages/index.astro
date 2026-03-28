@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AffiliateButton from '../components/affiliate/AffiliateButton.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 6);
+
+const programs = (await getCollection('programs', ({ data }) => data.featured))
+  .slice(0, 3);
+---
+<BaseLayout
+  title="The AI Affiliate Flywheel"
+  description="Build a $3,000/month affiliate income with AI tools and OpenClaw automation. Content → Traffic → Revenue on autopilot."
+>
+  <!-- Hero -->
+  <section class="py-24 px-6 text-center max-w-4xl mx-auto">
+    <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-4 py-2 rounded-full mb-8 uppercase tracking-wider">
+      🌀 AI Affiliate Flywheel · MoltyFlywheel.com
+    </div>
+    <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
+      Turn AI Tools Into<br/>
+      <span class="text-amber-500">$3,000/mo Affiliate Income</span>
+    </h1>
+    <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+      OpenClaw runs 52 AI skills 24/7 — generating content, finding programs, and closing sales while you sleep.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <AffiliateButton program="claude" label="Start with Claude Pro →" size="lg" />
+      <a href="/free-guide" class="inline-flex items-center px-8 py-4 text-lg border border-gray-700 hover:border-gray-500 rounded-lg text-gray-300 hover:text-white transition-all">
+        Get Free Guide
+      </a>
+    </div>
+  </section>
+
+  <!-- KPI Strip -->
+  <section class="py-12 border-y border-gray-800 bg-gray-900/50">
+    <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {[
+        { n: '52', l: 'AI Skills' },
+        { n: '$71', l: 'Budget/Month' },
+        { n: '$3,810', l: 'Target ROI/Mo' },
+        { n: '5,267%', l: 'ROI Month 3' },
+      ].map(({ n, l }) => (
+        <div>
+          <div class="text-3xl font-black text-amber-500">{n}</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">{l}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Programs -->
+  {programs.length > 0 && (
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold mb-12 text-center">Top Affiliate Programs</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {programs.map(p => (
+          <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-gray-600 transition-colors">
+            <h3 class="text-lg font-bold mb-2">{p.data.name}</h3>
+            <p class="text-gray-400 text-sm mb-4">{p.data.description}</p>
+            <AffiliateButton program={p.id} label="View Program →" size="sm" />
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Latest Posts -->
+  {posts.length > 0 && (
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold mb-12">Latest from the Blog</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map(post => (
+          <a href={`/blog/${post.id}`} class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-amber-500/50 transition-all group">
+            <span class="text-xs text-amber-500 uppercase tracking-wider font-semibold">{post.data.category}</span>
+            <h3 class="text-lg font-semibold mt-2 mb-3 group-hover:text-amber-400 transition-colors">{post.data.title}</h3>
+            <p class="text-gray-400 text-sm">{post.data.description}</p>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/blog" class="text-amber-500 hover:text-amber-400 font-semibold">View all posts →</a>
+      </div>
+    </section>
+  )}
+</BaseLayout>

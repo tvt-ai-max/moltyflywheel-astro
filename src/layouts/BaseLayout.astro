@@ -1,0 +1,32 @@
+---
+import SEO from '../components/seo/SEO.astro';
+import Header from '../components/nav/Header.astro';
+import Footer from '../components/nav/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <SEO title={title} description={description} ogImage={ogImage} />
+  <!-- Plausible Analytics (self-hosted on Mac Mini) -->
+  <script defer data-domain="moltyflywheel.com" src="https://plausible.moltyflywheel.com/js/script.js"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans">
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

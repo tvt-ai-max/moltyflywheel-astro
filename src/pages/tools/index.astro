@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import skills from '../../data/skills.json';
+
+const categories = [...new Set(skills.map(s => s.category))];
+const categoryColors: Record<string, string> = {
+  blog: 'text-purple-400 bg-purple-500/10 border-purple-500/30',
+  research: 'text-blue-400 bg-blue-500/10 border-blue-500/30',
+  landing: 'text-amber-400 bg-amber-500/10 border-amber-500/30',
+  analytics: 'text-green-400 bg-green-500/10 border-green-500/30',
+  content: 'text-pink-400 bg-pink-500/10 border-pink-500/30',
+  distribution: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
+  automation: 'text-orange-400 bg-orange-500/10 border-orange-500/30',
+  meta: 'text-gray-400 bg-gray-500/10 border-gray-500/30',
+  openclaw: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
+};
+---
+<BaseLayout title="52 AI Skills — OpenClaw Toolkit" description="Explore all 52 OpenClaw AI skills for affiliate marketing automation. 73% run free on the Free Ride Engine.">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl font-black mb-4">52 AI Skills</h1>
+      <p class="text-gray-400 text-lg">The complete OpenClaw toolkit. 38 skills run free (73%).</p>
+      <div class="flex justify-center gap-6 mt-6 text-sm">
+        <span class="text-green-400">✓ 38 Free Skills</span>
+        <span class="text-amber-400">⚡ 14 Paid Skills</span>
+        <span class="text-gray-400">$50/mo cap</span>
+      </div>
+    </div>
+
+    {categories.map(cat => (
+      <div class="mb-12">
+        <h2 class="text-lg font-bold uppercase tracking-wider text-gray-500 mb-4 border-b border-gray-800 pb-2">{cat}</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skills.filter(s => s.category === cat).map(skill => (
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-gray-600 transition-colors" key={skill.id}>
+              <div class="flex items-start justify-between mb-2">
+                <span class={`text-xs font-bold px-2 py-1 rounded border ${categoryColors[cat] || 'text-gray-400 bg-gray-800 border-gray-700'}`}>
+                  {skill.tier}
+                </span>
+                <span class={`text-xs font-semibold ${skill.cost === 'free' ? 'text-green-400' : 'text-amber-400'}`}>
+                  {skill.cost === 'free' ? 'FREE' : 'PAID'}
+                </span>
+              </div>
+              <h3 class="font-semibold mt-3 mb-1">{skill.name}</h3>
+              <p class="text-gray-400 text-sm">{skill.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import OfferLayout from '../../layouts/OfferLayout.astro';
+import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
+
+export async function getStaticPaths() {
+  const offers = await getCollection('offers', ({ data }) => !data.draft);
+  return offers.map(offer => ({ params: { offer: offer.id }, props: { offer } }));
+}
+
+const { offer } = Astro.props;
+---
+<OfferLayout title={offer.data.title} description={offer.data.headline}>
+  <section class="min-h-screen py-24 px-6 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+    <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-600 text-sm font-bold px-4 py-2 rounded-full mb-8 uppercase tracking-wider">
+      Limited Time Bonus Included
+    </div>
+    <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+      {offer.data.headline}
+    </h1>
+    <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+      Unlock the power of {offer.data.targetProgram} with MoltyFlywheel's exclusive AI content automation strategy.
+    </p>
+    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8 mb-12 w-full max-w-lg">
+      <h3 class="text-lg font-bold mb-4">What's Inside:</h3>
+      <ul class="text-left space-y-3 mb-8 text-gray-700">
+        <li class="flex items-start gap-2">
+          <span class="text-green-500 font-bold">✓</span>
+          Complete Setup Blueprint
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-green-500 font-bold">✓</span>
+          Custom Content Automation Workflows
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-green-500 font-bold">✓</span>
+          1-Click SEO Audit Tool
+        </li>
+      </ul>
+      <AffiliateButton program={offer.data.targetProgram} label={offer.data.cta} size="lg" />
+    </div>
+    <p class="text-xs text-gray-400 italic">
+      This offer is delivered automatically after signup via the link above.
+    </p>
+  </section>
+</OfferLayout>

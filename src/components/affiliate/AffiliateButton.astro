@@ -1,0 +1,25 @@
+---
+interface Props {
+  program: string;
+  label?: string;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'outline';
+}
+const { program, label = 'Get Started →', size = 'md', variant = 'primary' } = Astro.props;
+const href = `https://go.moltyflywheel.com/${program}`;
+---
+<a
+  href={href}
+  class:list={[
+    'inline-flex items-center font-semibold rounded-lg transition-all duration-200',
+    size === 'lg' && 'px-8 py-4 text-lg',
+    size === 'md' && 'px-6 py-3 text-base',
+    size === 'sm' && 'px-4 py-2 text-sm',
+    variant === 'primary' && 'bg-amber-500 hover:bg-amber-600 text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5',
+    variant === 'outline' && 'border-2 border-amber-500 text-amber-500 hover:bg-amber-50',
+  ]}
+  rel="nofollow sponsored"
+  target="_blank"
+>
+  {label}
+</a>

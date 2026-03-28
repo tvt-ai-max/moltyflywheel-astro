@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
+
+const programs = await getCollection('programs');
+---
+<BaseLayout title="Affiliate Programs" description="The best AI and marketing tools with affiliate programs reviewed.">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-black mb-8">Affiliate Programs</h1>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {programs.map(p => (
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-gray-600 transition-colors">
+          <h3 class="text-lg font-bold mb-2">{p.data.name}</h3>
+          <p class="text-gray-400 text-sm mb-4">{p.data.description}</p>
+          <div class="flex items-center gap-4">
+            <a href={`/programs/${p.id}`} class="text-amber-500 hover:underline text-sm font-semibold">Read Review</a>
+            <AffiliateButton program={p.id} label="Visit Site" size="sm" />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

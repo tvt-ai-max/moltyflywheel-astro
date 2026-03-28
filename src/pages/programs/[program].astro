@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
+
+export async function getStaticPaths() {
+  const programs = await getCollection('programs');
+  return programs.map(p => ({ params: { program: p.id }, props: { program: p } }));
+}
+
+const { program } = Astro.props;
+const { Content } = await render(program);
+---
+<BaseLayout title={program.data.name} description={program.data.description}>
+  <div class="max-w-4xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-black mb-4">{program.data.name}</h1>
+    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 mb-12 flex flex-col md:flex-row gap-8 items-center">
+      <div class="flex-1">
+        <p class="text-xl text-gray-300 mb-6">{program.data.description}</p>
+        <div class="grid grid-cols-2 gap-4 text-sm mb-8">
+          <div>
+            <span class="text-gray-500 uppercase">Commission:</span>
+            <div class="font-bold text-amber-500">{program.data.commission.rate}</div>
+          </div>
+          <div>
+            <span class="text-gray-500 uppercase">Cookie:</span>
+            <div class="font-bold text-amber-500">{program.data.commission.cookieDuration}</div>
+          </div>
+        </div>
+        <AffiliateButton program={program.id} label={`Try ${program.data.name} Now →`} size="lg" />
+      </div>
+    </div>
+    <div class="prose prose-invert prose-amber max-w-none">
+      <Content />
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
+
+export async function getStaticPaths() {
+  const niches = await getCollection('niches');
+  return niches.map(niche => ({ params: { niche: niche.id }, props: { niche } }));
+}
+
+const { niche } = Astro.props;
+const { Content } = await render(niche);
+---
+
+<BaseLayout title={niche.data.title} description={niche.data.description}>
+  <div class="max-w-4xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-black mb-4">{niche.data.title}</h1>
+    <p class="text-xl text-gray-400 mb-12">{niche.data.description}</p>
+    
+    <div class="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-6 mb-12">
+      <h3 class="text-sm font-bold text-amber-500 uppercase tracking-wider mb-3">Target Keywords</h3>
+      <div class="flex flex-wrap gap-2">
+        {niche.data.keywords.map(kw => (
+          <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded">{kw}</span>
+        ))}
+      </div>
+    </div>
+
+    <div class="prose prose-invert prose-amber max-w-none mb-16">
+      <Content />
+    </div>
+
+    <h2 class="text-2xl font-bold mb-6">Top Tools for {niche.data.title}</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      {niche.data.programs.map(pSlug => (
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+          <h4 class="font-bold mb-4">{pSlug}</h4>
+          <AffiliateButton program={pSlug} label="Learn More →" size="sm" />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
