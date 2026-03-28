@@ -1,1 +1,61 @@
 @import "tailwindcss";
+
+/* ============================================
+   MOLTYFLYWHEEL BRAND SYSTEM — Cloud Tech Blue
+   Based on brand guideline v1.0
+   ============================================ */
+
+@theme {
+  /* ─── Core Brand Colors ─── */
+  --color-brand-navy:   #011826;  /* Deep Core Navy    — hero/footer/authority */
+  --color-brand-blue:   #0B3B59;  /* Infrastructure Blue — cards/panels/secondary bg */
+  --color-brand-primary: #2173A6; /* Digital Signal Blue — CTA/links/active */
+  --color-brand-support: #5EA4BF; /* Cloud Interface Blue — hover/info/secondary */
+  --color-brand-accent:  #72DBF2; /* Tech Cyan Accent  — badges/highlights/icons */
+
+  /* ─── Override gray → Brand Dark System ─── */
+  --color-gray-950: #011826;  /* Deep Core Navy  → main background        */
+  --color-gray-900: #0B3B59;  /* Infrastructure Blue → card/panel bg       */
+  --color-gray-800: #0d2d40;  /* Border color (between navy and infra blue) */
+  --color-gray-700: #1a4560;  /* Subtle dividers                            */
+  --color-gray-600: #265c7a;  /* Muted UI elements                          */
+  --color-gray-500: #3d7a96;  /* Placeholder / disabled text                */
+  --color-gray-400: #5ea4bf;  /* Secondary text (Cloud Interface Blue)      */
+  --color-gray-300: #89c0d4;  /* Tertiary text                              */
+  --color-gray-200: #b8d9e8;  /* Very subtle text                           */
+  --color-gray-100: #daeef5;  /* Near-white (slight blue tint)              */
+  --color-gray-50:  #f0f8fc;  /* Off-white background for light sections    */
+
+  /* ─── Override amber → Brand Blue Accent System ─── */
+  /* NOTE: amber-500 = Tech Cyan for text highlights/badges/icons on dark bg */
+  /* Primary CTA buttons use explicit bg-[#2173A6] in components             */
+  --color-amber-50:  #e8f4fb;  /* Very light blue tint (hover bg on light)  */
+  --color-amber-100: #c5dfee;
+  --color-amber-200: #9dc8e2;
+  --color-amber-300: #72afd4;
+  --color-amber-400: #5EA4BF;  /* Cloud Interface Blue — secondary/hover     */
+  --color-amber-500: #72DBF2;  /* Tech Cyan Accent — text highlights/badges */
+  --color-amber-600: #2173A6;  /* Digital Signal Blue — interactive/deep    */
+  --color-amber-700: #1a5d8c;
+  --color-amber-800: #134873;
+  --color-amber-900: #0d3559;
+}
+
+/* ─── Brand Gradient Utilities ─── */
+.bg-brand-gradient-01 {
+  background: linear-gradient(135deg, #011826 0%, #0B3B59 45%, #2173A6 100%);
+}
+
+.bg-brand-gradient-02 {
+  background: linear-gradient(135deg, #0B3B59 0%, #2173A6 55%, #5EA4BF 100%);
+}
+
+.bg-brand-gradient-03 {
+  background: linear-gradient(135deg, #2173A6 0%, #5EA4BF 60%, #72DBF2 100%);
+}
+
+/* ─── Prose overrides for dark theme ─── */
+.prose-amber {
+  --tw-prose-links: #72DBF2;
+  --tw-prose-headings: #f0f8fc;
+}
