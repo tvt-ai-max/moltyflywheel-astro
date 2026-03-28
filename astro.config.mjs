@@ -1,13 +1,15 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import tailwindv4 from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://moltyflywheel.com',
   output: 'static',
+  vite: {
+    plugins: [tailwindv4()],
+  },
   integrations: [
-    tailwind(),
     sitemap({
       filter: (page) => !page.includes('/newsletter') && !page.includes('/privacy'),
       changefreq: 'weekly',
