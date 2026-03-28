@@ -1,0 +1,501 @@
+{
+  "meta": {
+    "project": "MoltyFlywheel.com",
+    "phase": "Phase 2 — Content Engine",
+    "updated": "2026-03-28",
+    "target_monthly_posts": 30,
+    "target_roi": "$3,810/month",
+    "primary_affiliate_stack": ["claude-pro", "koala-writer", "surfer-seo", "convertkit", "semrush"]
+  },
+
+  "clusters": [
+    {
+      "id": "ai-affiliate-marketing",
+      "name": "AI Affiliate Marketing",
+      "priority": 1,
+      "niche_page": "/niche/affiliate-marketing-automation",
+      "programs": ["claude-pro", "koala-writer", "convertkit"],
+      "keywords": [
+        {
+          "keyword": "ai affiliate marketing tools 2026",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 3.20,
+          "target_url": "/blog/ai-affiliate-marketing-tools-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "how to automate affiliate marketing with ai",
+          "intent": "informational",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 2.10,
+          "target_url": "/blog/automate-affiliate-marketing-ai",
+          "status": "queue"
+        },
+        {
+          "keyword": "best ai tools for affiliate marketers",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 4.50,
+          "target_url": "/blog/best-ai-tools-affiliate-marketers",
+          "status": "queue"
+        },
+        {
+          "keyword": "ai content strategy affiliate marketing",
+          "intent": "informational",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 1.80,
+          "target_url": "/blog/ai-content-strategy-affiliate-marketing",
+          "status": "queue"
+        },
+        {
+          "keyword": "passive income with ai tools 2026",
+          "intent": "informational",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 2.90,
+          "target_url": "/blog/passive-income-ai-tools-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "affiliate marketing flywheel strategy",
+          "intent": "informational",
+          "volume": "low",
+          "difficulty": "low",
+          "cpc_usd": 1.20,
+          "target_url": "/blog/affiliate-marketing-flywheel-strategy",
+          "status": "queue"
+        }
+      ]
+    },
+
+    {
+      "id": "ai-writing-tools",
+      "name": "AI Writing Tools — Reviews & Comparisons",
+      "priority": 1,
+      "niche_page": "/niche/ai-productivity-tools",
+      "programs": ["koala-writer", "jasper-ai", "copy-ai", "writesonic"],
+      "keywords": [
+        {
+          "keyword": "koala writer review 2026",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 3.80,
+          "target_url": "/blog/koala-writer-review-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "koala writer vs jasper ai",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "medium",
+          "cpc_usd": 5.20,
+          "target_url": "/blog/koala-writer-vs-jasper-ai",
+          "status": "queue"
+        },
+        {
+          "keyword": "best ai writing tool for affiliate blogs",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 4.10,
+          "target_url": "/blog/best-ai-writing-tool-affiliate-blogs",
+          "status": "queue"
+        },
+        {
+          "keyword": "copy.ai review honest 2026",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 3.50,
+          "target_url": "/blog/copy-ai-review-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "writesonic review affiliate marketing",
+          "intent": "commercial",
+          "volume": "low",
+          "difficulty": "low",
+          "cpc_usd": 2.80,
+          "target_url": "/blog/writesonic-review-affiliate-marketing",
+          "status": "queue"
+        },
+        {
+          "keyword": "jasper ai vs claude for content creation",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "medium",
+          "cpc_usd": 4.80,
+          "target_url": "/blog/jasper-ai-vs-claude-content-creation",
+          "status": "queue"
+        },
+        {
+          "keyword": "ai writing tools with affiliate programs",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 3.20,
+          "target_url": "/blog/ai-writing-tools-affiliate-programs",
+          "status": "queue"
+        }
+      ]
+    },
+
+    {
+      "id": "seo-content-tools",
+      "name": "SEO & Content Optimization Tools",
+      "priority": 2,
+      "niche_page": "/niche/seo-content-ai",
+      "programs": ["surfer-seo", "semrush", "frase-io"],
+      "keywords": [
+        {
+          "keyword": "surfer seo review 2026",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 6.50,
+          "target_url": "/blog/surfer-seo-review-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "surfer seo vs frase io comparison",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "medium",
+          "cpc_usd": 5.80,
+          "target_url": "/blog/surfer-seo-vs-frase-io",
+          "status": "queue"
+        },
+        {
+          "keyword": "semrush affiliate program review",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 4.20,
+          "target_url": "/blog/semrush-affiliate-program-review",
+          "status": "queue"
+        },
+        {
+          "keyword": "frase io review content optimization",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 3.90,
+          "target_url": "/blog/frase-io-review-content-optimization",
+          "status": "queue"
+        },
+        {
+          "keyword": "best seo tool for bloggers 2026",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "high",
+          "cpc_usd": 7.20,
+          "target_url": "/blog/best-seo-tool-bloggers-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "how to rank ai content in 2026",
+          "intent": "informational",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 2.10,
+          "target_url": "/blog/rank-ai-content-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "ai seo content workflow step by step",
+          "intent": "informational",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 1.90,
+          "target_url": "/blog/ai-seo-content-workflow",
+          "status": "queue"
+        }
+      ]
+    },
+
+    {
+      "id": "email-marketing-ai",
+      "name": "Email Marketing with AI",
+      "priority": 2,
+      "niche_page": "/niche/email-marketing-ai",
+      "programs": ["convertkit", "notion-ai"],
+      "keywords": [
+        {
+          "keyword": "convertkit review 2026 affiliate marketing",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 4.10,
+          "target_url": "/blog/convertkit-review-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "how to build email list with ai",
+          "intent": "informational",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 2.30,
+          "target_url": "/blog/build-email-list-ai",
+          "status": "queue"
+        },
+        {
+          "keyword": "best email platform for affiliate marketers",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "medium",
+          "cpc_usd": 5.80,
+          "target_url": "/blog/best-email-platform-affiliate-marketers",
+          "status": "queue"
+        },
+        {
+          "keyword": "convertkit vs mailchimp for creators",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 4.90,
+          "target_url": "/blog/convertkit-vs-mailchimp-creators",
+          "status": "queue"
+        },
+        {
+          "keyword": "ai email sequences affiliate marketing",
+          "intent": "informational",
+          "volume": "low",
+          "difficulty": "low",
+          "cpc_usd": 1.70,
+          "target_url": "/blog/ai-email-sequences-affiliate-marketing",
+          "status": "queue"
+        }
+      ]
+    },
+
+    {
+      "id": "claude-ai-productivity",
+      "name": "Claude AI — Use Cases & Comparisons",
+      "priority": 1,
+      "niche_page": "/niche/ai-productivity-tools",
+      "programs": ["claude-pro"],
+      "keywords": [
+        {
+          "keyword": "claude pro review 2026",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 5.10,
+          "target_url": "/blog/claude-pro-review-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "claude ai for affiliate marketing",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 3.40,
+          "target_url": "/blog/claude-ai-affiliate-marketing",
+          "status": "queue"
+        },
+        {
+          "keyword": "claude vs gpt-4o which is better for content",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 4.20,
+          "target_url": "/blog/claude-vs-gpt4o-content-creation",
+          "status": "queue"
+        },
+        {
+          "keyword": "is claude pro worth it 2026",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 3.80,
+          "target_url": "/blog/is-claude-pro-worth-it-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "claude ai writing prompts for bloggers",
+          "intent": "informational",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 1.50,
+          "target_url": "/blog/claude-ai-writing-prompts-bloggers",
+          "status": "queue"
+        }
+      ]
+    },
+
+    {
+      "id": "saas-affiliate-programs",
+      "name": "SaaS Affiliate Programs — High Commission",
+      "priority": 2,
+      "niche_page": "/niche/saas-review-sites",
+      "programs": ["copy-ai", "koala-writer", "surfer-seo", "convertkit"],
+      "keywords": [
+        {
+          "keyword": "highest paying ai affiliate programs 2026",
+          "intent": "commercial",
+          "volume": "high",
+          "difficulty": "medium",
+          "cpc_usd": 5.50,
+          "target_url": "/blog/highest-paying-ai-affiliate-programs-2026",
+          "status": "queue"
+        },
+        {
+          "keyword": "recurring commission affiliate programs saas",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "medium",
+          "cpc_usd": 4.80,
+          "target_url": "/blog/recurring-commission-affiliate-programs-saas",
+          "status": "queue"
+        },
+        {
+          "keyword": "how to make $3000 per month affiliate marketing",
+          "intent": "informational",
+          "volume": "high",
+          "difficulty": "high",
+          "cpc_usd": 2.60,
+          "target_url": "/blog/make-3000-per-month-affiliate-marketing",
+          "status": "queue"
+        },
+        {
+          "keyword": "copy ai affiliate program review",
+          "intent": "commercial",
+          "volume": "medium",
+          "difficulty": "low",
+          "cpc_usd": 3.70,
+          "target_url": "/blog/copy-ai-affiliate-program-review",
+          "status": "queue"
+        },
+        {
+          "keyword": "notion ai affiliate program worth it",
+          "intent": "commercial",
+          "volume": "low",
+          "difficulty": "low",
+          "cpc_usd": 2.90,
+          "target_url": "/blog/notion-ai-affiliate-program",
+          "status": "queue"
+        },
+        {
+          "keyword": "saas affiliate marketing beginner guide 2026",
+          "intent": "informational",
+          "volume": "medium",
+          "difficulty": "medium",
+          "cpc_usd": 2.20,
+          "target_url": "/blog/saas-affiliate-marketing-beginner-guide-2026",
+          "status": "queue"
+        }
+      ]
+    },
+
+    {
+      "id": "openclaw-system",
+      "name": "OpenClaw AI System — Brand Keywords",
+      "priority": 3,
+      "niche_page": "/niche/affiliate-marketing-automation",
+      "programs": ["claude-pro", "koala-writer"],
+      "keywords": [
+        {
+          "keyword": "openclaw affiliate marketing system review",
+          "intent": "navigational",
+          "volume": "low",
+          "difficulty": "low",
+          "cpc_usd": 1.00,
+          "target_url": "/blog/openclaw-review",
+          "status": "queue"
+        },
+        {
+          "keyword": "how openclaw automates blog writing",
+          "intent": "informational",
+          "volume": "low",
+          "difficulty": "low",
+          "cpc_usd": 0.80,
+          "target_url": "/blog/how-openclaw-generates-1-blog-post-per-day",
+          "status": "published",
+          "published_url": "/blog/how-openclaw-generates-1-blog-post-per-day"
+        },
+        {
+          "keyword": "moltyflywheel affiliate system explained",
+          "intent": "navigational",
+          "volume": "low",
+          "difficulty": "low",
+          "cpc_usd": 0.90,
+          "target_url": "/blog/moltyflywheel-system-explained",
+          "status": "queue"
+        }
+      ]
+    }
+  ],
+
+  "published": [
+    {
+      "slug": "getting-started-with-ai-affiliate-marketing",
+      "cluster": "ai-affiliate-marketing",
+      "published_date": "2026-03-01",
+      "programs": ["claude-pro", "koala-writer"]
+    },
+    {
+      "slug": "how-openclaw-generates-1-blog-post-per-day",
+      "cluster": "openclaw-system",
+      "published_date": "2026-03-10",
+      "programs": ["koala-writer", "claude-pro"]
+    },
+    {
+      "slug": "best-recurring-affiliate-programs-ai-tools-2026",
+      "cluster": "saas-affiliate-programs",
+      "published_date": "2026-03-15",
+      "programs": ["koala-writer", "convertkit", "surfer-seo", "copy-ai"]
+    },
+    {
+      "slug": "71-dollar-ai-affiliate-system-breakdown",
+      "cluster": "ai-affiliate-marketing",
+      "published_date": "2026-03-18",
+      "programs": ["claude-pro", "koala-writer", "surfer-seo"]
+    },
+    {
+      "slug": "grand-slam-offer-affiliate-marketing-guide",
+      "cluster": "saas-affiliate-programs",
+      "published_date": "2026-03-22",
+      "programs": ["claude-pro", "koala-writer", "convertkit"]
+    },
+    {
+      "slug": "claude-pro-vs-chatgpt-plus-affiliate-marketing",
+      "cluster": "claude-ai-productivity",
+      "published_date": "2026-03-25",
+      "programs": ["claude-pro"]
+    }
+  ],
+
+  "next_batch": [
+    "koala-writer-review-2026",
+    "surfer-seo-review-2026",
+    "best-ai-writing-tool-affiliate-blogs",
+    "convertkit-review-2026",
+    "highest-paying-ai-affiliate-programs-2026",
+    "how-to-rank-ai-content-2026"
+  ],
+
+  "production_rules": {
+    "posts_per_week": 5,
+    "min_word_count": 1500,
+    "max_word_count": 2500,
+    "required_sections": [
+      "hook_paragraph",
+      "toc",
+      "main_body_h2s",
+      "affiliate_cta_box",
+      "pros_cons_table",
+      "faq_schema",
+      "bottom_cta"
+    ],
+    "affiliate_disclosure": true,
+    "internal_links_min": 3,
+    "programs_per_post_max": 3,
+    "image_required": true
+  }
+}
