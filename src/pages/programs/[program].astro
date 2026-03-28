@@ -10,28 +10,70 @@ export async function getStaticPaths() {
 
 const { program } = Astro.props;
 const { Content } = await render(program);
+
+const stars = '★'.repeat(program.data.rating) + '☆'.repeat(5 - program.data.rating);
 ---
-<BaseLayout title={program.data.name} description={program.data.description}>
-  <div class="max-w-4xl mx-auto px-6 py-16">
-    <h1 class="text-4xl font-black mb-4">{program.data.name}</h1>
-    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 mb-12 flex flex-col md:flex-row gap-8 items-center">
-      <div class="flex-1">
-        <p class="text-xl text-gray-300 mb-6">{program.data.description}</p>
-        <div class="grid grid-cols-2 gap-4 text-sm mb-8">
-          <div>
-            <span class="text-gray-500 uppercase">Commission:</span>
-            <div class="font-bold text-amber-500">{program.data.commission.rate}</div>
-          </div>
-          <div>
-            <span class="text-gray-500 uppercase">Cookie:</span>
-            <div class="font-bold text-amber-500">{program.data.commission.cookieDuration}</div>
-          </div>
+<BaseLayout
+  title={`${program.data.name} Affiliate Program Review — MoltyFlywheel`}
+  description={program.data.description}
+>
+  <div class="max-w-3xl mx-auto px-6 py-16">
+
+    <!-- Header -->
+    <div class="mb-8">
+      <span class="text-xs text-amber-500 uppercase tracking-wider font-semibold bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
+        {program.data.category}
+      </span>
+      <h1 class="text-4xl font-black mt-4 mb-3">{program.data.name} Affiliate Program</h1>
+      <p class="text-gray-400 text-lg leading-relaxed">{program.data.description}</p>
+    </div>
+
+    <!-- Rating -->
+    <div class="flex items-center gap-3 mb-8">
+      <span class="text-amber-500 text-2xl tracking-wider">{stars}</span>
+      <span class="text-gray-400 text-sm">{program.data.rating}/5 — MoltyFlywheel Rating</span>
+    </div>
+
+    <!-- Commission Box -->
+    <div class="bg-gray-900 border border-amber-500/30 rounded-2xl p-6 mb-10">
+      <h2 class="text-sm font-bold text-amber-500 uppercase tracking-wider mb-5">💰 Commission Details</h2>
+      <div class="grid grid-cols-3 gap-4 text-center mb-6">
+        <div>
+          <div class="text-2xl font-black text-white">{program.data.commission?.rate || 'N/A'}</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Commission Rate</div>
         </div>
-        <AffiliateButton program={program.id} label={`Try ${program.data.name} Now →`} size="lg" />
+        <div>
+          <div class="text-2xl font-black text-white">{program.data.commission?.cookieDuration || 'N/A'}</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Cookie Duration</div>
+        </div>
+        <div>
+          <div class="text-2xl font-black text-white capitalize">{program.data.commission?.type || 'N/A'}</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Payout Type</div>
+        </div>
+      </div>
+      <div class="text-center">
+        <AffiliateButton program={program.id} label={`Join ${program.data.name} Affiliate →`} size="lg" />
       </div>
     </div>
+
+    <!-- Full Review Content -->
     <div class="prose prose-invert prose-amber max-w-none">
       <Content />
     </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-14 p-8 bg-gray-900 border border-gray-800 rounded-2xl text-center">
+      <h3 class="text-2xl font-bold mb-2">Ready to Start Earning?</h3>
+      <p class="text-gray-400 mb-6">
+        Earn {program.data.commission?.rate} commissions promoting {program.data.name}
+      </p>
+      <AffiliateButton program={program.id} label={`Get Started with ${program.data.name} →`} size="lg" />
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-8 text-center">
+      <a href="/programs" class="text-gray-500 hover:text-gray-400 text-sm">← View all affiliate programs</a>
+    </div>
+
   </div>
 </BaseLayout>

@@ -9,80 +9,264 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
 const programs = (await getCollection('programs', ({ data }) => data.featured))
   .slice(0, 3);
+
+const niches = [
+  { icon: '🤖', title: 'Claude AI Tools', slug: 'claude-ai-tools', desc: 'Best Claude Pro use cases for affiliate marketers' },
+  { icon: '🔄', title: 'Affiliate Automation', slug: 'affiliate-marketing-automation', desc: 'Automate your full affiliate funnel with AI' },
+  { icon: '📝', title: 'AI SEO & Content', slug: 'seo-content-ai', desc: 'AI tools that dominate search rankings' },
+  { icon: '📧', title: 'Email Marketing AI', slug: 'email-marketing-ai', desc: 'Automated sequences that convert subscribers' },
+  { icon: '📦', title: 'SaaS Review Sites', slug: 'saas-review-sites', desc: 'Build profitable software review blogs with AI' },
+  { icon: '⚡', title: 'AI Productivity', slug: 'ai-productivity-tools', desc: 'Tools that 10x your output without extra cost' },
+];
+
+const featuredSkills = [
+  { icon: '✍️', name: 'Affiliate Blog Builder', desc: 'Writes 1,500-word SEO blog posts with affiliate links embedded. Runs daily at 9am automatically.', tier: 'S3', cost: 'FREE' },
+  { icon: '🎯', name: 'Grand Slam Offer', desc: 'Builds high-converting landing pages with bonus stacks, risk reversals, and strong CTAs per program.', tier: 'S4', cost: 'PAID' },
+  { icon: '🔄', name: 'Self Improver', desc: 'Reads weekly KPI data and rewrites underperforming skill prompts. Your system gets smarter weekly.', tier: 'S8', cost: 'PAID' },
+];
 ---
 <BaseLayout
-  title="The AI Affiliate Flywheel"
-  description="Build a $3,000/month affiliate income with AI tools and OpenClaw automation. Content → Traffic → Revenue on autopilot."
+  title="MoltyFlywheel — Build a $3,000/mo AI Affiliate System"
+  description="52 AI skills running 24/7. Content, programs, landing pages, email sequences — automated with OpenClaw for just $71/month."
 >
-  <!-- Hero -->
+  <!-- 1. HERO -->
   <section class="py-24 px-6 text-center max-w-4xl mx-auto">
     <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-4 py-2 rounded-full mb-8 uppercase tracking-wider">
-      🌀 AI Affiliate Flywheel · MoltyFlywheel.com
+      🌀 AI Affiliate Flywheel · Powered by OpenClaw
     </div>
-    <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
-      Turn AI Tools Into<br/>
-      <span class="text-amber-500">$3,000/mo Affiliate Income</span>
+    <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+      Build a $3,000/mo<br/>
+      <span class="text-amber-500">Affiliate Income</span><br/>
+      With 52 AI Skills
     </h1>
-    <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-      OpenClaw runs 52 AI skills 24/7 — generating content, finding programs, and closing sales while you sleep.
+    <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+      MoltyFlywheel automates the entire affiliate marketing flywheel —
+      content creation, program research, landing pages, and email sequences.
+      All for <strong class="text-white">$71/month</strong>. No team required.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <AffiliateButton program="claude" label="Start with Claude Pro →" size="lg" />
-      <a href="/free-guide" class="inline-flex items-center px-8 py-4 text-lg border border-gray-700 hover:border-gray-500 rounded-lg text-gray-300 hover:text-white transition-all">
-        Get Free Guide
+      <a href="/free-guide" class="inline-flex items-center px-8 py-4 text-lg bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-lg transition-all">
+        Get the Free Flywheel Guide →
+      </a>
+      <a href="/tools" class="inline-flex items-center px-8 py-4 text-lg border border-gray-700 hover:border-gray-500 rounded-lg text-gray-300 hover:text-white transition-all">
+        Explore 52 AI Skills
       </a>
     </div>
   </section>
 
-  <!-- KPI Strip -->
-  <section class="py-12 border-y border-gray-800 bg-gray-900/50">
+  <!-- 2. SOCIAL PROOF STRIP -->
+  <div class="py-4 bg-gray-900/80 border-y border-gray-800 text-center">
+    <p class="text-gray-500 text-sm">
+      Trusted by affiliate marketers in 🇻🇳 🇺🇸 🇬🇧 🇦🇺 🇸🇬 &nbsp;·&nbsp;
+      Built on <span class="text-amber-400 font-semibold">Claude AI</span> &nbsp;·&nbsp;
+      Powered by <span class="text-amber-400 font-semibold">OpenClaw</span> &nbsp;·&nbsp;
+      Deployed on <span class="text-amber-400 font-semibold">Cloudflare</span>
+    </p>
+  </div>
+
+  <!-- 3. KPI STATS -->
+  <section class="py-16 border-b border-gray-800 bg-gray-900/30">
     <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
       {[
-        { n: '52', l: 'AI Skills' },
-        { n: '$71', l: 'Budget/Month' },
-        { n: '$3,810', l: 'Target ROI/Mo' },
-        { n: '5,267%', l: 'ROI Month 3' },
+        { n: '52', l: 'AI Skills Running' },
+        { n: '$71/mo', l: 'Total Cost to Operate' },
+        { n: '5,267%', l: 'ROI by Month 3' },
+        { n: '2h/week', l: "Tony's Time Input" },
       ].map(({ n, l }) => (
         <div>
-          <div class="text-3xl font-black text-amber-500">{n}</div>
-          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">{l}</div>
+          <div class="text-4xl font-black text-amber-500">{n}</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-2">{l}</div>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- Featured Programs -->
-  {programs.length > 0 && (
-    <section class="py-20 px-6 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold mb-12 text-center">Top Affiliate Programs</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        {programs.map(p => (
-          <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-gray-600 transition-colors">
-            <h3 class="text-lg font-bold mb-2">{p.data.name}</h3>
-            <p class="text-gray-400 text-sm mb-4">{p.data.description}</p>
-            <AffiliateButton program={p.id} label="View Program →" size="sm" />
+  <!-- 4. HOW THE FLYWHEEL WORKS -->
+  <section class="py-24 px-6 max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-black mb-4">The 8-Step Flywheel That Runs Itself</h2>
+      <p class="text-gray-400 text-lg">OpenClaw chains 52 AI skills into one self-reinforcing system</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        { icon: '🔍', step: '01', title: 'Research', desc: 'Affiliate Program Search finds high-commission programs in your niche automatically.' },
+        { icon: '✍️', step: '02', title: 'Content', desc: 'Blog Builder writes SEO-optimized articles daily. No writer's block. No hiring.' },
+        { icon: '🎯', step: '03', title: 'Offers', desc: 'Grand Slam Offer Generator creates high-converting landing pages per program.' },
+        { icon: '📱', step: '04', title: 'Social', desc: 'TikTok scripts, Twitter threads, Reddit posts — auto-generated at 10am daily.' },
+        { icon: '📧', step: '05', title: 'Email', desc: 'Flywheel Digest newsletter + drip sequences nurture leads on autopilot.' },
+        { icon: '📊', step: '06', title: 'Analytics', desc: 'A/B tests run, conversion data tracked, UTM attribution handled automatically.' },
+        { icon: '🔄', step: '07', title: 'Optimize', desc: 'Self-Improver reads KPI data and upgrades underperforming prompts weekly.' },
+        { icon: '💰', step: '08', title: 'Revenue', desc: 'Recurring SaaS commissions stack month over month. Passive income compounds.' },
+      ].map(({ icon, step, title, desc }) => (
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-amber-500/30 transition-colors">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">{icon}</span>
+            <span class="text-xs text-gray-600 font-mono">{step}</span>
           </div>
+          <h3 class="font-bold text-white mb-2">{title}</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">{desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="text-center mt-10">
+      <a href="/tools" class="text-amber-500 hover:text-amber-400 font-semibold">See all 52 skills →</a>
+    </div>
+  </section>
+
+  <!-- 5. TOP AFFILIATE PROGRAMS -->
+  <section class="py-20 px-6 bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-black mb-3">Top Performing Affiliate Programs</h2>
+        <p class="text-gray-400 text-lg">Handpicked for high EPC, recurring commissions, and AI-tool audiences</p>
+      </div>
+      {programs.length > 0 ? (
+        <div class="grid md:grid-cols-3 gap-6">
+          {programs.map(p => (
+            <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 hover:border-amber-500/30 transition-colors flex flex-col">
+              <div class="mb-2">
+                <span class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-1 rounded font-semibold uppercase">
+                  {p.data.category}
+                </span>
+              </div>
+              <h3 class="text-xl font-bold mt-3 mb-2">{p.data.name}</h3>
+              <p class="text-gray-400 text-sm mb-4 flex-1">{p.data.description}</p>
+              {p.data.commission && (
+                <div class="text-sm text-green-400 font-semibold mb-4">
+                  {p.data.commission.rate} · {p.data.commission.type}
+                </div>
+              )}
+              <div class="flex gap-3">
+                <a href={`/programs/${p.id}`} class="text-sm text-amber-500 hover:underline">Read Review →</a>
+                <AffiliateButton program={p.id} label="Join →" size="sm" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="text-center text-gray-500">Loading programs...</p>
+      )}
+      <div class="text-center mt-10">
+        <a href="/programs" class="text-amber-500 hover:text-amber-400 font-semibold">View all programs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SKILLS SHOWCASE TEASER -->
+  <section class="py-24 px-6 max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-black mb-3">52 AI Skills. 73% Run Free.</h2>
+      <p class="text-gray-400 text-lg">The Free Ride Engine routes 38 skills to free-tier models — $0 API cost</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+      {featuredSkills.map(skill => (
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-3xl">{skill.icon}</span>
+            <div class="flex gap-2">
+              <span class="text-xs bg-gray-800 text-gray-400 px-2 py-1 rounded font-mono">{skill.tier}</span>
+              <span class={`text-xs font-bold px-2 py-1 rounded ${skill.cost === 'FREE' ? 'text-green-400 bg-green-500/10' : 'text-amber-400 bg-amber-500/10'}`}>
+                {skill.cost}
+              </span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white mb-2">{skill.name}</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">{skill.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="text-center">
+      <a href="/tools" class="inline-flex items-center px-6 py-3 border border-amber-500/50 text-amber-500 hover:bg-amber-500/10 rounded-lg font-semibold transition-all">
+        Explore all 52 skills →
+      </a>
+    </div>
+  </section>
+
+  <!-- 7. NICHE CATEGORIES -->
+  <section class="py-20 px-6 bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-black mb-3">6 High-Converting Niches</h2>
+        <p class="text-gray-400 text-lg">Each niche has dedicated keyword clusters, programs, and content templates</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {niches.map(niche => (
+          <a href={`/niche/${niche.slug}`} class="bg-gray-950 border border-gray-800 rounded-xl p-5 hover:border-amber-500/40 transition-all group">
+            <div class="text-3xl mb-3">{niche.icon}</div>
+            <h3 class="font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">{niche.title}</h3>
+            <p class="text-gray-500 text-sm">{niche.desc}</p>
+          </a>
         ))}
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
-  <!-- Latest Posts -->
-  {posts.length > 0 && (
-    <section class="py-20 px-6 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold mb-12">Latest from the Blog</h2>
+  <!-- 8. LATEST BLOG POSTS -->
+  <section class="py-24 px-6 max-w-6xl mx-auto">
+    <div class="flex items-center justify-between mb-10">
+      <div>
+        <h2 class="text-4xl font-black mb-2">From the Blog</h2>
+        <p class="text-gray-400">Published by OpenClaw's affiliate-blog-builder skill</p>
+      </div>
+      <a href="/blog" class="text-amber-500 hover:text-amber-400 font-semibold hidden md:block">View all posts →</a>
+    </div>
+    {posts.length > 0 ? (
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map(post => (
           <a href={`/blog/${post.id}`} class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-amber-500/50 transition-all group">
             <span class="text-xs text-amber-500 uppercase tracking-wider font-semibold">{post.data.category}</span>
-            <h3 class="text-lg font-semibold mt-2 mb-3 group-hover:text-amber-400 transition-colors">{post.data.title}</h3>
-            <p class="text-gray-400 text-sm">{post.data.description}</p>
+            <h3 class="text-lg font-semibold mt-2 mb-3 group-hover:text-amber-400 transition-colors leading-snug">{post.data.title}</h3>
+            <p class="text-gray-400 text-sm line-clamp-2">{post.data.description}</p>
           </a>
         ))}
       </div>
-      <div class="text-center mt-10">
-        <a href="/blog" class="text-amber-500 hover:text-amber-400 font-semibold">View all posts →</a>
+    ) : (
+      <p class="text-gray-500">No posts yet — check back soon.</p>
+    )}
+    <div class="text-center mt-10 md:hidden">
+      <a href="/blog" class="text-amber-500 hover:text-amber-400 font-semibold">View all posts →</a>
+    </div>
+  </section>
+
+  <!-- 9. LEAD MAGNET -->
+  <section class="py-20 px-6">
+    <div class="max-w-3xl mx-auto bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/30 rounded-3xl p-12 text-center">
+      <div class="text-5xl mb-6">📘</div>
+      <h2 class="text-4xl font-black mb-3">The Flywheel Complete Guide</h2>
+      <p class="text-gray-400 text-lg mb-8">Free PDF: How to build a $3,000/month AI affiliate system with OpenClaw</p>
+      <ul class="text-left max-w-md mx-auto mb-10 space-y-3">
+        {[
+          'Full 52-skill breakdown with use cases',
+          'Budget calculator ($71/mo operating cost explained)',
+          '12-week launch timeline',
+          'Real revenue projections with assumptions',
+        ].map(item => (
+          <li class="flex items-start gap-3 text-gray-300 text-sm">
+            <span class="text-green-400 mt-0.5 shrink-0">✓</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <a href="/free-guide" class="inline-flex items-center px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg rounded-lg transition-all">
+        Download Free Guide →
+      </a>
+      <p class="text-gray-600 text-xs mt-4">No spam. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <!-- 10. BOTTOM CTA BANNER -->
+  <section class="py-20 px-6 bg-gradient-to-br from-gray-900 via-gray-950 to-black border-t border-gray-800">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-black mb-4">Ready to Build Your Flywheel?</h2>
+      <p class="text-gray-400 text-lg mb-8">
+        Start with Claude Pro — the AI powering MoltyFlywheel's entire content engine
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <AffiliateButton program="claude" label="Get Claude Pro →" size="lg" />
+        <a href="/free-guide" class="inline-flex items-center px-8 py-4 text-lg border border-gray-700 hover:border-gray-500 rounded-lg text-gray-400 hover:text-white transition-all">
+          Or explore the free guide first
+        </a>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 </BaseLayout>
