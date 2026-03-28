@@ -6,7 +6,10 @@ interface Props {
   variant?: 'primary' | 'outline';
 }
 const { program, label = 'Get Started →', size = 'md', variant = 'primary' } = Astro.props;
-const href = `https://go.moltyflywheel.com/${program}`;
+
+// Internal redirect path — managed via public/_redirects
+// Cloudflare Pages routes /go/[program] → real affiliate URL
+const href = `/go/${program}`;
 ---
 <a
   href={href}

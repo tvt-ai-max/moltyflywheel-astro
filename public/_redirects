@@ -1,1 +1,38 @@
-# Redirects for Cloudflare Pages\n/go/kling https://affitor.com/affiliate-program/molty-flywheel 301\n/go/heygen https://affitor.com/affiliate-program/molty-flywheel 301\n/go/invideo https://affitor.com/affiliate-program/molty-flywheel 301\n/go/advertiser https://affitor.com/join/advertiser?aff=REF-93D7EA-E3FF 301\n/go/openclaw https://github.com/openclaw/openclaw 301\n
+# ============================================================
+# MoltyFlywheel Affiliate Redirects — Cloudflare Pages
+# Format: /go/[program-id]   [affiliate-url]   301
+# UPDATE: Replace URLs with real affiliate tracking links
+# once you join each program's affiliate program.
+# ============================================================
+
+# ─── Core AI ───
+/go/claude-pro      https://claude.ai/upgrade                              301
+/go/claude          https://claude.ai/upgrade                              301
+
+# ─── AI Writing ───
+/go/koala-writer    https://koalawriter.com                                301
+/go/koala           https://koalawriter.com                                301
+/go/jasper-ai       https://jasper.ai                                      301
+/go/jasper          https://jasper.ai                                      301
+/go/copy-ai         https://copy.ai                                        301
+/go/copyai          https://copy.ai                                        301
+/go/writesonic      https://writesonic.com                                 301
+
+# ─── SEO Tools ───
+/go/surfer-seo      https://surferseo.com                                  301
+/go/surfer          https://surferseo.com                                  301
+/go/semrush         https://www.semrush.com                                301
+/go/frase-io        https://frase.io                                       301
+/go/frase           https://frase.io                                       301
+
+# ─── Email & Productivity ───
+/go/convertkit      https://convertkit.com                                 301
+/go/notion-ai       https://notion.so                                      301
+/go/notion          https://notion.so                                      301
+
+# ─── Legacy / Other ───
+/go/kling           https://affitor.com/affiliate-program/molty-flywheel   301
+/go/heygen          https://affitor.com/affiliate-program/molty-flywheel   301
+/go/invideo         https://affitor.com/affiliate-program/molty-flywheel   301
+/go/advertiser      https://affitor.com/join/advertiser?aff=REF-93D7EA-E3FF 301
+/go/openclaw        https://github.com/openclaw/openclaw                   301
