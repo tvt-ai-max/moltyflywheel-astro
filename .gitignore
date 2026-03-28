@@ -29,3 +29,6 @@ pnpm-debug.log*
 !src/**/*.md
 push.sh
 shared_context.json
+
+# openclaw skills (do not push agent prompts/skills to web repo)
+affiliate-skills/
