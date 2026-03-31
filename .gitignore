@@ -32,3 +32,5 @@ shared_context.json
 
 # openclaw skills (do not push agent prompts/skills to web repo)
 affiliate-skills/
+seo-writer/
+docs/

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { skill: 'link-tracking' } },
+    { params: { skill: 'seo' } },
+    { params: { skill: 'email-marketing' } },
+    { params: { skill: 'funnel-building' } }
+  ];
+}
+
+const { skill } = Astro.params;
+
+// Format skill name for display
+const formattedTitle = skill ? skill.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'Tools';
+---
+
+<BaseLayout 
+  title={`${formattedTitle} Tools for Affiliate Marketing`} 
+  description={`Explore recommended ${formattedTitle.toLowerCase()} tools for your affiliate marketing workflow.`}
+>
+  <section class="py-20 bg-gray-900 border-b border-gray-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl font-bold text-white sm:text-5xl">{formattedTitle} Tools</h1>
+      <p class="mt-6 text-xl text-gray-400">Discover the essential tools and platforms to upgrade your {formattedTitle.toLowerCase()} workflows.</p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-gray-800 rounded-xl p-12 border border-gray-700">
+        <h2 class="text-2xl font-bold text-white mb-4">Under Construction</h2>
+        <p class="text-gray-400 text-lg mb-8">We are actively curating and reviewing the best {formattedTitle.toLowerCase()} tools for this category. Check back soon for deep-dive reviews and comparisons.</p>
+        <a href="/tools" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">Back to Tools Hub</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
