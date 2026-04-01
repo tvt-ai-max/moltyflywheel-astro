@@ -11,6 +11,19 @@ const blog = defineCollection({
     tags: z.array(z.string()),
     affiliatePrograms: z.array(z.string()).optional(),
     draft: z.boolean().default(false),
+    featured: z.boolean().default(false),
+    ogImage: z.string().optional(),
+    // legacy aliases — tolerated, not rendered
+    og_image: z.string().optional(),
+    keyword: z.string().optional(),
+    cluster: z.string().optional(),
+    canonical: z.string().optional(),
+    primary_keyword: z.string().optional(),
+    secondary_keywords: z.array(z.string()).optional(),
+    search_intent: z.string().optional(),
+    target_word_count: z.number().optional(),
+    keyword_cluster: z.string().optional(),
+    author: z.string().optional(),
   }),
 });
 

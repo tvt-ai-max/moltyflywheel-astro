@@ -1,0 +1,118 @@
+---
+// BlogTOC.astro — Sticky Table of Contents with scroll-spy and reading progress
+// Usage: <BlogTOC /> — reads headings from rendered article via client-side JS
+---
+
+<div class="bg-[#0B3B59] rounded-2xl p-5 border border-[#1a4560]">
+  <p class="text-[10px] font-bold text-[#3d7a96] uppercase tracking-widest mb-4">Table of Contents</p>
+
+  <nav id="toc-nav" class="flex flex-col gap-0.5">
+    <!-- Populated by client-side JS -->
+    <p class="text-[11px] text-[#3d7a96] italic">Loading…</p>
+  </nav>
+
+  <!-- Reading Progress -->
+  <div class="mt-5 pt-4 border-t border-[#1a4560]">
+    <div class="flex items-center justify-between mb-1.5">
+      <span class="text-[10px] text-[#3d7a96] font-medium">Reading Progress</span>
+      <span id="progress-pct" class="text-[10px] text-[#72DBF2] font-bold">0%</span>
+    </div>
+    <div class="w-full h-1.5 bg-[#011826] rounded-full overflow-hidden">
+      <div id="progress-fill" class="h-full rounded-full transition-all duration-150"
+        style="width:0%; background: linear-gradient(90deg, #72DBF2, #2173A6);"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Build TOC from article headings
+  function buildTOC() {
+    const article = document.getElementById('article-body');
+    if (!article) return;
+
+    const headings = article.querySelectorAll('h2, h3');
+    const nav = document.getElementById('toc-nav');
+    if (!nav || headings.length === 0) return;
+
+    nav.innerHTML = '';
+
+    headings.forEach((heading, i) => {
+      // Ensure each heading has an id
+      if (!heading.id) {
+        heading.id = 'section-' + i + '-' + heading.textContent!
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+      }
+
+      const a = document.createElement('a');
+      a.href = '#' + heading.id;
+      a.textContent = heading.textContent || '';
+      a.className = 'toc-link' + (heading.tagName === 'H3' ? ' toc-h3' : '');
+
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.getElementById(heading.id);
+        if (target) {
+          const offset = 90;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+
+      nav.appendChild(a);
+    });
+  }
+
+  // Scroll spy via IntersectionObserver
+  function initScrollSpy() {
+    const article = document.getElementById('article-body');
+    if (!article) return;
+
+    const headings = article.querySelectorAll('h2, h3');
+    const tocLinks = document.querySelectorAll('#toc-nav .toc-link');
+
+    if (headings.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-10% 0px -80% 0px',
+      threshold: 0
+    });
+
+    headings.forEach(h => observer.observe(h));
+  }
+
+  // Reading progress bar
+  function initProgress() {
+    const fill = document.getElementById('progress-fill');
+    const pct = document.getElementById('progress-pct');
+    if (!fill || !pct) return;
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.round((scrolled / max) * 100) : 0;
+      fill.style.width = p + '%';
+      pct.textContent = p + '%';
+    }, { passive: true });
+  }
+
+  // Run after DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    buildTOC();
+    initScrollSpy();
+    initProgress();
+  });
+</script>

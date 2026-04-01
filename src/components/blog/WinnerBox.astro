@@ -1,0 +1,28 @@
+---
+// WinnerBox.astro — Highlighted winner/verdict box for comparison articles
+// Used in .mdx posts. For .md posts, use raw HTML with .winner-box classes.
+// Usage:
+//   <WinnerBox winner="Claude Pro" type="blue">Your verdict text here</WinnerBox>
+//   <WinnerBox winner="ChatGPT Plus" type="green">Your verdict text here</WinnerBox>
+//   <WinnerBox winner="Tie" type="tie">Your verdict text here</WinnerBox>
+interface Props {
+  winner: string;
+  type?: 'blue' | 'green' | 'tie';
+}
+const { winner, type = 'blue' } = Astro.props;
+
+const typeClass = type === 'green'
+  ? 'winner-green'
+  : type === 'tie'
+    ? 'winner-tie'
+    : '';
+
+const icon = type === 'green' ? '🏆' : type === 'tie' ? '🤝' : '🏆';
+---
+
+<div class:list={['winner-box', typeClass]}>
+  <p class="winner-label">{icon} Winner: {winner}</p>
+  <div class="winner-body">
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,29 @@
+---
+// CompareGrid.astro — Two-column comparison card layout for .mdx posts
+// For .md posts, use raw HTML with .compare-grid / .compare-card classes.
+// Usage:
+//   <CompareGrid>
+//     <Fragment slot="left">
+//       <p class="compare-card-title blue">Claude Pro</p>
+//       <div class="check-item"><svg.../>Item text</div>
+//     </Fragment>
+//     <Fragment slot="right">
+//       <p class="compare-card-title green">ChatGPT Plus</p>
+//       <div class="cross-item"><svg.../>Item text</div>
+//     </Fragment>
+//   </CompareGrid>
+interface Props {
+  leftColor?: 'blue' | 'green';
+  rightColor?: 'blue' | 'green';
+}
+const { leftColor = 'blue', rightColor = 'green' } = Astro.props;
+---
+
+<div class="compare-grid">
+  <div class:list={['compare-card', rightColor === 'green' ? '' : 'card-green']}>
+    <slot name="left" />
+  </div>
+  <div class:list={['compare-card', rightColor === 'green' ? 'card-green' : '']}>
+    <slot name="right" />
+  </div>
+</div>

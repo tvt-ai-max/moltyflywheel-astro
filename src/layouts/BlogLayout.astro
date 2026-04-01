@@ -1,0 +1,263 @@
+---
+// BlogLayout.astro — Premium 3-column blog reading layout
+// Wraps BaseLayout, manages: left sidebar, center article, right TOC
+import BaseLayout from './BaseLayout.astro';
+import BlogSidebar from '../components/blog/BlogSidebar.astro';
+import BlogTOC from '../components/blog/BlogTOC.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  tags: string[];
+  ogImage?: string;
+  affiliatePrograms?: string[];
+  relatedPosts?: { slug: string; title: string }[];
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  category,
+  tags,
+  ogImage,
+  affiliatePrograms = [],
+  relatedPosts = [],
+} = Astro.props;
+
+const categoryLabel: Record<string, string> = {
+  guide: 'Guide',
+  review: 'Review',
+  comparison: 'Comparison',
+  'case-study': 'Case Study',
+  tutorial: 'Tutorial',
+};
+
+const displayCategory = categoryLabel[category] ?? category;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Primary CTA affiliate program (first in list)
+const primaryProgram = affiliatePrograms[0] ?? null;
+
+// Category → gradient for hero badge
+const categoryColorClass = category === 'comparison'
+  ? 'text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25'
+  : category === 'review'
+    ? 'text-[#10B981] bg-[#10B981]/10 border border-[#10B981]/25'
+    : category === 'guide' || category === 'tutorial'
+      ? 'text-[#A78BFA] bg-[#A78BFA]/10 border border-[#A78BFA]/25'
+      : 'text-[#5ea4bf] bg-[#5ea4bf]/10 border border-[#5ea4bf]/25';
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-10">
+    <div class="flex gap-6 relative">
+
+      <!-- LEFT SIDEBAR (lg+) -->
+      <BlogSidebar pubDate={pubDate} title={title} relatedPosts={relatedPosts} />
+
+      <!-- CENTER — Main Content -->
+      <main class="flex-1 min-w-0">
+
+        <!-- Article Header -->
+        <header class="mb-10">
+
+          <!-- Breadcrumb -->
+          <nav class="flex items-center gap-2 text-xs text-[#3d7a96] mb-5" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-[#72DBF2] transition-colors">Home</a>
+            <span>/</span>
+            <a href="/blog" class="hover:text-[#72DBF2] transition-colors">Blog</a>
+            <span>/</span>
+            <span class="text-[#5ea4bf]">{displayCategory}</span>
+          </nav>
+
+          <!-- Category Badge -->
+          <div class="flex flex-wrap items-center gap-2 mb-5">
+            <span class:list={['text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full', categoryColorClass]}>
+              {displayCategory}
+            </span>
+          </div>
+
+          <!-- H1 Title -->
+          <h1 class="font-bold text-[36px] md:text-[44px] leading-[1.15] mb-5 hero-title-glow">
+            {title}
+          </h1>
+
+          <!-- Description -->
+          <p class="text-lg text-[#5ea4bf] leading-relaxed mb-7 max-w-2xl">
+            {description}
+          </p>
+
+          <!-- Meta Row -->
+          <div class="flex flex-wrap items-center gap-3 text-sm text-[#3d7a96] pb-7 border-b border-[#0d2d40]">
+            <!-- Author avatar -->
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                style="background: linear-gradient(135deg, #72DBF2, #2173A6);">M</div>
+              <span class="text-[#89c0d4] font-medium">MoltyFlywheel</span>
+            </div>
+            <span class="text-[#1a4560]">•</span>
+            <time datetime={pubDate.toISOString()} class="text-[#3d7a96]">{formattedDate}</time>
+            <span class="text-[#1a4560]">•</span>
+            <!-- Read time filled client-side -->
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#72DBF2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span id="header-read-time">— min read</span>
+            </span>
+          </div>
+
+          <!-- FTC Disclosure -->
+          <div class="mt-6 flex items-start gap-3 bg-[#0d2d40] border border-[#1a4560] rounded-xl p-4">
+            <svg class="w-4 h-4 text-[#72DBF2] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <p class="text-[12px] text-[#5ea4bf] leading-relaxed">
+              <strong class="text-[#89c0d4]">Disclosure:</strong> Some links in this article are affiliate links. If you purchase through our links, we earn a commission at no extra cost to you. We only recommend tools we've tested and trust.
+            </p>
+          </div>
+
+        </header>
+
+        <!-- ARTICLE BODY -->
+        <article id="article-body" class="article-body">
+          <slot />
+        </article>
+
+        <!-- TAGS -->
+        {tags.length > 0 && (
+          <div class="flex flex-wrap items-center gap-2 mt-12 pt-6 border-t border-[#0d2d40]">
+            <span class="text-xs text-[#3d7a96] mr-1 font-medium">Tags:</span>
+            {tags.map(tag => (
+              <a href={`/blog?tag=${tag}`} class="tag-pill">{tag}</a>
+            ))}
+          </div>
+        )}
+
+        <!-- BOTTOM CTA -->
+        {primaryProgram && (
+          <div class="mt-12 rounded-2xl p-8 relative overflow-hidden" style="background: linear-gradient(135deg, #0B3B59 0%, #0d2d40 50%, #1a4560 100%); border: 1px solid rgba(114,219,242,0.2);">
+            <!-- Decorative elements -->
+            <div class="absolute -top-12 -right-12 w-40 h-40 bg-[#72DBF2]/5 rounded-full pointer-events-none"></div>
+            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-[#2173A6]/10 rounded-full pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <p class="text-[11px] font-bold text-[#72DBF2] uppercase tracking-widest mb-2">Ready to get started?</p>
+                <h3 class="text-xl font-bold text-[#daeef5] mb-2">Try it yourself and see the difference</h3>
+                <p class="text-[#5ea4bf] text-sm">Join thousands of affiliate marketers who are already using these tools.</p>
+              </div>
+              <a href={`/go/${primaryProgram}`}
+                rel="nofollow sponsored"
+                target="_blank"
+                class="shrink-0 inline-flex items-center gap-2 font-bold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                style="background: linear-gradient(135deg, #72DBF2, #2173A6); color: #011826;">
+                Get Started →
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        )}
+
+        <!-- RELATED POSTS (bottom, mobile-visible) -->
+        {relatedPosts.length > 0 && (
+          <section class="mt-12 lg:hidden">
+            <h3 class="text-sm font-bold text-[#3d7a96] uppercase tracking-widest mb-4">Related Articles</h3>
+            <div class="flex flex-col gap-3">
+              {relatedPosts.map(p => (
+                <a href={`/blog/${p.slug}`}
+                  class="flex items-center gap-3 bg-[#0B3B59] border border-[#1a4560] hover:border-[#2173A6] rounded-xl p-4 transition-all group">
+                  <div class="w-7 h-7 rounded-lg bg-[#72DBF2]/10 flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 text-[#72DBF2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                  </div>
+                  <span class="text-sm text-[#89c0d4] group-hover:text-[#72DBF2] transition-colors font-medium">{p.title}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- NEWSLETTER CTA -->
+        <section class="mt-16 mb-8">
+          <div class="relative rounded-2xl overflow-hidden"
+            style="background: linear-gradient(135deg, #0B3B59 0%, #2173A6 55%, #5EA4BF 100%);">
+            <div class="absolute -top-16 -right-16 w-56 h-56 bg-white/5 rounded-full pointer-events-none"></div>
+            <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-white/5 rounded-full pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.04]"
+              style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:40px 40px;"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-8 p-8 md:p-10">
+              <div class="flex-1 text-center md:text-left">
+                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs font-semibold text-white mb-3">
+                  📬 FREE NEWSLETTER
+                </div>
+                <h3 class="font-bold text-2xl md:text-3xl text-white leading-tight mb-3">
+                  Get AI Affiliate Insights<br>Every Week
+                </h3>
+                <p class="text-white/80 text-[15px] leading-relaxed max-w-sm">
+                  Strategy, tools, and real case studies from affiliate marketers earning with AI. No spam. Unsubscribe anytime.
+                </p>
+              </div>
+              <div class="flex flex-col gap-3 w-full md:w-[280px] shrink-0">
+                <a href="/free-guide"
+                  class="w-full bg-white hover:bg-slate-100 text-[#0B3B59] font-bold py-3 rounded-xl transition-colors text-sm text-center shadow-lg shadow-black/20">
+                  Get the Free Guide →
+                </a>
+                <p class="text-white/60 text-xs text-center">Trusted by 2,400+ affiliate marketers</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- RIGHT SIDEBAR — TOC (xl+) -->
+      <aside class="hidden xl:block w-[220px] shrink-0">
+        <div class="sticky top-24 flex flex-col gap-4">
+          <BlogTOC />
+
+          <!-- Optional affiliate sticky CTA (if primaryProgram) -->
+          {primaryProgram && (
+            <div class="rounded-2xl p-4 border border-[#72DBF2]/20"
+              style="background: linear-gradient(135deg, #0B3B59, #2173A6);">
+              <p class="font-bold text-white text-sm mb-1">Try it Free</p>
+              <p class="text-white/70 text-[11px] mb-3 leading-relaxed">The best AI tools for affiliate content.</p>
+              <a href={`/go/${primaryProgram}`}
+                rel="nofollow sponsored"
+                target="_blank"
+                class="block w-full bg-white hover:bg-slate-100 text-[#0B3B59] font-bold text-xs py-2 rounded-lg text-center transition-colors">
+                Get Started →
+              </a>
+            </div>
+          )}
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Header read time
+  function calcReadTime() {
+    const article = document.getElementById('article-body');
+    if (!article) return;
+    const words = article.innerText.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words / 220));
+    const el = document.getElementById('header-read-time');
+    if (el) el.textContent = mins + ' min read';
+  }
+  document.addEventListener('DOMContentLoaded', calcReadTime);
+</script>
