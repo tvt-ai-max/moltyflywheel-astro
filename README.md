@@ -16,6 +16,7 @@ Whenever a request is made for **blog posts, SEO articles, GEO articles, tutoria
 2. **`seo-writer/references/blog-template.md`**: The standard structure for long-form content.
 3. **`seo-writer/references/cta-blocks.md`**: Rules for UTM tracking and CTA levels (Soft/Medium/Strong).
 4. **`seo-writer/references/internal-linking-rules.md`**: Guidelines for building topical authority through internal links.
+5. **Language Rule**: For `moltyflywheel.com`, blog content must be written in English by default. Do not output Vietnamese unless the task explicitly asks for Vietnamese or a bilingual rollout has been implemented.
 
 ---
 
