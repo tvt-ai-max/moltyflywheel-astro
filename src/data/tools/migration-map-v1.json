@@ -1,0 +1,653 @@
+{
+  "version": "v1",
+  "date": "2026-04-03",
+  "source_file": "src/data/skills.json",
+  "record_count": 52,
+  "schema_target": "docs/AI_Tools_Directory_Schema_v1.md",
+  "records": [
+    {
+      "legacy_id": "affiliate-blog-builder",
+      "legacy_name": "Affiliate Blog Builder",
+      "legacy_category": "blog",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "longform-editorial",
+      "suggested_tags": ["affiliate-content", "blog", "seo"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "comparison-post-writer",
+      "legacy_name": "Comparison Post Writer",
+      "legacy_category": "blog",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "longform-editorial",
+      "suggested_tags": ["comparison", "bofu", "review"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "content-decay-detector",
+      "legacy_name": "Content Decay Detector",
+      "legacy_category": "blog",
+      "entity_type": "internal-skill",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "content-optimization",
+      "suggested_tags": ["content-decay", "refresh", "seo"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "content-moat-calculator",
+      "legacy_name": "Content Moat Calculator",
+      "legacy_category": "blog",
+      "entity_type": "calculator",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "content-optimization",
+      "suggested_tags": ["moat", "scoring", "strategy"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "how-to-tutorial-writer",
+      "legacy_name": "How-To Tutorial Writer",
+      "legacy_category": "blog",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "longform-editorial",
+      "suggested_tags": ["tutorial", "how-to", "seo"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "keyword-cluster-architect",
+      "legacy_name": "Keyword Cluster Architect",
+      "legacy_category": "blog",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "longform-editorial",
+      "suggested_tags": ["keywords", "cluster", "seo-planning"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "listicle-generator",
+      "legacy_name": "Listicle Generator",
+      "legacy_category": "blog",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "longform-editorial",
+      "suggested_tags": ["listicle", "best-of", "affiliate"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "affiliate-program-search",
+      "legacy_name": "Affiliate Program Search",
+      "legacy_category": "research",
+      "entity_type": "internal-skill",
+      "primary_category": "research-discovery",
+      "secondary_category": "program-intelligence",
+      "suggested_tags": ["affiliate-programs", "research", "niche"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "commission-calculator",
+      "legacy_name": "Commission Calculator",
+      "legacy_category": "research",
+      "entity_type": "calculator",
+      "primary_category": "research-discovery",
+      "secondary_category": "financial-modeling",
+      "suggested_tags": ["commission", "forecasting", "roi"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "competitor-spy",
+      "legacy_name": "Competitor Spy",
+      "legacy_category": "research",
+      "entity_type": "internal-skill",
+      "primary_category": "research-discovery",
+      "secondary_category": "competitor-intelligence",
+      "suggested_tags": ["competitor", "intel", "strategy"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "list-affitor-program",
+      "legacy_name": "List Affitor Program",
+      "legacy_category": "research",
+      "entity_type": "internal-skill",
+      "primary_category": "research-discovery",
+      "secondary_category": "program-intelligence",
+      "suggested_tags": ["database", "programs", "lookup"],
+      "manual_review": true,
+      "cleanup_needed": true
+    },
+    {
+      "legacy_id": "monopoly-niche-finder",
+      "legacy_name": "Monopoly Niche Finder",
+      "legacy_category": "research",
+      "entity_type": "internal-skill",
+      "primary_category": "research-discovery",
+      "secondary_category": "niche-research",
+      "suggested_tags": ["niche", "opportunity", "competition"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "niche-opportunity-finder",
+      "legacy_name": "Niche Opportunity Finder",
+      "legacy_category": "research",
+      "entity_type": "internal-skill",
+      "primary_category": "research-discovery",
+      "secondary_category": "niche-research",
+      "suggested_tags": ["niche", "scoring", "validation"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "purple-cow-audit",
+      "legacy_name": "Purple Cow Audit",
+      "legacy_category": "research",
+      "entity_type": "framework",
+      "primary_category": "research-discovery",
+      "secondary_category": "competitor-intelligence",
+      "suggested_tags": ["positioning", "differentiation", "brand-angle"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "bonus-stack-builder",
+      "legacy_name": "Bonus Stack Builder",
+      "legacy_category": "landing",
+      "entity_type": "internal-skill",
+      "primary_category": "conversion-assets",
+      "secondary_category": "offer-design",
+      "suggested_tags": ["bonus", "offer", "conversion"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "grand-slam-offer",
+      "legacy_name": "Grand Slam Offer",
+      "legacy_category": "landing",
+      "entity_type": "framework",
+      "primary_category": "conversion-assets",
+      "secondary_category": "offer-design",
+      "suggested_tags": ["offer", "positioning", "conversion"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "guarantee-generator",
+      "legacy_name": "Guarantee Generator",
+      "legacy_category": "landing",
+      "entity_type": "internal-skill",
+      "primary_category": "conversion-assets",
+      "secondary_category": "offer-design",
+      "suggested_tags": ["guarantee", "risk-reversal", "copy"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "landing-page-creator",
+      "legacy_name": "Landing Page Creator",
+      "legacy_category": "landing",
+      "entity_type": "internal-skill",
+      "primary_category": "conversion-assets",
+      "secondary_category": "landing-pages",
+      "suggested_tags": ["landing-page", "copy", "conversion"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "product-showcase-page",
+      "legacy_name": "Product Showcase Page",
+      "legacy_category": "landing",
+      "entity_type": "internal-skill",
+      "primary_category": "conversion-assets",
+      "secondary_category": "landing-pages",
+      "suggested_tags": ["showcase", "product-page", "pre-sell"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "squeeze-page-builder",
+      "legacy_name": "Squeeze Page Builder",
+      "legacy_category": "landing",
+      "entity_type": "internal-skill",
+      "primary_category": "conversion-assets",
+      "secondary_category": "landing-pages",
+      "suggested_tags": ["lead-gen", "squeeze-page", "email"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "value-ladder-architect",
+      "legacy_name": "Value Ladder Architect",
+      "legacy_category": "landing",
+      "entity_type": "framework",
+      "primary_category": "conversion-assets",
+      "secondary_category": "offer-design",
+      "suggested_tags": ["value-ladder", "ascension", "monetization"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "webinar-registration-page",
+      "legacy_name": "Webinar Registration Page",
+      "legacy_category": "landing",
+      "entity_type": "internal-skill",
+      "primary_category": "conversion-assets",
+      "secondary_category": "landing-pages",
+      "suggested_tags": ["webinar", "registration", "landing"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "ab-test-generator",
+      "legacy_name": "A/B Test Generator",
+      "legacy_category": "analytics",
+      "entity_type": "internal-skill",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "experimentation",
+      "suggested_tags": ["ab-test", "experiment", "optimization"],
+      "manual_review": false,
+      "cleanup_needed": true
+    },
+    {
+      "legacy_id": "conversion-tracker",
+      "legacy_name": "Conversion Tracker",
+      "legacy_category": "analytics",
+      "entity_type": "internal-skill",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "attribution-reporting",
+      "suggested_tags": ["tracking", "utm", "attribution"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "internal-linking-optimizer",
+      "legacy_name": "Internal Linking Optimizer",
+      "legacy_category": "analytics",
+      "entity_type": "internal-skill",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "seo-optimization",
+      "suggested_tags": ["internal-links", "seo", "site-structure"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "performance-report",
+      "legacy_name": "Performance Report",
+      "legacy_category": "analytics",
+      "entity_type": "internal-skill",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "attribution-reporting",
+      "suggested_tags": ["reporting", "kpi", "weekly"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "seo-audit",
+      "legacy_name": "SEO Audit",
+      "legacy_category": "analytics",
+      "entity_type": "internal-skill",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "seo-optimization",
+      "suggested_tags": ["seo-audit", "technical-seo", "diagnostics"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "content-pillar-atomizer",
+      "legacy_name": "Content Pillar Atomizer",
+      "legacy_category": "content",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "repurposing",
+      "suggested_tags": ["repurposing", "pillar", "micro-content"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "reddit-post-writer",
+      "legacy_name": "Reddit Post Writer",
+      "legacy_category": "content",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "social-content",
+      "suggested_tags": ["reddit", "community", "traffic"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "tiktok-script-writer",
+      "legacy_name": "TikTok Script Writer",
+      "legacy_category": "content",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "social-content",
+      "suggested_tags": ["tiktok", "video-script", "social"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "twitter-thread-writer",
+      "legacy_name": "Twitter Thread Writer",
+      "legacy_category": "content",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "social-content",
+      "suggested_tags": ["twitter", "thread", "social"],
+      "manual_review": false,
+      "cleanup_needed": true
+    },
+    {
+      "legacy_id": "viral-post-writer",
+      "legacy_name": "Viral Post Writer",
+      "legacy_category": "content",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "social-content",
+      "suggested_tags": ["social", "engagement", "top-of-funnel"],
+      "manual_review": true,
+      "cleanup_needed": true
+    },
+    {
+      "legacy_id": "bio-link-deployer",
+      "legacy_name": "Bio Link Deployer",
+      "legacy_category": "distribution",
+      "entity_type": "internal-skill",
+      "primary_category": "distribution-activation",
+      "secondary_category": "link-hub",
+      "suggested_tags": ["bio-link", "distribution", "creator"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "email-drip-sequence",
+      "legacy_name": "Email Drip Sequence",
+      "legacy_category": "distribution",
+      "entity_type": "internal-skill",
+      "primary_category": "distribution-activation",
+      "secondary_category": "email-activation",
+      "suggested_tags": ["email", "drip", "nurture"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "github-pages-deployer",
+      "legacy_name": "GitHub Pages Deployer",
+      "legacy_category": "distribution",
+      "entity_type": "ops-utility",
+      "primary_category": "distribution-activation",
+      "secondary_category": "deployment",
+      "suggested_tags": ["deployment", "github-pages", "static-site"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "social-media-scheduler",
+      "legacy_name": "Social Media Scheduler",
+      "legacy_category": "distribution",
+      "entity_type": "internal-skill",
+      "primary_category": "distribution-activation",
+      "secondary_category": "social-publishing",
+      "suggested_tags": ["social", "scheduler", "publishing"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "content-repurposer",
+      "legacy_name": "Content Repurposer",
+      "legacy_category": "automation",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "repurposing",
+      "suggested_tags": ["repurpose", "multi-format", "workflow"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "email-automation-builder",
+      "legacy_name": "Email Automation Builder",
+      "legacy_category": "automation",
+      "entity_type": "internal-skill",
+      "primary_category": "distribution-activation",
+      "secondary_category": "email-activation",
+      "suggested_tags": ["convertkit", "email-automation", "workflow"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "multi-program-manager",
+      "legacy_name": "Multi-Program Manager",
+      "legacy_category": "automation",
+      "entity_type": "internal-skill",
+      "primary_category": "planning-governance",
+      "secondary_category": "portfolio-management",
+      "suggested_tags": ["portfolio", "program-ops", "management"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "paid-ad-copy-writer",
+      "legacy_name": "Paid Ad Copy Writer",
+      "legacy_category": "automation",
+      "entity_type": "internal-skill",
+      "primary_category": "conversion-assets",
+      "secondary_category": "paid-media-creative",
+      "suggested_tags": ["ads", "paid-media", "copy"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "proprietary-data-generator",
+      "legacy_name": "Proprietary Data Generator",
+      "legacy_category": "automation",
+      "entity_type": "internal-skill",
+      "primary_category": "content-production",
+      "secondary_category": "evidence-generation",
+      "suggested_tags": ["data", "authority", "research-input"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "category-designer",
+      "legacy_name": "Category Designer",
+      "legacy_category": "meta",
+      "entity_type": "framework",
+      "primary_category": "planning-governance",
+      "secondary_category": "system-design",
+      "suggested_tags": ["taxonomy", "ia", "governance"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "compliance-checker",
+      "legacy_name": "Compliance Checker",
+      "legacy_category": "meta",
+      "entity_type": "internal-skill",
+      "primary_category": "planning-governance",
+      "secondary_category": "compliance",
+      "suggested_tags": ["compliance", "affiliate", "disclosure"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "funnel-planner",
+      "legacy_name": "Funnel Planner",
+      "legacy_category": "meta",
+      "entity_type": "framework",
+      "primary_category": "planning-governance",
+      "secondary_category": "system-design",
+      "suggested_tags": ["funnel", "planning", "strategy"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "list-affitor-skill",
+      "legacy_name": "List Affitor Skill",
+      "legacy_category": "meta",
+      "entity_type": "internal-skill",
+      "primary_category": "planning-governance",
+      "secondary_category": "tool-discovery",
+      "suggested_tags": ["inventory", "skills", "lookup"],
+      "manual_review": true,
+      "cleanup_needed": true
+    },
+    {
+      "legacy_id": "self-improver",
+      "legacy_name": "Self Improver",
+      "legacy_category": "meta",
+      "entity_type": "ops-utility",
+      "primary_category": "platform-operations",
+      "secondary_category": "system-improvement",
+      "suggested_tags": ["self-improvement", "ops", "feedback-loop"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "skill-finder",
+      "legacy_name": "Skill Finder",
+      "legacy_category": "meta",
+      "entity_type": "internal-skill",
+      "primary_category": "planning-governance",
+      "secondary_category": "tool-discovery",
+      "suggested_tags": ["routing", "skills", "recommendation"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "flywheel-kpi-report",
+      "legacy_name": "Flywheel KPI Report",
+      "legacy_category": "openclaw",
+      "entity_type": "ops-utility",
+      "primary_category": "measurement-optimization",
+      "secondary_category": "attribution-reporting",
+      "suggested_tags": ["kpi", "flywheel", "reporting"],
+      "manual_review": true,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "free-ride-optimizer",
+      "legacy_name": "Free Ride Optimizer",
+      "legacy_category": "openclaw",
+      "entity_type": "ops-utility",
+      "primary_category": "platform-operations",
+      "secondary_category": "cost-control",
+      "suggested_tags": ["cost-control", "usage", "optimization"],
+      "manual_review": false,
+      "cleanup_needed": true
+    },
+    {
+      "legacy_id": "openclaw-health-check",
+      "legacy_name": "OpenClaw Health Check",
+      "legacy_category": "openclaw",
+      "entity_type": "ops-utility",
+      "primary_category": "platform-operations",
+      "secondary_category": "runtime-health",
+      "suggested_tags": ["health-check", "uptime", "ops"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "pm2-monitor",
+      "legacy_name": "PM2 Monitor",
+      "legacy_category": "openclaw",
+      "entity_type": "ops-utility",
+      "primary_category": "platform-operations",
+      "secondary_category": "runtime-health",
+      "suggested_tags": ["pm2", "monitoring", "runtime"],
+      "manual_review": false,
+      "cleanup_needed": false
+    },
+    {
+      "legacy_id": "telegram-alert-sender",
+      "legacy_name": "Telegram Alert Sender",
+      "legacy_category": "openclaw",
+      "entity_type": "ops-utility",
+      "primary_category": "platform-operations",
+      "secondary_category": "alerts",
+      "suggested_tags": ["telegram", "alerts", "notifications"],
+      "manual_review": false,
+      "cleanup_needed": false
+    }
+  ],
+  "manual_review_ids": [
+    "content-moat-calculator",
+    "keyword-cluster-architect",
+    "list-affitor-program",
+    "purple-cow-audit",
+    "grand-slam-offer",
+    "value-ladder-architect",
+    "performance-report",
+    "viral-post-writer",
+    "email-drip-sequence",
+    "multi-program-manager",
+    "proprietary-data-generator",
+    "funnel-planner",
+    "list-affitor-skill",
+    "self-improver",
+    "flywheel-kpi-report"
+  ],
+  "cleanup_needed_ids": [
+    "list-affitor-program",
+    "list-affitor-skill",
+    "viral-post-writer",
+    "free-ride-optimizer",
+    "ab-test-generator",
+    "twitter-thread-writer"
+  ],
+  "overlap_groups": [
+    {
+      "group": "reporting",
+      "records": ["performance-report", "flywheel-kpi-report"],
+      "note": "Likely merge or make one a specialized reporting subtype."
+    },
+    {
+      "group": "repurposing",
+      "records": ["content-pillar-atomizer", "content-repurposer"],
+      "note": "Very close functional family; keep separate only if one is a narrower specialized variant."
+    },
+    {
+      "group": "niche-research",
+      "records": ["monopoly-niche-finder", "niche-opportunity-finder"],
+      "note": "May be distinct models, but need explicit differentiation in descriptions."
+    },
+    {
+      "group": "program-intelligence",
+      "records": ["affiliate-program-search", "list-affitor-program"],
+      "note": "One appears discovery-oriented, one appears lookup-oriented; naming should make that boundary explicit."
+    },
+    {
+      "group": "skill-discovery",
+      "records": ["skill-finder", "list-affitor-skill"],
+      "note": "One is routing/recommendation, one is inventory; still easy to confuse."
+    },
+    {
+      "group": "offer-design",
+      "records": ["grand-slam-offer", "bonus-stack-builder", "guarantee-generator", "value-ladder-architect"],
+      "note": "All belong to the same offer-design family and need cleaner boundaries."
+    },
+    {
+      "group": "email-activation",
+      "records": ["email-drip-sequence", "email-automation-builder"],
+      "note": "One may be content asset creation and the other flow assembly; clarify scope."
+    },
+    {
+      "group": "social-content",
+      "records": ["comparison-post-writer", "listicle-generator"],
+      "note": "Not duplicates, but both need stronger format boundaries for future expansion."
+    }
+  ],
+  "recommended_next_action": {
+    "type": "implementation",
+    "label": "Create normalized tools dataset",
+    "note": "Add a new tools collection or data file that follows the v1 schema, migrate these 52 records into it, and keep manual-review flags in the source of truth until overlaps are resolved."
+  }
+}
