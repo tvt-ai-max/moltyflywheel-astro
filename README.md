@@ -36,3 +36,13 @@ This project is built using [Astro](https://astro.build).
 ## 🔒 Local-Only Skills
 
 The `seo-writer/` folder contains proprietary writing rules and is configured to be **local-only**. It is ignored by Git and should not be pushed to the public repository.
+
+---
+
+## 🧠 Codebase Memory
+
+To avoid re-reading the entire repository on every session, this project maintains a local codebase memory file at:
+
+- `docs/CODEBASE_MEMORY.md`
+
+For future analysis, review this file first, then scan only the files changed since the last log entry or the files directly relevant to the current task. Update the memory file after major codebase reads, architecture changes, or significant implementation work.
