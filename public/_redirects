@@ -8,6 +8,8 @@
 # ─── Core AI ───
 /go/claude-pro      https://claude.ai/upgrade                              301
 /go/claude          https://claude.ai/upgrade                              301
+/go/merlin-ai       https://www.getmerlin.in                               301
+/go/lovable         https://lovable.dev                                    301
 
 # ─── AI Writing ───
 /go/koala-writer    https://koalawriter.com                                301
@@ -17,6 +19,7 @@
 /go/copy-ai         https://copy.ai                                        301
 /go/copyai          https://copy.ai                                        301
 /go/writesonic      https://writesonic.com                                 301
+/go/aiseo           https://aiseo.ai                                       301
 
 # ─── SEO Tools ───
 /go/surfer-seo      https://surferseo.com                                  301
@@ -29,6 +32,9 @@
 /go/convertkit      https://convertkit.com                                 301
 /go/notion-ai       https://notion.so                                      301
 /go/notion          https://notion.so                                      301
+/go/beehiiv         https://www.beehiiv.com                                301
+/go/make            https://www.make.com                                   301
+/go/fireflies       https://fireflies.ai                                   301
 
 # ─── Legacy / Other ───
 /go/kling           https://affitor.com/affiliate-program/molty-flywheel   301
