@@ -6,7 +6,7 @@ category: review
 keyword: "surfer seo review 2026"
 cluster: "seo-content-tools"
 tags: ["surfer-seo", "seo", "content-optimization", "affiliate-marketing"]
-ogImage: "/images/blog/surfer-seo-review-2026-cover.webp"
+ogImage: "/images/blog/surfer-seo-review-2026-cover-v2.webp"
 draft: false
 ---
 

@@ -6,7 +6,7 @@ category: review
 keyword: "koala writer review 2026"
 cluster: "ai-writing-tools"
 tags: ["koala-writer", "ai-writing", "seo", "affiliate-marketing"]
-ogImage: "/images/blog/koala-writer-review-2026-cover.webp"
+ogImage: "/images/blog/koala-writer-review-2026-cover-v2.webp"
 draft: false
 ---
 

@@ -6,7 +6,7 @@ category: comparison
 keyword: "best ai writing tool for affiliate blogs"
 cluster: "ai-writing-tools"
 tags: ["ai-writing", "affiliate-marketing", "seo", "koala-writer"]
-ogImage: "/images/blog/best-ai-writing-tool-affiliate-blogs-cover.webp"
+ogImage: "/images/blog/best-ai-writing-tool-affiliate-blogs-cover-v2.webp"
 draft: false
 ---
 
