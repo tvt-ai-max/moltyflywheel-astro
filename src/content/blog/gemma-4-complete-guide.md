@@ -6,6 +6,7 @@ category: guide
 tags: ["gemma-4", "open-source-ai", "google-deepmind", "on-device-ai", "llm"]
 keyword: "gemma 4"
 cluster: "ai-tools"
+ogImage: "/images/blog/gemma-4-cover.webp"
 draft: false
 ---
 
