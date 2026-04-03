@@ -18,6 +18,24 @@ Whenever a request is made for **blog posts, SEO articles, GEO articles, tutoria
 4. **`seo-writer/references/internal-linking-rules.md`**: Guidelines for building topical authority through internal links.
 5. **Language Rule**: For `moltyflywheel.com`, blog content must be written in English by default. Do not output Vietnamese unless the task explicitly asks for Vietnamese or a bilingual rollout has been implemented.
 
+## Blog Writing Rule
+
+All production blog posts must follow the internal writing workflow before drafting begins.
+
+Required source files to read first:
+- `seo-writer/SKILL.md`
+- `seo-writer/references/blog-template.md`
+- `seo-writer/references/cta-blocks.md`
+- `seo-writer/references/internal-linking-rules.md`
+- `docs/Blog_Writing_Prompt_Template_v1.md`
+
+Default language rule:
+- Blog content must be written in English by default.
+- Do not output Vietnamese unless the task explicitly asks for Vietnamese or a bilingual rollout has been implemented.
+
+Execution rule:
+- A blog task is not complete until the final file is created, build validation passes, and Git push succeeds.
+
 ---
 
 ## 🛠️ Project Setup & Commands
