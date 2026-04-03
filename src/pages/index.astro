@@ -6,10 +6,56 @@ import ProgramLogo from '../components/programs/ProgramLogo.astro';
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
+function getThumbnail(post: typeof allPosts[number]) {
+  return post.data.ogImage ?? post.data.og_image ?? null;
+}
+
+const blogCategoryStyle: Record<string, { badge: string; gradient: string; icon: string }> = {
+  comparison: {
+    badge: 'text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25',
+    gradient: 'from-[#0B3B59] via-[#2173A6] to-[#72DBF2]',
+    icon: 'CL',
+  },
+  review: {
+    badge: 'text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25',
+    gradient: 'from-[#011826] via-[#0B3B59] to-[#2173A6]',
+    icon: 'RV',
+  },
+  guide: {
+    badge: 'text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25',
+    gradient: 'from-[#011826] via-[#0d2d40] to-[#2173A6]',
+    icon: 'GD',
+  },
+  'case-study': {
+    badge: 'text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25',
+    gradient: 'from-[#0B3B59] via-[#1a4560] to-[#72DBF2]',
+    icon: 'CS',
+  },
+  tutorial: {
+    badge: 'text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25',
+    gradient: 'from-[#011826] via-[#2173A6] to-[#5EA4BF]',
+    icon: 'TU',
+  },
+};
+
+function getBlogCategoryStyle(category: string) {
+  return blogCategoryStyle[category] ?? {
+    badge: 'text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25',
+    gradient: 'from-[#011826] via-[#0B3B59] to-[#2173A6]',
+    icon: 'AI',
+  };
+}
+
 const latestPosts = allPosts.slice(0, 4);
 const reviewAndComparisonPosts = allPosts
   .filter((post) => ['review', 'comparison'].includes(post.data.category))
   .slice(0, 4);
+
+const homepageReviewCards = (reviewAndComparisonPosts.length > 0 ? reviewAndComparisonPosts : latestPosts)
+  .map((post) => ({
+    ...post,
+    thumbnail: getThumbnail(post),
+  }));
 
 const allPrograms = (await getCollection('programs'))
   .sort((a, b) => {
@@ -346,24 +392,62 @@ const faqs = [
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        {(reviewAndComparisonPosts.length > 0 ? reviewAndComparisonPosts : latestPosts).map((post) => (
-          <a
-            href={`/blog/${post.id}`}
-            class="group rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-6 transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40"
-          >
-            <div class="flex items-center gap-3 text-[11px] text-[#3d7a96]">
-              <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 font-bold uppercase tracking-[0.18em] text-[#72DBF2]">
-                {post.data.category}
-              </span>
-            </div>
-            <h3 class="mt-5 text-xl font-bold leading-tight text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">{post.data.title}</h3>
-            <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{post.data.description}</p>
-            <div class="mt-6 flex items-center justify-between border-t border-[#0d2d40] pt-4 text-sm font-semibold text-[#72DBF2]">
-              <span>Read article</span>
-              <span aria-hidden="true">→</span>
-            </div>
-          </a>
-        ))}
+        {homepageReviewCards.map((post) => {
+          const style = getBlogCategoryStyle(post.data.category);
+          return (
+            <a
+              href={`/blog/${post.id}`}
+              class="group overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#0B3B59] transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40"
+            >
+              <div class="relative block h-56 overflow-hidden">
+                {post.thumbnail ? (
+                  <>
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#011826] via-[#0B3B59] to-[#1a4560]"></div>
+                    <div
+                      class="absolute inset-0 opacity-[0.08]"
+                      style="background-image: radial-gradient(circle at 22% 18%, rgba(255,255,255,0.18) 0%, transparent 28%), repeating-linear-gradient(45deg, rgba(255,255,255,0.38) 0px, rgba(255,255,255,0.38) 1px, transparent 1px, transparent 14px);"
+                    ></div>
+                    <img
+                      src={post.thumbnail}
+                      alt={post.data.title}
+                      loading="lazy"
+                      decoding="async"
+                      class="absolute inset-0 h-full w-full object-contain p-4 transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </>
+                ) : (
+                  <div class:list={['h-full w-full bg-gradient-to-br', style.gradient]}>
+                    <div
+                      class="absolute inset-0 opacity-[0.08]"
+                      style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 14px);"
+                    ></div>
+                    <div class="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-5">
+                      <span class:list={['rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]', style.badge]}>
+                        {post.data.category}
+                      </span>
+                      <span class="text-lg font-black tracking-[0.18em] text-white/25">{style.icon}</span>
+                    </div>
+                  </div>
+                )}
+
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#011826] via-[#011826]/60 to-transparent px-5 pb-5 pt-12">
+                  <span class:list={['inline-flex rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]', style.badge]}>
+                    {post.data.category}
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-6">
+                <h3 class="text-xl font-bold leading-tight text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">{post.data.title}</h3>
+                <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{post.data.description}</p>
+                <div class="mt-6 flex items-center justify-between border-t border-[#0d2d40] pt-4 text-sm font-semibold text-[#72DBF2]">
+                  <span>Read article</span>
+                  <span aria-hidden="true">→</span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>
