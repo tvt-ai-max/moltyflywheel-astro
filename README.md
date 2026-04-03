@@ -45,6 +45,7 @@ The `seo-writer/` folder contains proprietary writing rules and is configured to
 To avoid re-reading the entire repository on every session, this project maintains a local codebase memory file at:
 
 - `docs/CODEBASE_MEMORY.md`
+- `docs/MoltyFlywheel_System_Snapshot_v1.md`
 
 For future analysis, review this file first, then scan only the files changed since the last log entry or the files directly relevant to the current task. Update the memory file after major codebase reads, architecture changes, or significant implementation work.
 
@@ -58,3 +59,63 @@ The approved AI tools taxonomy has been operationalized into tracked repo assets
 - `src/data/tools/migration-map-v1.json`
 
 Use these as the source of truth before refactoring the current tools dataset, building category pages, or implementing new filters/search for the tools directory.
+
+---
+
+## 🧭 Current Site Snapshot
+
+As of the latest implementation sweep, the public site now has:
+
+- a decision-hub homepage in `src/pages/index.astro`
+- a redesigned `/blog` index with image-aware editorial cards
+- blog detail pages using `src/layouts/BlogLayout.astro`
+- a redesigned `/programs` directory plus richer program detail pages
+- a local logo system for program cards and program detail heroes
+- a full `/offers/` hub plus article-style offer detail pages
+- one content-driven offer route at `/p/[offer]`
+
+Current tracked content inventory:
+
+- `18` blog posts in `src/content/blog/`
+- `20` program entries in `src/content/programs/`
+- `7` static offer pages in `src/pages/offers/`
+- `1` content-driven offer entry in `src/content/offers/`
+- `6` niche pages in `src/content/niches/`
+- `21` blog cover assets in `public/images/blog/`
+- `10` program logo assets in `public/images/programs/logos/`
+
+If you are continuing work on this repo, review these files first:
+
+- `docs/CODEBASE_MEMORY.md`
+- `docs/MoltyFlywheel_System_Snapshot_v1.md`
+- `src/content.config.ts`
+- `src/pages/index.astro`
+- `src/pages/blog/index.astro`
+- `src/layouts/BlogLayout.astro`
+- `src/pages/programs/index.astro`
+- `src/pages/programs/[program].astro`
+- `src/layouts/OfferArticleLayout.astro`
+- `src/pages/offers/index.astro`
+
+---
+
+## 🎯 Offer System Assets
+
+The offer layer is now split into three levels:
+
+1. Framework
+   - `docs/MoltyFlywheel_Offer_Copy_Framework_v1.md`
+
+2. Execution Template
+   - `src/content/_engine/offer-page-template-v1.md`
+
+3. QA / Mapping Docs
+   - `docs/MoltyFlywheel_Offer_QA_Checklist_v1.md`
+   - `docs/sset name: MoltyFlywheel_OfferPages_Map_v1.md`
+
+Use this order whenever new offer pages or content-driven offers are added:
+
+1. framework
+2. execution template
+3. real page/content implementation
+4. QA checklist
