@@ -6,6 +6,7 @@ category: "guide"
 keyword: "what makes a high-ticket affiliate program worth promoting"
 cluster: "offer-model"
 tags: ["high-ticket", "offer-evaluation", "affiliate-marketing"]
+ogImage: "/images/blog/what-makes-a-high-ticket-affiliate-program-worth-promoting-cover.webp"
 draft: false
 ---
 

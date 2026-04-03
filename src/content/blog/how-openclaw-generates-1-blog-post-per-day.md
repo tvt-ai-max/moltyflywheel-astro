@@ -5,6 +5,7 @@ pubDate: 2026-03-27
 category: case-study
 tags: ["openclaw", "automation", "blogging", "seo"]
 affiliatePrograms: ["claude-pro"]
+ogImage: "/images/blog/how-openclaw-generates-1-blog-post-per-day-cover.webp"
 draft: false
 ---
 

@@ -6,6 +6,7 @@ category: "guide"
 keyword: "recurring commission affiliate programs"
 cluster: "offer-model"
 tags: ["recurring-commissions", "saas", "long-term-growth"]
+ogImage: "/images/blog/recurring-commission-affiliate-programs-long-term-growth-cover.webp"
 draft: false
 ---
 

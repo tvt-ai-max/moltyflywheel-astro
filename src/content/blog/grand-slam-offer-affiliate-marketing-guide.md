@@ -5,6 +5,7 @@ pubDate: 2026-03-24
 category: guide
 tags: ["conversion", "landing-pages", "offer", "hormozi"]
 affiliatePrograms: ["koala-writer", "surfer-seo"]
+ogImage: "/images/blog/grand-slam-offer-affiliate-marketing-guide-cover.webp"
 draft: false
 ---
 

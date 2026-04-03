@@ -6,6 +6,7 @@ category: "guide"
 keyword: "how to choose a niche for affiliate marketing"
 cluster: "beginner"
 tags: ["niche-selection", "affiliate-marketing", "strategy"]
+ogImage: "/images/blog/how-to-choose-a-niche-for-affiliate-marketing-cover.webp"
 draft: false
 ---
 
