@@ -1,6 +1,7 @@
 ---
 name: "Copy.ai"
 description: "AI copywriting workflows for marketing teams. 45% recurring commission — highest in the AI writing space."
+logo: "/images/programs/logos/copy-ai.webp"
 affiliateUrl: "https://go.moltyflywheel.com/copyai"
 commission:
   type: recurring

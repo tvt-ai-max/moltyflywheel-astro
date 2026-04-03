@@ -1,6 +1,7 @@
 ---
 name: "Notion AI"
 description: "All-in-one workspace with AI writing assistant. $10 per paid signup with 30-day cookie."
+logo: "/images/programs/logos/notion-ai.webp"
 affiliateUrl: "https://go.moltyflywheel.com/notion"
 commission:
   type: cps

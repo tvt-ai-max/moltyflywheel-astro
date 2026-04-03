@@ -1,6 +1,7 @@
 ---
 name: "Writesonic"
 description: "AI content generator for blogs, ads, and ecommerce. 30% recurring commission."
+logo: "/images/programs/logos/writesonic.webp"
 affiliateUrl: "https://go.moltyflywheel.com/writesonic"
 commission:
   type: recurring

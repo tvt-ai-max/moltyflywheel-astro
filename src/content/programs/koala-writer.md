@@ -1,6 +1,7 @@
 ---
 name: "KoalaWriter"
 description: "AI blog writer with built-in SEO optimization and affiliate link management. 30% recurring commission."
+logo: "/images/programs/logos/koala-writer.webp"
 affiliateUrl: "https://go.moltyflywheel.com/koala"
 commission:
   type: recurring

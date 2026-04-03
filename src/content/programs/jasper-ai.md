@@ -1,6 +1,7 @@
 ---
 name: "Jasper AI"
 description: "Enterprise AI writing platform. 25% recurring commission on $49+ plans."
+logo: "/images/programs/logos/jasper-ai.webp"
 affiliateUrl: "https://go.moltyflywheel.com/jasper"
 commission:
   type: recurring

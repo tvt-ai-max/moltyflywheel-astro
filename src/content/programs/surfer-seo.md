@@ -1,6 +1,7 @@
 ---
 name: "Surfer SEO"
 description: "AI-powered content optimization platform. 25% recurring commission on $89+ plans."
+logo: "/images/programs/logos/surfer-seo.webp"
 affiliateUrl: "https://go.moltyflywheel.com/surfer"
 commission:
   type: recurring

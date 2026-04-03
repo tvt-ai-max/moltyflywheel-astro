@@ -1,6 +1,7 @@
 ---
 name: "Claude Pro"
 description: "Anthropic's Claude Pro subscription — the most capable AI assistant for affiliate marketers."
+logo: "/images/programs/logos/claude-pro.webp"
 affiliateUrl: "https://go.moltyflywheel.com/claude"
 commission:
   type: cps

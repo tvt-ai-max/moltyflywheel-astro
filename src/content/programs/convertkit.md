@@ -1,6 +1,7 @@
 ---
 name: "ConvertKit"
 description: "Email marketing for creators. 30% recurring lifetime commission — one of the best in the industry."
+logo: "/images/programs/logos/convertkit.webp"
 affiliateUrl: "https://go.moltyflywheel.com/convertkit"
 commission:
   type: recurring

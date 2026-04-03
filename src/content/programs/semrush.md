@@ -1,6 +1,7 @@
 ---
 name: "SEMrush"
 description: "All-in-one SEO platform. $200 per sale + $10 per free trial signup."
+logo: "/images/programs/logos/semrush.webp"
 affiliateUrl: "https://go.moltyflywheel.com/semrush"
 commission:
   type: hybrid

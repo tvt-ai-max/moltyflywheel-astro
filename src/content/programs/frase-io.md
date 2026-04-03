@@ -1,6 +1,7 @@
 ---
 name: "Frase.io"
 description: "AI SEO research and content optimization tool. 30% recurring on $45+ plans."
+logo: "/images/programs/logos/frase-io.webp"
 affiliateUrl: "https://go.moltyflywheel.com/frase"
 commission:
   type: recurring

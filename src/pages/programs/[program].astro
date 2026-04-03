@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
+import ProgramLogo from '../../components/programs/ProgramLogo.astro';
 
 export async function getStaticPaths() {
   const programs = await getCollection('programs');
@@ -259,13 +260,20 @@ const faqItems = [
             <div class="absolute -left-10 -top-10 h-36 w-36 rounded-full blur-3xl bg-[#72DBF2]/20"></div>
             <div class="absolute inset-0 opacity-[0.06]" style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0px, rgba(255,255,255,0.35) 1px, transparent 1px, transparent 14px);"></div>
             <div class="relative">
-              <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#011826]/65 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#89c0d4]">
-                {visualChip[program.data.category]}
-              </span>
-              <div class="mt-6 grid grid-cols-3 gap-3">
-                <div class="h-16 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
-                <div class="h-20 rounded-2xl border border-[#72DBF2]/20 bg-[#72DBF2]/10"></div>
-                <div class="h-12 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
+              <div class="flex items-center justify-between gap-4">
+                <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#011826]/65 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#89c0d4]">
+                  {visualChip[program.data.category]}
+                </span>
+                <span class="text-[11px] uppercase tracking-[0.24em] text-[#5ea4bf]">Local logo</span>
+              </div>
+              <div class="mt-6 flex items-center gap-4">
+                <ProgramLogo name={program.data.name} logo={program.data.logo} size="lg" class="h-28 w-28 rounded-[28px]" />
+                <div class="min-w-0 flex-1">
+                  <p class="text-lg font-semibold text-[#daeef5]">{program.data.name}</p>
+                  <p class="mt-2 text-sm leading-7 text-[#5ea4bf]">
+                    Brand marker for the MoltyFlywheel directory. If a native logo is unavailable later, this slot can still degrade gracefully without breaking the page.
+                  </p>
+                </div>
               </div>
               <div class="mt-6 h-2 rounded-full bg-[linear-gradient(135deg,rgba(114,219,242,0.7),rgba(33,115,166,0.2))]"></div>
             </div>
@@ -407,8 +415,13 @@ const faqItems = [
                     href={`/programs/${entry.id}`}
                     class="group rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-5 transition-all hover:-translate-y-1 hover:border-[#72DBF2]/35"
                   >
-                    <p class="text-lg font-bold text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">{entry.data.name}</p>
-                    <p class="mt-3 text-sm leading-7 text-[#5ea4bf]">{entry.data.description}</p>
+                    <div class="flex items-start gap-4">
+                      <ProgramLogo name={entry.data.name} logo={entry.data.logo} size="sm" />
+                      <div class="min-w-0 flex-1">
+                        <p class="text-lg font-bold text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">{entry.data.name}</p>
+                        <p class="mt-3 text-sm leading-7 text-[#5ea4bf]">{entry.data.description}</p>
+                      </div>
+                    </div>
                     <div class="mt-4 flex items-center justify-between border-t border-[#0d2d40] pt-4 text-xs text-[#89c0d4]">
                       <span>{entry.data.commission.rate}</span>
                       <span>{entry.data.commission.cookieDuration}</span>
@@ -461,6 +474,9 @@ const faqItems = [
           <div class="space-y-6">
             <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
               <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Quick Action</p>
+              <div class="mt-4">
+                <ProgramLogo name={program.data.name} logo={program.data.logo} size="md" />
+              </div>
               <h2 class="mt-3 text-2xl font-bold text-[#daeef5]">Open the program and inspect the actual offer.</h2>
               <p class="mt-3 text-sm leading-7 text-[#5ea4bf]">
                 Never rely on the payout number alone. Cross-check the landing page, buyer fit, and onboarding quality before publishing a hard recommendation.
@@ -498,8 +514,13 @@ const faqItems = [
                 <div class="mt-5 space-y-4">
                   {alternatives.map((entry) => (
                     <a href={`/programs/${entry.id}`} class="block rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-4 transition-colors hover:border-[#72DBF2]/35">
-                      <p class="text-sm font-semibold text-[#daeef5]">{entry.data.name}</p>
-                      <p class="mt-2 text-xs leading-6 text-[#5ea4bf]">{entry.data.description}</p>
+                      <div class="flex items-start gap-3">
+                        <ProgramLogo name={entry.data.name} logo={entry.data.logo} size="sm" class="h-12 w-12 rounded-[18px]" />
+                        <div class="min-w-0 flex-1">
+                          <p class="text-sm font-semibold text-[#daeef5]">{entry.data.name}</p>
+                          <p class="mt-2 text-xs leading-6 text-[#5ea4bf]">{entry.data.description}</p>
+                        </div>
+                      </div>
                     </a>
                   ))}
                 </div>

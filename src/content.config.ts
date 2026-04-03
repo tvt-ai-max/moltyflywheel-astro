@@ -32,6 +32,7 @@ const programs = defineCollection({
   schema: z.object({
     name: z.string(),
     description: z.string().max(160),
+    logo: z.string().optional(),
     affiliateUrl: z.string().url(),
     commission: z.object({
       type: z.enum(['cps', 'cpl', 'recurring', 'hybrid']),
