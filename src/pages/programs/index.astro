@@ -3,22 +3,429 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
 
-const programs = await getCollection('programs');
+const allPrograms = (await getCollection('programs'))
+  .sort((a, b) => {
+    if (b.data.featured !== a.data.featured) return Number(b.data.featured) - Number(a.data.featured);
+    if (b.data.rating !== a.data.rating) return b.data.rating - a.data.rating;
+    return a.data.name.localeCompare(b.data.name);
+  });
+
+const featuredPrograms = allPrograms.filter((program) => program.data.featured).slice(0, 4);
+
+const categoryConfig = {
+  'all': {
+    label: 'All Programs',
+    description: 'A curated directory of AI, SEO, and creator software with real affiliate upside.',
+  },
+  'ai-writing': {
+    label: 'AI Writing',
+    description: 'Content engines, drafting workflows, and scalable publishing tools.',
+  },
+  'seo': {
+    label: 'SEO',
+    description: 'Optimization stacks for ranking, content scoring, and SERP-informed publishing.',
+  },
+  'email': {
+    label: 'Email',
+    description: 'Email infrastructure and creator monetization tools with durable retention.',
+  },
+  'general-ai': {
+    label: 'General AI',
+    description: 'Flexible AI platforms for research, strategy, copy, and automation.',
+  },
+  'productivity': {
+    label: 'Productivity',
+    description: 'Systems, workspace, and operational tools that improve execution velocity.',
+  },
+} as const;
+
+type CategoryKey = keyof typeof categoryConfig;
+
+const categoryOrder: CategoryKey[] = ['all', 'ai-writing', 'seo', 'email', 'general-ai', 'productivity'];
+const selectedCategory = (Astro.url.searchParams.get('category') as CategoryKey | null) ?? 'all';
+const activeCategory = categoryOrder.includes(selectedCategory) ? selectedCategory : 'all';
+
+const filteredPrograms = activeCategory === 'all'
+  ? allPrograms
+  : allPrograms.filter((program) => program.data.category === activeCategory);
+
+const categoryCounts = allPrograms.reduce<Record<string, number>>((acc, program) => {
+  acc[program.data.category] = (acc[program.data.category] ?? 0) + 1;
+  return acc;
+}, {});
+
+const stats = [
+  `${allPrograms.length} vetted programs`,
+  `${featuredPrograms.length} editor picks`,
+  `${allPrograms.filter((program) => program.data.commission.type === 'recurring').length} recurring models`,
+];
+
+const categoryAccent = {
+  'ai-writing': 'text-[#72DBF2] bg-[#72DBF2]/10 border-[#72DBF2]/20',
+  'seo': 'text-[#55F2C3] bg-[#55F2C3]/10 border-[#55F2C3]/20',
+  'email': 'text-[#5EA4BF] bg-[#5EA4BF]/10 border-[#5EA4BF]/20',
+  'general-ai': 'text-[#B8D9E8] bg-[#B8D9E8]/10 border-[#B8D9E8]/20',
+  'productivity': 'text-[#89C0D4] bg-[#89C0D4]/10 border-[#89C0D4]/20',
+} as const;
+
+const commissionTone = {
+  recurring: 'Recurring',
+  cps: 'Per sale',
+  cpl: 'Per lead',
+  hybrid: 'Hybrid',
+} as const;
+
+function formatCategory(category: Exclude<CategoryKey, 'all'>) {
+  return categoryConfig[category].label;
+}
+
+function getProgramVisual(programId: string) {
+  const palette = {
+    'claude-pro': {
+      glow: 'rgba(114, 219, 242, 0.22)',
+      lines: 'linear-gradient(135deg, rgba(114,219,242,0.7), rgba(33,115,166,0.18))',
+      chip: 'Strategy AI',
+    },
+    'koala-writer': {
+      glow: 'rgba(114, 219, 242, 0.2)',
+      lines: 'linear-gradient(135deg, rgba(94,164,191,0.7), rgba(114,219,242,0.2))',
+      chip: 'Writer Stack',
+    },
+    'surfer-seo': {
+      glow: 'rgba(85, 242, 195, 0.18)',
+      lines: 'linear-gradient(135deg, rgba(85,242,195,0.8), rgba(114,219,242,0.15))',
+      chip: 'SERP Signals',
+    },
+    'convertkit': {
+      glow: 'rgba(94, 164, 191, 0.2)',
+      lines: 'linear-gradient(135deg, rgba(94,164,191,0.75), rgba(33,115,166,0.18))',
+      chip: 'Owned Audience',
+    },
+  } as const;
+
+  return palette[programId as keyof typeof palette] ?? {
+    glow: 'rgba(114, 219, 242, 0.18)',
+    lines: 'linear-gradient(135deg, rgba(114,219,242,0.65), rgba(33,115,166,0.14))',
+    chip: 'MoltyFlywheel Pick',
+  };
+}
 ---
-<BaseLayout title="Affiliate Programs" description="The best AI and marketing tools with affiliate programs reviewed.">
-  <div class="max-w-6xl mx-auto px-6 py-16">
-    <h1 class="text-4xl font-black mb-8">Affiliate Programs</h1>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {programs.map(p => (
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-gray-600 transition-colors">
-          <h3 class="text-lg font-bold mb-2">{p.data.name}</h3>
-          <p class="text-gray-400 text-sm mb-4">{p.data.description}</p>
-          <div class="flex items-center gap-4">
-            <a href={`/programs/${p.id}`} class="text-amber-500 hover:underline text-sm font-semibold">Read Review</a>
-            <AffiliateButton program={p.id} label="Visit Site" size="sm" />
+
+<BaseLayout
+  title="Affiliate Programs Directory"
+  description="Explore MoltyFlywheel's curated directory of AI, SEO, creator, and productivity affiliate programs."
+>
+  <section class="relative overflow-hidden border-b border-[#0d2d40] bg-[#011826]">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(114,219,242,0.14),transparent_32%),radial-gradient(circle_at_82%_18%,rgba(33,115,166,0.24),transparent_22%),linear-gradient(180deg,rgba(11,59,89,0.18),transparent_55%)]"></div>
+    <div class="absolute inset-0 opacity-[0.08]" style="background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 72px 72px;"></div>
+
+    <div class="relative mx-auto max-w-[1400px] px-4 py-16 md:px-6 md:py-20">
+      <div class="grid gap-10 xl:grid-cols-[minmax(0,1.25fr)_420px] xl:items-start">
+        <div class="max-w-4xl">
+          <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">
+            Program Directory
+          </span>
+          <h1 class="mt-6 max-w-4xl text-4xl font-black leading-[1.05] text-[#daeef5] md:text-6xl">
+            Find affiliate programs with real operator economics.
+          </h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#5ea4bf] md:text-[19px]">
+            Browse MoltyFlywheel&apos;s dark-stack directory of AI writing, SEO, email, and workflow software. Built for faster scanning, cleaner comparison, and quicker clicks into the right review.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            {stats.map((stat) => (
+              <span class="inline-flex rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+                {stat}
+              </span>
+            ))}
           </div>
         </div>
-      ))}
+
+        <aside class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#72DBF2]">Signal Snapshot</p>
+          <h2 class="mt-3 text-2xl font-bold text-[#daeef5]">Start with the highest-fit stack for your monetization model.</h2>
+          <p class="mt-3 text-sm leading-7 text-[#5ea4bf]">
+            Compare commission shape, cookie window, and category fit in one place before diving into the full review.
+          </p>
+
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/65 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Active focus</p>
+              <p class="mt-2 text-lg font-semibold text-[#daeef5]">{categoryConfig[activeCategory].label}</p>
+              <p class="mt-2 text-sm leading-6 text-[#5ea4bf]">{categoryConfig[activeCategory].description}</p>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Programs</p>
+                <p class="mt-2 text-2xl font-bold text-[#daeef5]">{filteredPrograms.length}</p>
+              </div>
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Recurring</p>
+                <p class="mt-2 text-2xl font-bold text-[#daeef5]">{filteredPrograms.filter((program) => program.data.commission.type === 'recurring').length}</p>
+              </div>
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Featured</p>
+                <p class="mt-2 text-2xl font-bold text-[#daeef5]">{featuredPrograms.length}</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="sticky top-[64px] z-40 border-b border-[#0d2d40] bg-[#011826]/95 backdrop-blur">
+    <div class="mx-auto max-w-[1400px] px-4 py-4 md:px-6">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div class="flex flex-wrap gap-2">
+          {categoryOrder.map((category) => {
+            const active = category === activeCategory;
+            const count = category === 'all' ? allPrograms.length : (categoryCounts[category] ?? 0);
+            return (
+              <a
+                href={category === 'all' ? '/programs' : `/programs?category=${category}`}
+                class:list={[
+                  'inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all',
+                  active
+                    ? 'bg-[#2173A6] text-white'
+                    : 'border border-[#1a4560] bg-[#0B3B59] text-[#5ea4bf] hover:border-[#72DBF2]/30 hover:text-[#daeef5]',
+                ]}
+              >
+                <span>{categoryConfig[category].label}</span>
+                <span class="rounded-full bg-black/10 px-1.5 py-0.5 text-[10px]">{count}</span>
+              </a>
+            );
+          })}
+        </div>
+
+        <div class="relative w-full lg:w-[340px]">
+          <svg class="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#3d7a96]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <input
+            id="program-search"
+            type="text"
+            placeholder="Search by program, commission, or category"
+            class="w-full rounded-full border border-[#1a4560] bg-[#0B3B59] py-3 pl-11 pr-4 text-sm text-[#daeef5] outline-none transition-colors placeholder:text-[#3d7a96] focus:border-[#72DBF2]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {featuredPrograms.length > 0 && (
+    <section class="border-b border-[#0d2d40] bg-[#011826]">
+      <div class="mx-auto max-w-[1400px] px-4 py-10 md:px-6 md:py-12">
+        <div class="mb-6 flex items-center justify-between gap-4">
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Featured Programs</p>
+            <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Editorial picks with the strongest conversion profile</h2>
+          </div>
+          <p class="hidden text-sm text-[#5ea4bf] md:block">Curated from the highest-signal tools in the MoltyFlywheel stack</p>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+          {featuredPrograms.map((program) => {
+            const visual = getProgramVisual(program.id);
+            return (
+              <a
+                href={`/programs/${program.id}`}
+                class="group overflow-hidden rounded-[28px] border border-[#1a4560] bg-[#0B3B59] transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40 hover:shadow-2xl hover:shadow-[#011826]"
+              >
+                <div class="grid min-h-full md:grid-cols-[1fr_minmax(0,1.08fr)]">
+                  <div class="relative min-h-[240px] overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#011826] via-[#0B3B59] to-[#1a4560]"></div>
+                    <div class="absolute inset-0 opacity-[0.08]" style="background-image: radial-gradient(circle at 22% 18%, rgba(255,255,255,0.18) 0%, transparent 28%), repeating-linear-gradient(45deg, rgba(255,255,255,0.38) 0px, rgba(255,255,255,0.38) 1px, transparent 1px, transparent 14px);"></div>
+                    <div class="absolute inset-0 p-5">
+                      <div class="relative h-full overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#011826]/40">
+                        <div class="absolute -left-10 -top-10 h-40 w-40 rounded-full blur-3xl" style={`background:${visual.glow};`}></div>
+                        <div class="absolute inset-x-8 top-12 h-2 rounded-full opacity-80" style={`background:${visual.lines};`}></div>
+                        <div class="absolute inset-x-12 bottom-16 h-28 rounded-[28px] border border-[#72DBF2]/20 bg-[#011826]/45"></div>
+                        <div class="absolute left-10 top-10 rounded-full border border-[#72DBF2]/20 bg-[#011826]/65 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#89c0d4]">
+                          {visual.chip}
+                        </div>
+                        <div class="absolute left-10 right-10 top-24 grid grid-cols-3 gap-4">
+                          <div class="h-20 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
+                          <div class="h-24 rounded-2xl border border-[#72DBF2]/20 bg-[#72DBF2]/10"></div>
+                          <div class="h-16 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#011826] via-[#011826]/55 to-transparent px-5 pb-5 pt-12">
+                      <span class:list={[
+                        'inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]',
+                        categoryAccent[program.data.category],
+                      ]}>
+                        {formatCategory(program.data.category)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col p-6">
+                    <div class="flex flex-wrap items-center gap-3 text-xs text-[#3d7a96]">
+                      <span>{commissionTone[program.data.commission.type]}</span>
+                      <span class="text-[#1a4560]">•</span>
+                      <span>{program.data.commission.rate}</span>
+                      <span class="text-[#1a4560]">•</span>
+                      <span>{program.data.commission.cookieDuration} cookie</span>
+                    </div>
+                    <h3 class="mt-4 text-[26px] font-bold leading-tight text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">
+                      {program.data.name}
+                    </h3>
+                    <p class="mt-4 flex-1 text-sm leading-7 text-[#5ea4bf]">{program.data.description}</p>
+
+                    <div class="mt-6 flex items-center gap-2">
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <span class={index < Math.round(program.data.rating) ? 'text-[#72DBF2]' : 'text-[#1a4560]'}>★</span>
+                      ))}
+                      <span class="ml-1 text-sm text-[#89c0d4]">{program.data.rating.toFixed(1)} / 5</span>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between border-t border-[#0d2d40] pt-4">
+                      <span class="text-xs font-medium text-[#89c0d4]">MoltyFlywheel Editorial</span>
+                      <span class="text-sm font-bold text-[#72DBF2] transition-transform group-hover:translate-x-1">
+                        View program →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="bg-[#011826]">
+    <div class="mx-auto max-w-[1400px] px-4 py-10 md:px-6 md:py-12">
+      <div class="mb-6 flex items-center justify-between gap-4">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Program Grid</p>
+          <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Browse the full affiliate stack</h2>
+        </div>
+        <p class="text-sm text-[#5ea4bf]">{filteredPrograms.length} programs in view</p>
+      </div>
+
+      <div id="program-grid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {filteredPrograms.map((program) => {
+          const visual = getProgramVisual(program.id);
+          return (
+            <article
+              class="program-card group flex h-full flex-col overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#0B3B59] transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40 hover:shadow-2xl hover:shadow-[#011826]"
+              data-title={program.data.name.toLowerCase()}
+              data-desc={program.data.description.toLowerCase()}
+              data-category={program.data.category}
+              data-commission={`${program.data.commission.type} ${program.data.commission.rate} ${program.data.commission.cookieDuration}`.toLowerCase()}
+            >
+              <a href={`/programs/${program.id}`} class="relative block h-56 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#011826] via-[#0B3B59] to-[#1a4560]"></div>
+                <div class="absolute inset-0 opacity-[0.08]" style="background-image: radial-gradient(circle at 20% 18%, rgba(255,255,255,0.18) 0%, transparent 26%), repeating-linear-gradient(45deg, rgba(255,255,255,0.36) 0px, rgba(255,255,255,0.36) 1px, transparent 1px, transparent 15px);"></div>
+                <div class="absolute inset-0 p-4">
+                  <div class="relative h-full overflow-hidden rounded-[22px] border border-[#72DBF2]/15 bg-[#011826]/40">
+                    <div class="absolute -right-8 -top-8 h-28 w-28 rounded-full blur-3xl" style={`background:${visual.glow};`}></div>
+                    <div class="absolute left-6 top-6 rounded-full border border-[#72DBF2]/20 bg-[#011826]/65 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#89c0d4]">
+                      {visual.chip}
+                    </div>
+                    <div class="absolute inset-x-6 top-16 h-2 rounded-full opacity-85" style={`background:${visual.lines};`}></div>
+                    <div class="absolute left-6 right-6 top-28 grid grid-cols-3 gap-3">
+                      <div class="h-10 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
+                      <div class="h-16 rounded-2xl border border-[#72DBF2]/20 bg-[#72DBF2]/10"></div>
+                      <div class="h-12 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
+                    </div>
+                    <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
+                      <span class:list={[
+                        'inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]',
+                        categoryAccent[program.data.category],
+                      ]}>
+                        {formatCategory(program.data.category)}
+                      </span>
+                      {program.data.featured && (
+                        <span class="rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#72DBF2]">
+                          Featured
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <div class="flex flex-1 flex-col p-5">
+                <div class="flex flex-wrap items-center gap-3 text-[11px] text-[#3d7a96]">
+                  <span>{commissionTone[program.data.commission.type]}</span>
+                  <span class="text-[#1a4560]">•</span>
+                  <span>{program.data.commission.rate}</span>
+                  <span class="text-[#1a4560]">•</span>
+                  <span>{program.data.commission.cookieDuration}</span>
+                </div>
+
+                <a href={`/programs/${program.id}`} class="mt-4 block">
+                  <h3 class="text-[22px] font-bold leading-snug text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">
+                    {program.data.name}
+                  </h3>
+                </a>
+
+                <p class="mt-3 flex-1 text-sm leading-7 text-[#5ea4bf]">{program.data.description}</p>
+
+                <div class="mt-5 flex items-center gap-2">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <span class={index < Math.round(program.data.rating) ? 'text-[#72DBF2]' : 'text-[#1a4560]'}>★</span>
+                  ))}
+                  <span class="ml-1 text-sm text-[#89c0d4]">{program.data.rating.toFixed(1)}</span>
+                </div>
+
+                <div class="mt-5 flex items-center justify-between gap-3 border-t border-[#0d2d40] pt-4">
+                  <a href={`/programs/${program.id}`} class="text-sm font-semibold text-[#72DBF2] transition-transform group-hover:translate-x-1">
+                    Read review →
+                  </a>
+                  <AffiliateButton program={program.id} label="Visit Site" size="sm" />
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-[#0d2d40] bg-[#011826] pb-14 pt-2">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-6">
+      <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(135deg,#0B3B59_0%,#2173A6_58%,#5EA4BF_100%)] p-6 shadow-[0_20px_60px_rgba(1,24,38,0.24)] md:flex md:items-center md:justify-between md:gap-8 md:p-8">
+        <div class="max-w-2xl">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#011826]/70">Operator Notes</p>
+          <h2 class="mt-3 text-2xl font-bold text-white md:text-3xl">Want the shortlist before you click into every review?</h2>
+          <p class="mt-3 text-sm leading-7 text-[#e8f4fb] md:text-base">
+            Get the MoltyFlywheel free guide and see how we pair AI writing, SEO, and recurring SaaS programs into one cleaner monetization stack.
+          </p>
+        </div>
+
+        <div class="mt-6 md:mt-0 md:shrink-0">
+          <a
+            href="/free-guide"
+            class="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5"
+          >
+            Get the Free Guide →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const searchInput = document.getElementById('program-search');
+    const cards = Array.from(document.querySelectorAll('.program-card'));
+
+    searchInput?.addEventListener('input', (event) => {
+      const query = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+      cards.forEach((card) => {
+        const title = card.getAttribute('data-title') ?? '';
+        const desc = card.getAttribute('data-desc') ?? '';
+        const category = card.getAttribute('data-category') ?? '';
+        const commission = card.getAttribute('data-commission') ?? '';
+        const visible = !query || [title, desc, category, commission].some((value) => value.includes(query));
+        (card as HTMLElement).style.display = visible ? '' : 'none';
+      });
+    });
+  </script>
 </BaseLayout>

@@ -5,75 +5,509 @@ import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
 
 export async function getStaticPaths() {
   const programs = await getCollection('programs');
-  return programs.map(p => ({ params: { program: p.id }, props: { program: p } }));
+  return programs.map((program) => ({ params: { program: program.id }, props: { program } }));
 }
 
 const { program } = Astro.props;
+const allPrograms = await getCollection('programs');
 const { Content } = await render(program);
 
-const stars = '★'.repeat(program.data.rating) + '☆'.repeat(5 - program.data.rating);
+const rawBody = program.body ?? '';
+const stars = Array.from({ length: 5 }, (_, index) => index < Math.round(program.data.rating));
+
+function splitSections(markdown: string) {
+  const sections: { title: string; content: string }[] = [];
+  const headingRegex = /^##\s+(.+)$/gm;
+  const matches = [...markdown.matchAll(headingRegex)];
+
+  if (matches.length === 0) {
+    return {
+      intro: markdown.trim(),
+      sections,
+    };
+  }
+
+  const intro = markdown.slice(0, matches[0].index).trim();
+
+  matches.forEach((match, index) => {
+    const start = match.index! + match[0].length;
+    const end = index + 1 < matches.length ? matches[index + 1].index! : markdown.length;
+    sections.push({
+      title: match[1].trim(),
+      content: markdown.slice(start, end).trim(),
+    });
+  });
+
+  return { intro, sections };
+}
+
+function toPlainText(markdown: string) {
+  return markdown
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/^>\s*/gm, '')
+    .replace(/^-\s+/gm, '')
+    .replace(/^\d+\.\s+/gm, '')
+    .replace(/\n{2,}/g, '\n\n')
+    .trim();
+}
+
+function firstParagraph(markdown: string) {
+  return toPlainText(markdown)
+    .split('\n\n')
+    .map((chunk) => chunk.trim())
+    .find(Boolean) ?? '';
+}
+
+function findSection(sections: { title: string; content: string }[], keyword: string) {
+  return sections.find((section) => section.title.toLowerCase().includes(keyword.toLowerCase()));
+}
+
+function extractBulletList(markdown: string) {
+  return markdown
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith('- '))
+    .map((line) => toPlainText(line.replace(/^- /, '')))
+    .filter(Boolean);
+}
+
+function extractFeatureList(markdown: string) {
+  const lines = markdown.split('\n');
+  const start = lines.findIndex((line) => line.trim().toLowerCase().startsWith('key features'));
+  if (start === -1) return [];
+
+  const items: string[] = [];
+  for (let index = start + 1; index < lines.length; index += 1) {
+    const line = lines[index].trim();
+    if (line.startsWith('- ')) {
+      items.push(toPlainText(line.replace(/^- /, '')));
+      continue;
+    }
+    if (line.length === 0) continue;
+    if (line.startsWith('## ')) break;
+    if (!line.startsWith('- ')) break;
+  }
+  return items;
+}
+
+const { intro, sections } = splitSections(rawBody);
+const introSummary = firstParagraph(intro) || program.data.description;
+
+const whatIsSection = findSection(sections, 'what is');
+const whoIsForSection = findSection(sections, 'who is it for');
+const commissionSection = findSection(sections, 'commission details');
+const prosSection = findSection(sections, 'pros');
+const consSection = findSection(sections, 'cons');
+const verdictSection = findSection(sections, 'verdict');
+
+const featureSource = whatIsSection?.content ?? rawBody;
+const featureList = extractFeatureList(featureSource).slice(0, 6);
+const prosList = extractBulletList(prosSection?.content ?? '').slice(0, 5);
+const consList = extractBulletList(consSection?.content ?? '').slice(0, 5);
+
+const commissionLabel = {
+  recurring: 'Recurring payout',
+  cps: 'Per sale payout',
+  cpl: 'Per lead payout',
+  hybrid: 'Hybrid payout',
+} as const;
+
+const categoryLabel = {
+  'ai-writing': 'AI Writing',
+  seo: 'SEO',
+  email: 'Email',
+  'general-ai': 'General AI',
+  productivity: 'Productivity',
+} as const;
+
+const categoryBadgeTone = {
+  'ai-writing': 'text-[#72DBF2] bg-[#72DBF2]/10 border-[#72DBF2]/20',
+  seo: 'text-[#55F2C3] bg-[#55F2C3]/10 border-[#55F2C3]/20',
+  email: 'text-[#5EA4BF] bg-[#5EA4BF]/10 border-[#5EA4BF]/20',
+  'general-ai': 'text-[#B8D9E8] bg-[#B8D9E8]/10 border-[#B8D9E8]/20',
+  productivity: 'text-[#89C0D4] bg-[#89C0D4]/10 border-[#89C0D4]/20',
+} as const;
+
+const visualChip = {
+  'ai-writing': 'Content Engine',
+  seo: 'Ranking Layer',
+  email: 'Owned Audience',
+  'general-ai': 'Core Operator AI',
+  productivity: 'Workflow Stack',
+} as const;
+
+const bestFor = whoIsForSection
+  ? firstParagraph(whoIsForSection.content)
+  : `${program.data.name} is best for teams working in ${categoryLabel[program.data.category].toLowerCase()} workflows who want a cleaner affiliate program with a higher-fit buyer profile.`;
+
+const commissionSummary = commissionSection
+  ? firstParagraph(commissionSection.content)
+  : `${program.data.name} pays ${program.data.commission.rate} on a ${program.data.commission.type} model with a ${program.data.commission.cookieDuration} cookie window.`;
+
+const verdictSummary = verdictSection
+  ? firstParagraph(verdictSection.content)
+  : `${program.data.name} is one of MoltyFlywheel's stronger options in the ${categoryLabel[program.data.category].toLowerCase()} category based on buyer intent, brand trust, and commission structure.`;
+
+const fallbackPros = [
+  `${program.data.name} sits in the ${categoryLabel[program.data.category].toLowerCase()} category with a clear buyer use case.`,
+  `Commission structure is ${program.data.commission.rate} with a ${program.data.commission.cookieDuration} cookie.`,
+  `MoltyFlywheel rating is ${program.data.rating}/5.`,
+];
+
+const fallbackCons = [
+  'Requires a closer audience-to-product fit to convert well.',
+  'You still need strong editorial context to outperform generic affiliate pages.',
+  'Cookie duration and payout model should be weighed against alternatives.',
+];
+
+const alternatives = allPrograms
+  .filter((entry) => entry.id !== program.id && entry.data.category === program.data.category)
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.rating - a.data.rating)
+  .slice(0, 3);
+
+const faqItems = [
+  {
+    question: `Who should promote ${program.data.name}?`,
+    answer: bestFor,
+  },
+  {
+    question: `How does the ${program.data.name} commission model work?`,
+    answer: commissionSummary,
+  },
+  {
+    question: `Is ${program.data.name} better than similar alternatives?`,
+    answer: alternatives.length > 0
+      ? `${program.data.name} competes most directly with ${alternatives.map((entry) => entry.data.name).join(', ')}. The right choice depends on your audience's budget, intent, and how well your content matches the product's actual use case.`
+      : `${program.data.name} is currently the main highlighted option in this category inside the MoltyFlywheel stack, so the decision usually comes down to audience fit and commission shape rather than direct internal alternatives.`,
+  },
+];
 ---
+
 <BaseLayout
   title={`${program.data.name} Affiliate Program Review — MoltyFlywheel`}
   description={program.data.description}
 >
-  <div class="max-w-3xl mx-auto px-6 py-16">
+  <section class="relative overflow-hidden border-b border-[#0d2d40] bg-[#011826]">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(114,219,242,0.14),transparent_32%),radial-gradient(circle_at_82%_18%,rgba(33,115,166,0.24),transparent_22%),linear-gradient(180deg,rgba(11,59,89,0.18),transparent_55%)]"></div>
+    <div class="absolute inset-0 opacity-[0.08]" style="background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 72px 72px;"></div>
 
-    <!-- Header -->
-    <div class="mb-8">
-      <span class="text-xs text-amber-500 uppercase tracking-wider font-semibold bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
-        {program.data.category}
-      </span>
-      <h1 class="text-4xl font-black mt-4 mb-3">{program.data.name} Affiliate Program</h1>
-      <p class="text-gray-400 text-lg leading-relaxed">{program.data.description}</p>
-    </div>
+    <div class="relative mx-auto max-w-[1400px] px-4 py-14 md:px-6 md:py-18">
+      <div class="grid gap-10 xl:grid-cols-[minmax(0,1.2fr)_380px] xl:items-start">
+        <div class="max-w-4xl">
+          <nav class="flex items-center gap-2 text-xs text-[#3d7a96]" aria-label="Breadcrumb">
+            <a href="/" class="transition-colors hover:text-[#72DBF2]">Home</a>
+            <span>/</span>
+            <a href="/programs" class="transition-colors hover:text-[#72DBF2]">Programs</a>
+            <span>/</span>
+            <span class="text-[#5ea4bf]">{program.data.name}</span>
+          </nav>
 
-    <!-- Rating -->
-    <div class="flex items-center gap-3 mb-8">
-      <span class="text-amber-500 text-2xl tracking-wider">{stars}</span>
-      <span class="text-gray-400 text-sm">{program.data.rating}/5 — MoltyFlywheel Rating</span>
-    </div>
+          <div class="mt-5 flex flex-wrap items-center gap-2">
+            <span class:list={[
+              'inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]',
+              categoryBadgeTone[program.data.category],
+            ]}>
+              {categoryLabel[program.data.category]}
+            </span>
+            {program.data.featured && (
+              <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#72DBF2]">
+                Featured Pick
+              </span>
+            )}
+          </div>
 
-    <!-- Commission Box -->
-    <div class="bg-gray-900 border border-amber-500/30 rounded-2xl p-6 mb-10">
-      <h2 class="text-sm font-bold text-amber-500 uppercase tracking-wider mb-5">💰 Commission Details</h2>
-      <div class="grid grid-cols-3 gap-4 text-center mb-6">
-        <div>
-          <div class="text-2xl font-black text-white">{program.data.commission?.rate || 'N/A'}</div>
-          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Commission Rate</div>
+          <h1 class="mt-6 max-w-4xl text-4xl font-black leading-[1.05] text-[#daeef5] md:text-6xl">
+            {program.data.name} affiliate program review for higher-intent buyers.
+          </h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#5ea4bf] md:text-[19px]">
+            {introSummary}
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <div class="flex items-center gap-2 rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2">
+              <div class="flex items-center gap-1">
+                {stars.map((filled) => (
+                  <span class={filled ? 'text-[#72DBF2]' : 'text-[#1a4560]'}>★</span>
+                ))}
+              </div>
+              <span class="text-sm font-medium text-[#89c0d4]">{program.data.rating.toFixed(1)} / 5 MoltyFlywheel score</span>
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              {commissionLabel[program.data.commission.type]}
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              {program.data.commission.cookieDuration} cookie
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <AffiliateButton program={program.id} label={`Visit ${program.data.name} →`} size="lg" />
+            <a
+              href="#editorial-review"
+              class="inline-flex items-center rounded-full border border-[#72DBF2]/25 bg-[#72DBF2]/10 px-6 py-3 text-sm font-semibold text-[#72DBF2] transition-colors hover:bg-[#72DBF2]/16"
+            >
+              Read full review
+            </a>
+          </div>
         </div>
-        <div>
-          <div class="text-2xl font-black text-white">{program.data.commission?.cookieDuration || 'N/A'}</div>
-          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Cookie Duration</div>
-        </div>
-        <div>
-          <div class="text-2xl font-black text-white capitalize">{program.data.commission?.type || 'N/A'}</div>
-          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Payout Type</div>
+
+        <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+          <div class="relative overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#011826]/50 p-5">
+            <div class="absolute -left-10 -top-10 h-36 w-36 rounded-full blur-3xl bg-[#72DBF2]/20"></div>
+            <div class="absolute inset-0 opacity-[0.06]" style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0px, rgba(255,255,255,0.35) 1px, transparent 1px, transparent 14px);"></div>
+            <div class="relative">
+              <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#011826]/65 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#89c0d4]">
+                {visualChip[program.data.category]}
+              </span>
+              <div class="mt-6 grid grid-cols-3 gap-3">
+                <div class="h-16 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
+                <div class="h-20 rounded-2xl border border-[#72DBF2]/20 bg-[#72DBF2]/10"></div>
+                <div class="h-12 rounded-2xl border border-[#72DBF2]/15 bg-[#0B3B59]/55"></div>
+              </div>
+              <div class="mt-6 h-2 rounded-full bg-[linear-gradient(135deg,rgba(114,219,242,0.7),rgba(33,115,166,0.2))]"></div>
+            </div>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/65 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Quick decision</p>
+              <p class="mt-2 text-lg font-semibold text-[#daeef5]">{verdictSummary}</p>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Commission</p>
+                <p class="mt-2 text-2xl font-bold text-[#daeef5]">{program.data.commission.rate}</p>
+              </div>
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Cookie</p>
+                <p class="mt-2 text-2xl font-bold text-[#daeef5]">{program.data.commission.cookieDuration}</p>
+              </div>
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Category</p>
+                <p class="mt-2 text-lg font-bold text-[#daeef5]">{categoryLabel[program.data.category]}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="text-center">
-        <AffiliateButton program={program.id} label={`Join ${program.data.name} Affiliate →`} size="lg" />
+    </div>
+  </section>
+
+  <section class="bg-[#011826]">
+    <div class="mx-auto max-w-[1400px] px-4 py-10 md:px-6 md:py-12">
+      <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div class="min-w-0 space-y-8">
+          <section class="grid gap-6 md:grid-cols-3">
+            <div class="rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-5">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Program Summary</p>
+              <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{program.data.description}</p>
+            </div>
+            <div class="rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-5">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Affiliate Fit</p>
+              <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{bestFor}</p>
+            </div>
+            <div class="rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-5">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Commission Notes</p>
+              <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{commissionSummary}</p>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Key Features</p>
+                <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Why this program gets considered in the first place</h2>
+              </div>
+            </div>
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+              {(featureList.length > 0 ? featureList : [
+                `${program.data.name} operates in the ${categoryLabel[program.data.category].toLowerCase()} category with a clear buyer use case.`,
+                `The program advertises ${program.data.commission.rate} commission with a ${program.data.commission.cookieDuration} cookie window.`,
+                `MoltyFlywheel currently scores it ${program.data.rating}/5 based on fit, economics, and usability.`,
+                'It can be slotted into comparison, review, and problem-solution content angles without forcing the pitch.',
+              ]).map((feature) => (
+                <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-4">
+                  <div class="flex items-start gap-3">
+                    <span class="mt-1 text-[#72DBF2]">●</span>
+                    <p class="text-sm leading-7 text-[#89c0d4]">{feature}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Pros</p>
+              <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Reasons to promote it</h2>
+              <div class="mt-6 space-y-3">
+                {(prosList.length > 0 ? prosList : fallbackPros).map((item) => (
+                  <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-4">
+                    <div class="flex items-start gap-3">
+                      <span class="mt-1 text-[#55F2C3]">●</span>
+                      <p class="text-sm leading-7 text-[#89c0d4]">{item}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Cons</p>
+              <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Tradeoffs to think through</h2>
+              <div class="mt-6 space-y-3">
+                {(consList.length > 0 ? consList : fallbackCons).map((item) => (
+                  <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-4">
+                    <div class="flex items-start gap-3">
+                      <span class="mt-1 text-[#5EA4BF]">●</span>
+                      <p class="text-sm leading-7 text-[#89c0d4]">{item}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Decision Metrics</p>
+            <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Pricing, commission, and conversion shape</h2>
+            <div class="mt-6 grid gap-4 md:grid-cols-3">
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-5">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Payout model</p>
+                <p class="mt-2 text-xl font-bold text-[#daeef5]">{commissionLabel[program.data.commission.type]}</p>
+              </div>
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-5">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Commission rate</p>
+                <p class="mt-2 text-xl font-bold text-[#daeef5]">{program.data.commission.rate}</p>
+              </div>
+              <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-5">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Cookie window</p>
+                <p class="mt-2 text-xl font-bold text-[#daeef5]">{program.data.commission.cookieDuration}</p>
+              </div>
+            </div>
+            <p class="mt-5 text-sm leading-7 text-[#89c0d4]">{commissionSummary}</p>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Best For</p>
+            <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Who this program actually fits</h2>
+            <p class="mt-5 text-sm leading-7 text-[#89c0d4]">{bestFor}</p>
+          </section>
+
+          {alternatives.length > 0 && (
+            <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Alternatives</p>
+              <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Other programs in the same buying lane</h2>
+              <div class="mt-6 grid gap-4 md:grid-cols-3">
+                {alternatives.map((entry) => (
+                  <a
+                    href={`/programs/${entry.id}`}
+                    class="group rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-5 transition-all hover:-translate-y-1 hover:border-[#72DBF2]/35"
+                  >
+                    <p class="text-lg font-bold text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">{entry.data.name}</p>
+                    <p class="mt-3 text-sm leading-7 text-[#5ea4bf]">{entry.data.description}</p>
+                    <div class="mt-4 flex items-center justify-between border-t border-[#0d2d40] pt-4 text-xs text-[#89c0d4]">
+                      <span>{entry.data.commission.rate}</span>
+                      <span>{entry.data.commission.cookieDuration}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">FAQ</p>
+            <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Decision questions people usually ask</h2>
+            <div class="mt-6 space-y-4">
+              {faqItems.map((item) => (
+                <details class="group rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-5">
+                  <summary class="cursor-pointer list-none text-base font-semibold text-[#daeef5]">
+                    {item.question}
+                  </summary>
+                  <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section id="editorial-review" class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Full Review</p>
+            <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Editorial deep dive</h2>
+            <div class="article-body mt-8">
+              <Content />
+            </div>
+          </section>
+
+          <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(135deg,#0B3B59_0%,#2173A6_58%,#5EA4BF_100%)] p-6 shadow-[0_20px_60px_rgba(1,24,38,0.24)] md:p-8">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#011826]/70">Final CTA</p>
+            <h2 class="mt-3 text-2xl font-bold text-white md:text-3xl">Ready to monetize with {program.data.name}?</h2>
+            <p class="mt-3 max-w-2xl text-sm leading-7 text-[#e8f4fb] md:text-base">
+              If the audience fit and commission model line up, move from research to action and test the offer inside comparison, review, or implementation content.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <AffiliateButton program={program.id} label={`Visit ${program.data.name} →`} size="lg" />
+              <a href="/programs" class="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5">
+                Back to all programs
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="xl:sticky xl:top-[88px] xl:self-start">
+          <div class="space-y-6">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Quick Action</p>
+              <h2 class="mt-3 text-2xl font-bold text-[#daeef5]">Open the program and inspect the actual offer.</h2>
+              <p class="mt-3 text-sm leading-7 text-[#5ea4bf]">
+                Never rely on the payout number alone. Cross-check the landing page, buyer fit, and onboarding quality before publishing a hard recommendation.
+              </p>
+              <div class="mt-6">
+                <AffiliateButton program={program.id} label={`Visit ${program.data.name} →`} size="lg" />
+              </div>
+            </div>
+
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Scorecard</p>
+              <div class="mt-5 space-y-4">
+                <div class="flex items-center justify-between border-b border-[#0d2d40] pb-3">
+                  <span class="text-sm text-[#89c0d4]">Category</span>
+                  <span class="text-sm font-semibold text-[#daeef5]">{categoryLabel[program.data.category]}</span>
+                </div>
+                <div class="flex items-center justify-between border-b border-[#0d2d40] pb-3">
+                  <span class="text-sm text-[#89c0d4]">Commission</span>
+                  <span class="text-sm font-semibold text-[#daeef5]">{program.data.commission.rate}</span>
+                </div>
+                <div class="flex items-center justify-between border-b border-[#0d2d40] pb-3">
+                  <span class="text-sm text-[#89c0d4]">Cookie</span>
+                  <span class="text-sm font-semibold text-[#daeef5]">{program.data.commission.cookieDuration}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-[#89c0d4]">Rating</span>
+                  <span class="text-sm font-semibold text-[#daeef5]">{program.data.rating.toFixed(1)} / 5</span>
+                </div>
+              </div>
+            </div>
+
+            {alternatives.length > 0 && (
+              <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59] p-6">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Nearby Options</p>
+                <div class="mt-5 space-y-4">
+                  {alternatives.map((entry) => (
+                    <a href={`/programs/${entry.id}`} class="block rounded-2xl border border-[#1a4560] bg-[#011826]/45 p-4 transition-colors hover:border-[#72DBF2]/35">
+                      <p class="text-sm font-semibold text-[#daeef5]">{entry.data.name}</p>
+                      <p class="mt-2 text-xs leading-6 text-[#5ea4bf]">{entry.data.description}</p>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </aside>
       </div>
     </div>
-
-    <!-- Full Review Content -->
-    <div class="prose prose-invert prose-amber max-w-none">
-      <Content />
-    </div>
-
-    <!-- Bottom CTA -->
-    <div class="mt-14 p-8 bg-gray-900 border border-gray-800 rounded-2xl text-center">
-      <h3 class="text-2xl font-bold mb-2">Ready to Start Earning?</h3>
-      <p class="text-gray-400 mb-6">
-        Earn {program.data.commission?.rate} commissions promoting {program.data.name}
-      </p>
-      <AffiliateButton program={program.id} label={`Get Started with ${program.data.name} →`} size="lg" />
-    </div>
-
-    <!-- Back link -->
-    <div class="mt-8 text-center">
-      <a href="/programs" class="text-gray-500 hover:text-gray-400 text-sm">← View all affiliate programs</a>
-    </div>
-
-  </div>
+  </section>
 </BaseLayout>
