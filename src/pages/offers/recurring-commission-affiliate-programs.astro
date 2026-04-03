@@ -1,119 +1,103 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import OfferArticleLayout from '../../layouts/OfferArticleLayout.astro';
 
 const title = "Recurring Commission Affiliate Programs for Long-Term Income";
 const description = "Explore recurring commission affiliate programs to build long-term, sustainable income through better audience fit and high-retention software models.";
 ---
 
-<BaseLayout title={title} description={description}>
-  <section class="py-20 bg-gray-900 border-b border-gray-800">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl font-bold text-white sm:text-5xl">{title}</h1>
-      <p class="mt-6 text-xl text-gray-400">If you want a more sustainable affiliate model, recurring programs are worth comparing carefully. Evaluate long-term earning potential without getting lost in hype.</p>
-      <div class="mt-10">
-        <a href="#compare" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">Discover Recurring Programs</a>
-      </div>
-    </div>
-  </section>
+<OfferArticleLayout
+  title={title}
+  description={description}
+  offerType="Recurring Offer Page"
+  intro="Use this page when the goal is not just a one-time payout, but a more resilient income floor built on retention and repeat value."
+  quickDecision="This page is strongest for creators, SaaS reviewers, and tool educators who want to compare recurring programs through the lens of retention, audience quality, and long-term earning logic."
+  primaryCtaHref="/programs"
+  primaryCtaLabel="Compare Long-Term Earning Options"
+  secondaryCtaHref="/offers/high-ticket-affiliate-programs"
+  secondaryCtaLabel="See High-Ticket Alternatives"
+  quickFacts={[
+    { label: 'Best for', value: 'Readers who value steadier income and compounding monetization logic.' },
+    { label: 'Primary angle', value: 'Retention and long-term product fit matter more than a large one-off payout.' },
+    { label: 'Decision lens', value: 'Recurring works best when the audience actually keeps using the tool.' },
+  ]}
+  relatedLinks={[
+    { href: '/offers/high-ticket-affiliate-programs', label: 'High-Ticket Affiliate Programs' },
+    { href: '/offers/find-your-best-affiliate-fit', label: 'Find Your Best Affiliate Fit' },
+    { href: '/blog/recurring-commission-affiliate-programs-long-term-growth', label: 'Recurring Commission Long-Term Growth' },
+  ]}
+>
+  <h2>Who This Is For</h2>
+  <p>This page is a good fit if you are a content creator, SaaS reviewer, or tools educator who wants better long-term monetization rather than constantly replacing income with fresh traffic.</p>
+  <p>This is less useful if your model is built almost entirely around one-time impulse buys or offers with no recurring value at all.</p>
 
-  <section class="py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-6">Why one-off commissions can limit your growth.</h2>
-      <p class="text-gray-400 text-lg mb-4">Many people focus on the wrong signal first — like finding whatever is easiest to sell today — and end up constantly chasing new traffic just to maintain their baseline income. Without a stable recurring element, your revenue relies entirely on your immediate output.</p>
+  <h2>Why It Stands Out</h2>
+  <p>One-off commissions can limit growth when you have to keep rebuilding the revenue floor from scratch. Recurring programs matter because retention can turn a single conversion into a more durable income stream.</p>
+  <p>This page stands out by comparing recurring logic through sustainability and fit, not by assuming every SaaS program is automatically a better option.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">A better choice usually comes down to fit:</h2>
-      <ul class="list-disc pl-6 text-gray-400 text-lg space-y-2 mb-8">
-        <li>software or services that retain users long-term</li>
-        <li>who you serve and their dependency on the tool</li>
-        <li>how you want to grow over time</li>
-        <li>monetization model fit</li>
-      </ul>
+  <h2>Key Benefits And Fit</h2>
+  <ul>
+    <li>it helps compare recurring programs based on retention logic, not just payout percentage</li>
+    <li>it supports a more stable income model for content-driven operators</li>
+    <li>it keeps audience quality and product dependency central to the decision</li>
+    <li>it frames recurring as a monetization strategy, not just a commission type</li>
+  </ul>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">What You’ll Find on This Page</h2>
-      <p class="text-gray-400 text-lg mb-8">On this page, you’ll find a clearer way to evaluate your options, compare common paths in the recurring model, and move toward a more stable revenue floor with less guesswork.</p>
+  <h2>Practical Constraints</h2>
+  <p>Recurring programs only work well when the underlying tool is genuinely sticky. If users churn quickly, the recurring angle loses much of its appeal no matter how good the payout looks on paper.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Who This Is For</h2>
-      <p class="text-gray-400 text-lg mb-4">This page is a good fit if you:</p>
-      <ul class="list-disc pl-6 text-gray-400 text-lg space-y-2 mb-4">
-        <li>are a content creator, SaaS reviewer, or <a href="/tools" class="text-blue-400 hover:text-blue-300">tools</a> educator</li>
-        <li>already have content but want better, more stable monetization</li>
-        <li>want a more sustainable revenue model</li>
-      </ul>
-      <p class="text-gray-400 text-lg mb-8">This may be less useful if you are exclusively targeting one-time impulse buys or high-ticket courses with no trailing subscription.</p>
+  <h2 id="compare">Recurring Programs Overview</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Model type</th>
+        <th>Strength</th>
+        <th>Trade-off</th>
+        <th>Ideal content</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>B2B SaaS and marketing tools</td>
+        <td>High retention and compounding income potential</td>
+        <td>Often more competitive and explanation-heavy</td>
+        <td>Tutorials, setups, comparisons</td>
+      </tr>
+      <tr>
+        <td>Membership communities</td>
+        <td>Ongoing value when the audience stays engaged</td>
+        <td>Churn risk if the value weakens</td>
+        <td>Reviews, insider breakdowns, ongoing education</td>
+      </tr>
+      <tr>
+        <td>Hosting and infrastructure</td>
+        <td>Users often stay once committed</td>
+        <td>Requires more technical trust</td>
+        <td>Developer guides, tests, migration support</td>
+      </tr>
+    </tbody>
+  </table>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Why This Direction Matters</h2>
-      <p class="text-gray-400 text-lg mb-8">Instead of trying to learn everything at once, you can focus on building a more resilient income stream that compounds over time, aligning perfectly with users' long-term needs.</p>
+  <h2>Trust And Proof Logic</h2>
+  <p>The goal is not to label one option as universally best. It is to help you compare the right variables so you can choose what fits your niche, workflow, and goals more confidently.</p>
 
-      <h2 id="compare" class="text-3xl font-bold text-white mt-12 mb-6">Recurring Programs Overview</h2>
-      <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 overflow-x-auto mb-8">
-        <table class="w-full text-left text-gray-400">
-          <thead>
-            <tr class="border-b border-gray-700 text-white">
-              <th class="py-3 px-4">Model Type</th>
-              <th class="py-3 px-4">Strength</th>
-              <th class="py-3 px-4">Trade-off</th>
-              <th class="py-3 px-4">Ideal Content</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-b border-gray-700">
-              <td class="py-3 px-4">B2B SaaS / Marketing Tools</td>
-              <td class="py-3 px-4">Extremely high retention, compounding growth</td>
-              <td class="py-3 px-4">Lower upfront payout, saturated markets</td>
-              <td class="py-3 px-4">Tutorials, setups, comparisons</td>
-            </tr>
-            <tr class="border-b border-gray-700">
-              <td class="py-3 px-4">Membership Communities</td>
-              <td class="py-3 px-4">High ongoing value, scalable</td>
-              <td class="py-3 px-4">Churn can be high if the value drops</td>
-              <td class="py-3 px-4">Case studies, insider access reviews</td>
-            </tr>
-            <tr>
-              <td class="py-3 px-4">Hosting & Infrastructure</td>
-              <td class="py-3 px-4">People rarely switch once committed</td>
-              <td class="py-3 px-4">Requires significant technical trust</td>
-              <td class="py-3 px-4">Developer guides, speed tests</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <h2>FAQ</h2>
+  <h3>Are recurring programs better than high-ticket ones?</h3>
+  <p>They solve different problems. High-ticket helps with larger upfront cash flow, while recurring can build a steadier long-term revenue base.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Trust & Rationale</h2>
-      <p class="text-gray-400 text-lg mb-8">The goal here is not to label one option as universally “best.” It’s to help you compare the right variables so you can choose what fits your niche, workflow, and goals more confidently. A 20% recurring cut of a sticky tool often beats a 50% cut of a tool people abandon in a month.</p>
+  <h3>How should I compare these options?</h3>
+  <p>Look hard at product retention and audience dependency. A recurring tool is only valuable if users actually keep using it.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Frequently Asked Questions</h2>
-      <div class="space-y-6 text-gray-400 text-lg mb-12">
-        <div>
-          <strong class="text-white">Are recurring programs better than high-ticket ones?</strong>
-          <p class="mt-2">They serve different purposes. High-ticket offers great upfront cash flow, but recurring builds an income floor that can give you breathing room over the long term.</p>
-        </div>
-        <div>
-          <strong class="text-white">How should I compare these options?</strong>
-          <p class="mt-2">Look heavily at the product's churn rate. The most important metric in recurring affiliate marketing is product retention—if users leave quickly, recurring programs aren't worth it.</p>
-        </div>
-        <div>
-          <strong class="text-white">Can I switch later?</strong>
-          <p class="mt-2">Yes. Many people refine their niche, programs, and tools over time. The goal is not perfection on day one — it is choosing a direction that is sensible enough to build on.</p>
-        </div>
-        <div>
-          <strong class="text-white">What if I want both?</strong>
-          <p class="mt-2">Many successful affiliates balance a portfolio of high-ticket offers for cash flow and recurring offers for stability. See our <a href="/offers/high-ticket-affiliate-programs" class="text-blue-400 hover:text-blue-300">high-ticket guide</a> for the other side of this strategy.</p>
-        </div>
-      </div>
+  <h3>What if I want both?</h3>
+  <p>Many strong affiliate systems combine both: recurring for stability and high-ticket for larger cash injections when the fit is right.</p>
 
-      <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 text-center mb-16">
-        <h2 class="text-2xl font-bold text-white mb-4">Start Building Sustainable Income</h2>
-        <p class="text-gray-400 text-lg mb-6">Explore the top-tier recurring models and stop constantly replacing organic traffic to earn.</p>
-        <a href="/programs" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">Compare Long-Term Earning Options</a>
-      </div>
+  <h2>Closing Recommendation</h2>
+  <p>Use this page if the real objective is resilience, not just faster commissions. Recurring programs make the most sense when your audience stays with the product and your content can support that ongoing use.</p>
 
-      <h2 class="text-2xl font-bold text-white mb-6">Related Resources</h2>
-      <ul class="list-disc pl-6 text-gray-400 text-lg space-y-3 mb-8">
-        <li><a href="/blog/high-ticket-vs-recurring-affiliate-programs" class="text-blue-400 hover:text-blue-300">High-Ticket vs Recurring Affiliate Programs: Which Model Fits You Better?</a></li>
-        <li><a href="/blog/recurring-commission-affiliate-programs-long-term-growth" class="text-blue-400 hover:text-blue-300">Recurring Commission Affiliate Programs: Are They Better for Long-Term Growth?</a></li>
-        <li><a href="/blog/affiliate-workflow-for-content-creators" class="text-blue-400 hover:text-blue-300">How Content Creators Can Build an Affiliate Workflow That Actually Fits</a></li>
-        <li><a href="/offers/find-your-best-affiliate-fit" class="text-blue-400 hover:text-blue-300">Find your best affiliate fit</a></li>
-      </ul>
-    </div>
-  </section>
-</BaseLayout>
+  <h2>Related Resources</h2>
+  <ul>
+    <li><a href="/blog/high-ticket-vs-recurring-affiliate-programs">High-Ticket vs Recurring Affiliate Programs: Which Model Fits You Better?</a></li>
+    <li><a href="/blog/recurring-commission-affiliate-programs-long-term-growth">Recurring Commission Affiliate Programs: Are They Better for Long-Term Growth?</a></li>
+    <li><a href="/blog/affiliate-workflow-for-content-creators">How Content Creators Can Build an Affiliate Workflow That Actually Fits</a></li>
+    <li><a href="/offers/find-your-best-affiliate-fit">Find your best affiliate fit</a></li>
+  </ul>
+</OfferArticleLayout>

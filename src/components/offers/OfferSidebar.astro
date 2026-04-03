@@ -1,0 +1,128 @@
+---
+interface LinkItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  primaryCtaHref: string;
+  primaryCtaLabel: string;
+  relatedLinks?: LinkItem[];
+}
+
+const {
+  title,
+  primaryCtaHref,
+  primaryCtaLabel,
+  relatedLinks = [],
+} = Astro.props;
+
+const pageUrl = Astro.url.href;
+const encodedUrl = encodeURIComponent(pageUrl);
+const encodedTitle = encodeURIComponent(title);
+---
+
+<aside class="hidden lg:flex flex-col gap-4 w-[180px] shrink-0">
+  <div class="sticky top-24 flex flex-col gap-4">
+    <div class="bg-[#0B3B59] rounded-2xl p-4 border border-[#1a4560]">
+      <div class="flex flex-col items-center text-center gap-2.5">
+        <div class="relative">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg"
+            style="background: linear-gradient(135deg, #72DBF2, #2173A6);">
+            OF
+          </div>
+          <span class="absolute bottom-0 right-0 w-4 h-4 bg-[#72DBF2] rounded-full border-2 border-[#0B3B59]"></span>
+        </div>
+        <div>
+          <p class="font-semibold text-[#daeef5] text-sm">MoltyFlywheel</p>
+          <p class="text-[11px] text-[#3d7a96] mt-0.5">Offer Guide</p>
+        </div>
+      </div>
+
+      <div class="mt-3 pt-3 border-t border-[#1a4560] space-y-1.5">
+        <div class="flex items-center gap-2 text-[11px] text-[#3d7a96]">
+          <svg class="w-3.5 h-3.5 text-[#72DBF2] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span>Decision page</span>
+        </div>
+        <div class="flex items-center gap-2 text-[11px] text-[#3d7a96]">
+          <svg class="w-3.5 h-3.5 text-[#72DBF2] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span id="sidebar-read-time">— min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-[#0B3B59] rounded-2xl p-4 border border-[#1a4560]">
+      <p class="text-[10px] font-bold text-[#3d7a96] uppercase tracking-widest mb-3 text-center">Primary CTA</p>
+      <a
+        href={primaryCtaHref}
+        class="block w-full rounded-xl bg-[linear-gradient(135deg,#72DBF2,#2173A6)] px-4 py-3 text-center text-xs font-bold text-[#011826] transition-transform hover:-translate-y-0.5"
+      >
+        {primaryCtaLabel}
+      </a>
+    </div>
+
+    <div class="bg-[#0B3B59] rounded-2xl p-4 border border-[#1a4560]">
+      <p class="text-[10px] font-bold text-[#3d7a96] uppercase tracking-widest mb-3 text-center">Share</p>
+      <div class="flex flex-col gap-1.5">
+        <a href={`https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
+          target="_blank" rel="noopener noreferrer"
+          class="flex items-center gap-2.5 bg-[#011826] hover:bg-[#0d2d40] text-[#5ea4bf] hover:text-white rounded-lg px-3 py-2 text-[11px] font-medium transition-all">
+          <span>X / Twitter</span>
+        </a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
+          target="_blank" rel="noopener noreferrer"
+          class="flex items-center gap-2.5 bg-[#011826] hover:bg-[#0d2d40] text-[#5ea4bf] hover:text-white rounded-lg px-3 py-2 text-[11px] font-medium transition-all">
+          <span>LinkedIn</span>
+        </a>
+        <button id="sidebar-copy-btn"
+          class="flex items-center gap-2.5 bg-[#011826] hover:bg-[#0d2d40] text-[#5ea4bf] hover:text-[#72DBF2] rounded-lg px-3 py-2 text-[11px] font-medium transition-all w-full text-left">
+          <span id="sidebar-copy-label">Copy Link</span>
+        </button>
+      </div>
+    </div>
+
+    {relatedLinks.length > 0 && (
+      <div class="bg-[#0B3B59] rounded-2xl p-4 border border-[#1a4560]">
+        <p class="text-[10px] font-bold text-[#3d7a96] uppercase tracking-widest mb-3">Related</p>
+        <div class="flex flex-col gap-3">
+          {relatedLinks.map(link => (
+            <a href={link.href} class="group flex flex-col gap-0.5">
+              <span class="text-[11px] text-[#89c0d4] group-hover:text-[#72DBF2] transition-colors leading-snug font-medium">
+                {link.label}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</aside>
+
+<script>
+  const copyBtn = document.getElementById('sidebar-copy-btn');
+  const copyLabel = document.getElementById('sidebar-copy-label');
+  if (copyBtn && copyLabel) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        copyLabel.textContent = '✓ Copied!';
+        setTimeout(() => { copyLabel.textContent = 'Copy Link'; }, 2200);
+      });
+    });
+  }
+
+  function calcReadTime() {
+    const article = document.getElementById('article-body');
+    if (!article) return;
+    const words = article.innerText.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words / 220));
+    const el = document.getElementById('sidebar-read-time');
+    if (el) el.textContent = mins + ' min read';
+  }
+
+  document.addEventListener('DOMContentLoaded', calcReadTime);
+</script>

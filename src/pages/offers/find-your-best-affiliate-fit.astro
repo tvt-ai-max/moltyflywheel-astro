@@ -1,111 +1,97 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import OfferArticleLayout from '../../layouts/OfferArticleLayout.astro';
 
 const title = "Find Your Best Affiliate Fit";
 const description = "Not sure where to start? Explore an easier way to find your optimal path in affiliate marketing, mapped to your current situation.";
 ---
 
-<BaseLayout title={title} description={description}>
-  <section class="py-20 bg-gray-900 border-b border-gray-800">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl font-bold text-white sm:text-5xl">{title}</h1>
-      <p class="mt-6 text-xl text-gray-400">If you’re still deciding between niches, programs, platforms, or tools, this page helps you sort your next step more clearly.</p>
-      <div class="mt-10">
-        <a href="#compare" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">Explore your options</a>
+<OfferArticleLayout
+  title={title}
+  description={description}
+  offerType="Best-Fit Offer Page"
+  intro="Use this page when the real problem is not lack of options, but lack of clarity about which affiliate path fits your stage."
+  quickDecision="This page is best for readers who still feel pulled in too many directions and need a practical way to sort their next move before choosing a niche, program, platform, or tool stack."
+  primaryCtaHref="/programs"
+  primaryCtaLabel="Find Your Best-Fit Path"
+  secondaryCtaHref="/offers/best-affiliate-programs-for-beginners"
+  secondaryCtaLabel="See Beginner Paths"
+  quickFacts={[
+    { label: 'Best for', value: 'Readers who are still sorting the right path before committing to one monetization model.' },
+    { label: 'Primary angle', value: 'Decision support first, commitment second.' },
+    { label: 'Use it when', value: 'You need clarity on stage, fit, and next step more than another generic recommendation list.' },
+  ]}
+  relatedLinks={[
+    { href: '/offers/best-affiliate-programs-for-beginners', label: 'Best Affiliate Programs for Beginners' },
+    { href: '/offers/affiliate-programs-by-niche', label: 'Affiliate Programs by Niche' },
+    { href: '/offers/recurring-commission-affiliate-programs', label: 'Recurring Commission Affiliate Programs' },
+  ]}
+>
+  <h2>Who This Is For</h2>
+  <p>This page is a good fit if you feel overwhelmed by the amount of information available, have started but feel like you have taken a wrong turn, or want an honest assessment of what path is viable for your current situation.</p>
+  <p>This is less useful if you already know exactly which offer or platform you want and only need a direct signup path.</p>
+
+  <h2>Why It Stands Out</h2>
+  <p>Starting out is prone to distraction. Many people jump into complex recurring platforms or high-ticket offers before they understand who their audience is or how they are going to create consistent content.</p>
+  <p>This page stands out by treating affiliate fit as a routing problem. It helps match your current stage, content state, and time capacity to a more sensible next step.</p>
+
+  <h2>Key Benefits And Fit</h2>
+  <ul>
+    <li>it reduces overwhelm by organizing the decision around stage rather than hype</li>
+    <li>it helps you avoid skipping ahead into more complex monetization models too early</li>
+    <li>it gives a more practical bridge from uncertainty to a next page worth reading</li>
+    <li>it keeps the focus on fit between niche, workflow, and monetization</li>
+  </ul>
+
+  <h2>Practical Constraints</h2>
+  <p>This page does not replace doing the work of niche validation or content creation. It simply improves the odds that your next step is coherent instead of reactive.</p>
+
+  <h2 id="compare">Choose Your Current Stage</h2>
+  <div class="overflow-hidden rounded-2xl border border-[#1a4560] bg-[#0B3B59]/80">
+    <div class="space-y-0">
+      <div class="border-b border-[#1a4560] p-6">
+        <h3>If you are utterly new and have no audience</h3>
+        <p>Your first goal is finding a subject you can write or talk about consistently without burning out. Do not obsess over commission structures yet.</p>
+        <p><a href="/offers/best-affiliate-programs-for-beginners">View beginner-friendly paths</a></p>
+      </div>
+      <div class="border-b border-[#1a4560] p-6">
+        <h3>If you have a defined topic but no money strategy</h3>
+        <p>You need to align the way you monetize with the way your specific audience consumes content.</p>
+        <p><a href="/offers/affiliate-programs-by-niche">Match programs to your niche</a></p>
+      </div>
+      <div class="border-b border-[#1a4560] p-6">
+        <h3>If you have traffic but tiny, erratic payouts</h3>
+        <p>You likely have a retention or offer-value problem. That is usually where recurring and high-ticket comparisons become more useful.</p>
+        <p><a href="/offers/recurring-commission-affiliate-programs">Recurring paths</a> · <a href="/offers/high-ticket-affiliate-programs">High-ticket paths</a></p>
+      </div>
+      <div class="p-6">
+        <h3>If you are losing track of links and workflow</h3>
+        <p>You may not need more programs yet. You may need better infrastructure around the offers you already promote.</p>
+        <p><a href="/offers/affiliate-tools-for-content-creators">Find workflow tools</a></p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-white mb-6">Starting out is prone to distraction.</h2>
-      <p class="text-gray-400 text-lg mb-4">Many people focus on the wrong signal first—jumping into complex recurring platforms or high-ticket courses before they even understand who their audience is, resulting in burnout and confusion.</p>
+  <h2>Trust And Proof Logic</h2>
+  <p>The goal here is not to label one option as universally best. It is to help you compare the right variables so you can choose what fits your workflow, audience, and goals more confidently.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">A better choice usually comes down to fit:</h2>
-      <ul class="list-disc pl-6 text-gray-400 text-lg space-y-2 mb-8">
-        <li>your current level of experience</li>
-        <li>the state of your existing content library</li>
-        <li>how much time you can dedicate</li>
-        <li>clear, logical next steps without skipping ahead</li>
-      </ul>
+  <h2>FAQ</h2>
+  <h3>I am new. Is this too advanced?</h3>
+  <p>Not necessarily. This page is designed to help you understand the decision before it asks you to commit.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">What You’ll Find on This Page</h2>
-      <p class="text-gray-400 text-lg mb-8">Use this page as a decision helper when everything still feels too broad. On this page, you’ll find a clearer way to parse through the noise and identify the single path you should be pursuing right now.</p>
+  <h3>What if I am still unsure?</h3>
+  <p>Do not overthink every monetization model immediately. Narrow the path first, then build enough content to learn what your audience actually responds to.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Who This Is For</h2>
-      <p class="text-gray-400 text-lg mb-4">This page is a good fit if you:</p>
-      <ul class="list-disc pl-6 text-gray-400 text-lg space-y-2 mb-4">
-        <li>feel overwhelmed by the amount of information available</li>
-        <li>have started but feel like you've taken a wrong turn</li>
-        <li>want an honest assessment of what path is viable for your situation</li>
-      </ul>
-      <p class="text-gray-400 text-lg mb-8">This may be less useful if you already know exactly which offer or platform you want and only need a direct signup path.</p>
+  <h3>Can I change direction later?</h3>
+  <p>Yes. The strongest systems usually evolve as audience trust, niche clarity, and monetization options improve.</p>
 
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Why This Direction Matters</h2>
-      <p class="text-gray-400 text-lg mb-8">Instead of trying to learn everything at once, you can focus on the direction that makes the most sense for your current stage. It's about matching intent with practical action.</p>
+  <h2>Closing Recommendation</h2>
+  <p>Use this page when everything still feels too broad. The right first decision is often the one that reduces noise, not the one that promises the biggest payout on day one.</p>
 
-      <h2 id="compare" class="text-3xl font-bold text-white mt-12 mb-6">Choose Your Current Stage</h2>
-      <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 mb-8">
-        <div class="space-y-6">
-          <div class="border-b border-gray-700 pb-6">
-            <h3 class="text-xl font-semibold text-white mb-2">If you are utterly new and have no audience...</h3>
-            <p class="text-gray-400 mb-4">Your first goal is finding a subject you can write or talk about endlessly without burning out. Do not obsess over commission structures yet.</p>
-            <a href="/offers/best-affiliate-programs-for-beginners" class="text-blue-400 hover:text-blue-300 font-medium tracking-wide">View beginner-friendly paths &rarr;</a>
-          </div>
-          <div class="border-b border-gray-700 pb-6">
-            <h3 class="text-xl font-semibold text-white mb-2">If you have a defined topic, but no money strategy...</h3>
-            <p class="text-gray-400 mb-4">You need to align the way you monetize with the way your specific crowd consumes content.</p>
-            <a href="/offers/affiliate-programs-by-niche" class="text-blue-400 hover:text-blue-300 font-medium tracking-wide">Match programs to your niche &rarr;</a>
-          </div>
-          <div class="border-b border-gray-700 pb-6">
-            <h3 class="text-xl font-semibold text-white mb-2">If you have traffic, but tiny, erratic payouts...</h3>
-            <p class="text-gray-400 mb-4">You have a retention or offer-value problem. You need to transition into models that provide deeper value and compounding results.</p>
-            <div class="flex gap-4">
-              <a href="/offers/high-ticket-affiliate-programs" class="text-blue-400 hover:text-blue-300 font-medium tracking-wide">High-ticket &rarr;</a>
-              <span class="text-gray-500">|</span>
-              <a href="/offers/recurring-commission-affiliate-programs" class="text-blue-400 hover:text-blue-300 font-medium tracking-wide">Recurring &rarr;</a>
-            </div>
-          </div>
-          <div class="pb-2">
-            <h3 class="text-xl font-semibold text-white mb-2">If you are losing track of links and losing sleep...</h3>
-            <p class="text-gray-400 mb-4">You lack a streamlined workflow. You don't need new programs; you need infrastructure.</p>
-            <a href="/offers/affiliate-tools-for-content-creators" class="text-blue-400 hover:text-blue-300 font-medium tracking-wide">Find workflow tools &rarr;</a>
-          </div>
-        </div>
-      </div>
-
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Trust & Rationale</h2>
-      <p class="text-gray-400 text-lg mb-8">The goal here is not to label one option as universally “best.” It’s to help you compare the right variables so you can choose what fits your niche, workflow, and goals more confidently.</p>
-
-      <h2 class="text-3xl font-bold text-white mt-12 mb-6">Frequently Asked Questions</h2>
-      <div class="space-y-6 text-gray-400 text-lg mb-12">
-        <div>
-          <strong class="text-white">I’m new — is this too advanced?</strong>
-          <p class="mt-2">Not necessarily. Many of these pages are designed to help you understand the decision first, not force you into a final commitment immediately.</p>
-        </div>
-        <div>
-          <strong class="text-white">What if I am still unsure?</strong>
-          <p class="mt-2">Don't overthink logic models initially. Create 10 pieces of content first on a topic you love, then <a href="/offers/best-affiliate-programs-for-beginners" class="text-blue-400 hover:text-blue-300">start small</a>.</p>
-        </div>
-        <div>
-          <strong class="text-white">Can I change direction later?</strong>
-          <p class="mt-2">Absolutely. The most successful affiliates routinely pivot their monetization strategies entirely as their audiences mature.</p>
-        </div>
-      </div>
-
-      <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 text-center mb-16">
-        <h2 class="text-2xl font-bold text-white mb-4">Ready to Focus?</h2>
-        <p class="text-gray-400 text-lg mb-6">Stop jumping from trend to trend and start building a stable, sensible foundation.</p>
-        <a href="/programs" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">Find Your Best-Fit Path</a>
-      </div>
-
-      <h2 class="text-2xl font-bold text-white mb-6">Related Resources</h2>
-      <ul class="list-disc pl-6 text-gray-400 text-lg space-y-3 mb-8">
-        <li><a href="/blog/how-to-start-affiliate-marketing-without-getting-overwhelmed" class="text-blue-400 hover:text-blue-300">How to Start Affiliate Marketing Without Getting Overwhelmed</a></li>
-        <li><a href="/blog/how-to-choose-a-niche-for-affiliate-marketing" class="text-blue-400 hover:text-blue-300">How to Choose a Niche for Affiliate Marketing More Clearly</a></li>
-        <li><a href="/blog/common-affiliate-marketing-mistakes-beginners-make" class="text-blue-400 hover:text-blue-300">Common Affiliate Marketing Mistakes Beginners Make Early On</a></li>
-        <li><a href="/blog/affiliate-workflow-for-content-creators" class="text-blue-400 hover:text-blue-300">How Content Creators Can Build an Affiliate Workflow That Actually Fits</a></li>
-      </ul>
-    </div>
-  </section>
-</BaseLayout>
+  <h2>Related Resources</h2>
+  <ul>
+    <li><a href="/blog/how-to-start-affiliate-marketing-without-getting-overwhelmed">How to Start Affiliate Marketing Without Getting Overwhelmed</a></li>
+    <li><a href="/blog/how-to-choose-a-niche-for-affiliate-marketing">How to Choose a Niche for Affiliate Marketing More Clearly</a></li>
+    <li><a href="/blog/common-affiliate-marketing-mistakes-beginners-make">Common Affiliate Marketing Mistakes Beginners Make Early On</a></li>
+    <li><a href="/blog/affiliate-workflow-for-content-creators">How Content Creators Can Build an Affiliate Workflow That Actually Fits</a></li>
+  </ul>
+</OfferArticleLayout>

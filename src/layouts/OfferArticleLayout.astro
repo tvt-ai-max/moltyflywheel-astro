@@ -1,0 +1,238 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import BlogTOC from '../components/blog/BlogTOC.astro';
+import OfferSidebar from '../components/offers/OfferSidebar.astro';
+
+interface FactItem {
+  label: string;
+  value: string;
+}
+
+interface LinkItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  offerType: string;
+  intro: string;
+  quickDecision: string;
+  primaryCtaHref: string;
+  primaryCtaLabel: string;
+  secondaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  quickFacts?: FactItem[];
+  relatedLinks?: LinkItem[];
+}
+
+const {
+  title,
+  description,
+  offerType,
+  intro,
+  quickDecision,
+  primaryCtaHref,
+  primaryCtaLabel,
+  secondaryCtaHref = '/programs',
+  secondaryCtaLabel = 'Explore Programs',
+  quickFacts = [],
+  relatedLinks = [],
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-10">
+    <div class="flex gap-6 relative">
+      <OfferSidebar
+        title={title}
+        primaryCtaHref={primaryCtaHref}
+        primaryCtaLabel={primaryCtaLabel}
+        relatedLinks={relatedLinks}
+      />
+
+      <main class="flex-1 min-w-0">
+        <header class="mb-10">
+          <nav class="flex items-center gap-2 text-xs text-[#3d7a96] mb-5" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-[#72DBF2] transition-colors">Home</a>
+            <span>/</span>
+            <a href="/offers" class="hover:text-[#72DBF2] transition-colors">Offers</a>
+            <span>/</span>
+            <span class="text-[#5ea4bf]">{offerType}</span>
+          </nav>
+
+          <div class="flex flex-wrap items-center gap-2 mb-5">
+            <span class="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full text-[#72DBF2] bg-[#72DBF2]/10 border border-[#72DBF2]/25">
+              {offerType}
+            </span>
+            <span class="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full text-[#5ea4bf] bg-[#5ea4bf]/10 border border-[#5ea4bf]/25">
+              Offer Guide
+            </span>
+          </div>
+
+          <h1 class="font-bold text-[36px] md:text-[44px] leading-[1.15] mb-5 hero-title-glow">
+            {title}
+          </h1>
+
+          <p class="text-lg text-[#5ea4bf] leading-relaxed mb-7 max-w-3xl">
+            {description}
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 text-sm text-[#3d7a96] pb-7 border-b border-[#0d2d40]">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                style="background: linear-gradient(135deg, #72DBF2, #2173A6);">M</div>
+              <span class="text-[#89c0d4] font-medium">MoltyFlywheel</span>
+            </div>
+            <span class="text-[#1a4560]">•</span>
+            <span class="text-[#3d7a96]">Evergreen offer page</span>
+            <span class="text-[#1a4560]">•</span>
+            <span class="text-[#3d7a96]">Decision-first guidance</span>
+            <span class="text-[#1a4560]">•</span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#72DBF2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span id="header-read-time">— min read</span>
+            </span>
+          </div>
+
+          <div class="mt-6 overflow-hidden rounded-2xl border border-[#1a4560] bg-[#0B3B59] shadow-[0_24px_60px_rgba(1,24,38,0.28)]">
+            <div class="grid gap-0 md:grid-cols-[1.2fr_0.8fr]">
+              <div class="relative overflow-hidden p-8 md:p-10">
+                <div class="absolute inset-0 opacity-[0.06]"
+                  style="background-image: linear-gradient(rgba(255,255,255,0.45) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.45) 1px,transparent 1px);background-size:34px 34px;"></div>
+                <div class="relative z-10 max-w-2xl">
+                  <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-[#72DBF2] mb-3">Offer Intent</p>
+                  <h2 class="text-2xl md:text-3xl font-bold text-[#daeef5] leading-tight">
+                    {intro}
+                  </h2>
+                  <p class="mt-5 text-sm md:text-base leading-7 text-[#89c0d4]">
+                    Use this page when you need a clearer decision path, stronger fit logic, and a cleaner next action than a standard directory card can provide.
+                  </p>
+                  <div class="mt-7 flex flex-wrap gap-3">
+                    <a
+                      href={primaryCtaHref}
+                      class="inline-flex items-center rounded-xl bg-[linear-gradient(135deg,#72DBF2,#2173A6)] px-6 py-3 text-sm font-bold text-[#011826] transition-transform hover:-translate-y-0.5"
+                    >
+                      {primaryCtaLabel}
+                    </a>
+                    <a
+                      href="#offer-details"
+                      class="inline-flex items-center rounded-xl border border-[#2173A6] px-6 py-3 text-sm font-semibold text-[#72DBF2] transition-colors hover:bg-[#2173A6]/10"
+                    >
+                      Read the guide
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border-t md:border-t-0 md:border-l border-[#1a4560] bg-[linear-gradient(180deg,rgba(1,24,38,0.88),rgba(11,59,89,0.86))] p-8">
+                <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-[#72DBF2]">Offer Positioning</p>
+                <div class="mt-5 space-y-4 text-sm leading-7 text-[#89c0d4]">
+                  <p>This page is structured to help readers decide based on fit, trade-offs, and monetization logic.</p>
+                  <p>The CTA stays visible, but the decision support still comes first.</p>
+                  <p class="border-t border-[#1a4560] pt-4 text-[#daeef5] font-medium">Use it as a reading page first and a click-through page second.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-start gap-3 bg-[#0d2d40] border border-[#1a4560] rounded-xl p-4">
+            <svg class="w-4 h-4 text-[#72DBF2] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <p class="text-[12px] text-[#5ea4bf] leading-relaxed">
+              <strong class="text-[#89c0d4]">Disclosure:</strong> Offer pages may include affiliate links. The page logic is written to support a decision first, and the CTA is placed only after fit, constraints, and next-step context are made clear.
+            </p>
+          </div>
+
+          <div class="mt-6 rounded-2xl border border-[#1a4560] bg-[#0B3B59] p-6 md:p-8">
+            <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-[#72DBF2]">Quick Decision Summary</p>
+            <p class="mt-4 text-base md:text-lg leading-8 text-[#89c0d4] max-w-4xl">
+              {quickDecision}
+            </p>
+
+            {quickFacts.length > 0 && (
+              <div class="mt-6 grid gap-4 md:grid-cols-3">
+                {quickFacts.map((fact) => (
+                  <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/60 p-5">
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5ea4bf]">{fact.label}</p>
+                    <p class="mt-3 text-sm leading-7 text-[#daeef5]">{fact.value}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </header>
+
+        <article id="offer-details" class="article-body">
+          <slot />
+        </article>
+
+        <section class="mt-16 mb-8">
+          <div class="relative rounded-2xl overflow-hidden"
+            style="background: linear-gradient(135deg, #0B3B59 0%, #2173A6 55%, #5EA4BF 100%);">
+            <div class="absolute -top-16 -right-16 w-56 h-56 bg-white/5 rounded-full pointer-events-none"></div>
+            <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-white/5 rounded-full pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.04]"
+              style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:40px 40px;"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-8 p-8 md:p-10">
+              <div class="flex-1 text-center md:text-left">
+                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs font-semibold text-white mb-3">
+                  Offer CTA
+                </div>
+                <h3 class="font-bold text-2xl md:text-3xl text-white leading-tight mb-3">
+                  If the fit is clear, take the next step with the right offer.
+                </h3>
+                <p class="text-white/80 text-[15px] leading-relaxed max-w-xl">
+                  The goal is not to click faster. It is to click with more confidence after the page has clarified audience fit, constraints, and the logic behind the recommendation.
+                </p>
+              </div>
+              <div class="flex flex-col gap-3 w-full md:w-[280px] shrink-0">
+                <a href={primaryCtaHref}
+                  class="w-full bg-white hover:bg-slate-100 text-[#0B3B59] font-bold py-3 rounded-xl transition-colors text-sm text-center shadow-lg shadow-black/20">
+                  {primaryCtaLabel}
+                </a>
+                <a href={secondaryCtaHref}
+                  class="w-full border border-white/35 hover:bg-white/10 text-white font-semibold py-3 rounded-xl transition-colors text-sm text-center">
+                  {secondaryCtaLabel}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="hidden xl:block w-[220px] shrink-0">
+        <div class="sticky top-24 flex flex-col gap-4">
+          <BlogTOC />
+
+          <div class="rounded-2xl p-4 border border-[#72DBF2]/20"
+            style="background: linear-gradient(135deg, #0B3B59, #2173A6);">
+            <p class="font-bold text-white text-sm mb-1">Primary next step</p>
+            <p class="text-white/70 text-[11px] mb-3 leading-relaxed">This CTA stays visible so the offer page keeps momentum after the decision becomes clear.</p>
+            <a href={primaryCtaHref}
+              class="block w-full bg-white hover:bg-slate-100 text-[#0B3B59] font-bold text-xs py-2 rounded-lg text-center transition-colors">
+              {primaryCtaLabel}
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    function calcReadTime() {
+      const article = document.getElementById('article-body');
+      if (!article) return;
+      const words = article.innerText.trim().split(/\s+/).length;
+      const mins = Math.max(1, Math.round(words / 220));
+      const el = document.getElementById('header-read-time');
+      if (el) el.textContent = mins + ' min read';
+    }
+    document.addEventListener('DOMContentLoaded', calcReadTime);
+  </script>
+</BaseLayout>
