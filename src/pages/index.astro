@@ -1,271 +1,468 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AffiliateButton from '../components/affiliate/AffiliateButton.astro';
 import { getCollection } from 'astro:content';
+import ProgramLogo from '../components/programs/ProgramLogo.astro';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 6);
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const programs = (await getCollection('programs', ({ data }) => data.featured))
-  .slice(0, 3);
+const latestPosts = allPosts.slice(0, 4);
+const reviewAndComparisonPosts = allPosts
+  .filter((post) => ['review', 'comparison'].includes(post.data.category))
+  .slice(0, 4);
 
-const niches = [
-  { icon: '🤖', title: 'Claude AI Tools', slug: 'claude-ai-tools', desc: 'Best Claude Pro use cases for affiliate marketers' },
-  { icon: '🔄', title: 'Affiliate Automation', slug: 'affiliate-marketing-automation', desc: 'Automate your full affiliate funnel with AI' },
-  { icon: '📝', title: 'AI SEO & Content', slug: 'seo-content-ai', desc: 'AI tools that dominate search rankings' },
-  { icon: '📧', title: 'Email Marketing AI', slug: 'email-marketing-ai', desc: 'Automated sequences that convert subscribers' },
-  { icon: '📦', title: 'SaaS Review Sites', slug: 'saas-review-sites', desc: 'Build profitable software review blogs with AI' },
-  { icon: '⚡', title: 'AI Productivity', slug: 'ai-productivity-tools', desc: 'Tools that 10x your output without extra cost' },
+const allPrograms = (await getCollection('programs'))
+  .sort((a, b) => {
+    if (b.data.featured !== a.data.featured) return Number(b.data.featured) - Number(a.data.featured);
+    if (b.data.rating !== a.data.rating) return b.data.rating - a.data.rating;
+    return a.data.name.localeCompare(b.data.name);
+  });
+
+const featuredPrograms = allPrograms.filter((program) => program.data.featured).slice(0, 4);
+
+const categoryLabel = {
+  'ai-writing': 'AI Writing',
+  seo: 'SEO',
+  email: 'Email',
+  'general-ai': 'General AI',
+  productivity: 'Productivity',
+} as const;
+
+const offerSpotlights = [
+  {
+    title: 'Best Affiliate Programs for Beginners',
+    href: '/offers/best-affiliate-programs-for-beginners',
+    type: 'Beginner offer page',
+    description: 'A cleaner starting path for readers who want easier first programs and less decision noise.',
+  },
+  {
+    title: 'Recurring Commission Affiliate Programs',
+    href: '/offers/recurring-commission-affiliate-programs',
+    type: 'Recurring offer page',
+    description: 'Compare options built for steadier long-term payout logic instead of one-off spikes only.',
+  },
+  {
+    title: 'Find Your Best Affiliate Fit',
+    href: '/offers/find-your-best-affiliate-fit',
+    type: 'Best-fit decision page',
+    description: 'Start here if the real problem is choosing the right direction before choosing a program.',
+  },
 ];
 
-const featuredSkills = [
-  { icon: '✍️', name: 'Affiliate Blog Builder', desc: 'Writes 1,500-word SEO blog posts with affiliate links embedded. Runs daily at 9am automatically.', tier: 'S3', cost: 'FREE' },
-  { icon: '🎯', name: 'Grand Slam Offer', desc: 'Builds high-converting landing pages with bonus stacks, risk reversals, and strong CTAs per program.', tier: 'S4', cost: 'PAID' },
-  { icon: '🔄', name: 'Self Improver', desc: 'Reads weekly KPI data and rewrites underperforming skill prompts. Your system gets smarter weekly.', tier: 'S8', cost: 'PAID' },
+const routingCards = [
+  {
+    title: 'Programs',
+    href: '/programs',
+    eyebrow: 'Directory',
+    description: 'Browse vetted AI, SEO, creator, and workflow programs with cleaner fit and commission context.',
+    cta: 'Explore Programs',
+  },
+  {
+    title: 'Blog',
+    href: '/blog',
+    eyebrow: 'Editorial',
+    description: 'Read reviews, comparisons, and practical guides that help you decide what to use next.',
+    cta: 'Read Reviews',
+  },
+  {
+    title: 'Offers',
+    href: '/offers',
+    eyebrow: 'Decision Pages',
+    description: 'Use structured offer pages when you want guidance by beginner fit, recurring logic, or best use case.',
+    cta: 'Browse Offers',
+  },
+];
+
+const trustPoints = [
+  '20 vetted programs',
+  '18 live editorial posts',
+  '7 decision-focused offer pages',
+  'Built for programs, reviews, and fit-driven choices',
+];
+
+const whyCards = [
+  {
+    title: 'Curated, not random',
+    description: 'The site is designed to narrow the field, not dump every possible tool into one directory.',
+  },
+  {
+    title: 'Decision support first',
+    description: 'Programs, articles, and offers are structured to help readers choose, not just browse.',
+  },
+  {
+    title: 'Beginner-friendly paths',
+    description: 'Readers can start with easier routes before stepping into more advanced recurring or higher-ticket models.',
+  },
+  {
+    title: 'Recurring opportunity aware',
+    description: 'The site keeps long-term monetization logic visible without forcing every reader into the same model.',
+  },
+  {
+    title: 'Comparison-led content',
+    description: 'Reviews and comparison pages are used to reduce ambiguity and improve next-step confidence.',
+  },
+  {
+    title: 'Practical, not hype',
+    description: 'The page logic emphasizes fit, constraints, and useful trade-offs instead of inflated promises.',
+  },
+];
+
+const categoryStrip = [
+  { label: 'AI Writing Programs', href: '/programs?category=ai-writing' },
+  { label: 'SEO Tools', href: '/programs?category=seo' },
+  { label: 'Email & Creator Tools', href: '/programs?category=email' },
+  { label: 'General AI Picks', href: '/programs?category=general-ai' },
+  { label: 'Beginner Paths', href: '/offers/best-affiliate-programs-for-beginners' },
+  { label: 'Recurring Paths', href: '/offers/recurring-commission-affiliate-programs' },
+  { label: 'Comparison Guides', href: '/blog?category=comparison' },
+  { label: 'Best-Fit Offers', href: '/offers/find-your-best-affiliate-fit' },
+];
+
+const faqs = [
+  {
+    question: 'What should I start with first: Programs, Blog, or Offers?',
+    answer: 'Start with Programs if you already know the category you want. Start with Blog if you want reviews and comparisons first. Start with Offers if you still need help narrowing the right path.',
+  },
+  {
+    question: 'Is this site more of a directory or an editorial resource?',
+    answer: 'It is both, but the directory and content layers are tied together. Programs help you browse, blog content helps you evaluate, and offer pages help you choose a next step with more confidence.',
+  },
+  {
+    question: 'Does the site focus only on beginners?',
+    answer: 'No. The structure supports beginner-friendly picks, recurring models, and comparison-led decisions, but it is designed to stay useful as readers become more advanced.',
+  },
+  {
+    question: 'Why are there separate Offer pages if Programs already exist?',
+    answer: 'Programs help you browse specific entries. Offers help when the reader needs a guided decision path such as best-fit, recurring, beginner, or category-specific direction.',
+  },
 ];
 ---
+
 <BaseLayout
-  title="MoltyFlywheel — Build a $3,000/mo AI Affiliate System"
-  description="52 AI skills running 24/7. Content, programs, landing pages, email sequences — automated with OpenClaw for just $71/month."
+  title="MoltyFlywheel — AI Affiliate Programs, Reviews, and Offer Paths"
+  description="A premium dark decision hub for AI tools, affiliate programs, reviews, comparisons, and offer pages."
 >
-  <!-- 1. HERO -->
-  <section class="py-24 px-6 text-center max-w-4xl mx-auto">
-    <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-4 py-2 rounded-full mb-8 uppercase tracking-wider">
-      🌀 AI Affiliate Flywheel · Powered by OpenClaw
-    </div>
-    <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
-      Build a $3,000/mo<br/>
-      <span class="text-amber-500">Affiliate Income</span><br/>
-      With 52 AI Skills
-    </h1>
-    <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-      MoltyFlywheel automates the entire affiliate marketing flywheel —
-      content creation, program research, landing pages, and email sequences.
-      All for <strong class="text-white">$71/month</strong>. No team required.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="/free-guide" class="inline-flex items-center px-8 py-4 text-lg bg-[#2173A6] hover:bg-[#1a5d8c] text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-xl">
-        Get the Free Flywheel Guide →
-      </a>
-      <a href="/tools" class="inline-flex items-center px-8 py-4 text-lg border border-gray-700 hover:border-gray-500 rounded-lg text-gray-300 hover:text-white transition-all">
-        Explore 52 AI Skills
-      </a>
-    </div>
-  </section>
+  <section class="relative overflow-hidden border-b border-[#0d2d40] bg-[#011826]">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(114,219,242,0.16),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(33,115,166,0.28),transparent_24%),linear-gradient(180deg,rgba(11,59,89,0.22),transparent_55%)]"></div>
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 68px 68px;"></div>
 
-  <!-- 2. SOCIAL PROOF STRIP -->
-  <div class="py-4 bg-gray-900/80 border-y border-gray-800 text-center">
-    <p class="text-gray-500 text-sm">
-      Trusted by affiliate marketers in 🇻🇳 🇺🇸 🇬🇧 🇦🇺 🇸🇬 &nbsp;·&nbsp;
-      Built on <span class="text-amber-400 font-semibold">Claude AI</span> &nbsp;·&nbsp;
-      Powered by <span class="text-amber-400 font-semibold">OpenClaw</span> &nbsp;·&nbsp;
-      Deployed on <span class="text-amber-400 font-semibold">Cloudflare</span>
-    </p>
-  </div>
+    <div class="relative mx-auto max-w-[1400px] px-4 py-20 md:px-6 md:py-24">
+      <div class="grid gap-10 xl:grid-cols-[minmax(0,1.15fr)_420px] xl:items-start">
+        <div class="max-w-4xl">
+          <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">
+            AI Affiliate Decision Hub
+          </span>
+          <h1 class="mt-6 max-w-4xl text-4xl font-black leading-[1.03] text-[#daeef5] md:text-6xl">
+            Find the right AI tools, programs, and affiliate paths without the usual noise.
+          </h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-[#5ea4bf] md:text-[19px]">
+            MoltyFlywheel helps readers move from browsing to clearer decisions across programs, reviews, comparisons, and offer pages. The goal is not more options. It is better next steps.
+          </p>
 
-  <!-- 3. KPI STATS -->
-  <section class="py-16 border-b border-gray-800 bg-gray-900/30">
-    <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      {[
-        { n: '52', l: 'AI Skills Running' },
-        { n: '$71/mo', l: 'Total Cost to Operate' },
-        { n: '5,267%', l: 'ROI by Month 3' },
-        { n: '2h/week', l: "Tony's Time Input" },
-      ].map(({ n, l }) => (
-        <div>
-          <div class="text-4xl font-black text-amber-500">{n}</div>
-          <div class="text-xs text-gray-500 uppercase tracking-wider mt-2">{l}</div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- 4. HOW THE FLYWHEEL WORKS -->
-  <section class="py-24 px-6 max-w-6xl mx-auto">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-black mb-4">The 8-Step Flywheel That Runs Itself</h2>
-      <p class="text-gray-400 text-lg">OpenClaw chains 52 AI skills into one self-reinforcing system</p>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {[
-        { icon: '🔍', step: '01', title: 'Research', desc: 'Affiliate Program Search finds high-commission programs in your niche automatically.' },
-        { icon: '✍️', step: '02', title: 'Content', desc: "Blog Builder writes SEO-optimized articles daily. No writer's block. No hiring." },
-        { icon: '🎯', step: '03', title: 'Offers', desc: 'Grand Slam Offer Generator creates high-converting landing pages per program.' },
-        { icon: '📱', step: '04', title: 'Social', desc: 'TikTok scripts, Twitter threads, Reddit posts — auto-generated at 10am daily.' },
-        { icon: '📧', step: '05', title: 'Email', desc: 'Flywheel Digest newsletter + drip sequences nurture leads on autopilot.' },
-        { icon: '📊', step: '06', title: 'Analytics', desc: 'A/B tests run, conversion data tracked, UTM attribution handled automatically.' },
-        { icon: '🔄', step: '07', title: 'Optimize', desc: 'Self-Improver reads KPI data and upgrades underperforming prompts weekly.' },
-        { icon: '💰', step: '08', title: 'Revenue', desc: 'Recurring SaaS commissions stack month over month. Passive income compounds.' },
-      ].map(({ icon, step, title, desc }) => (
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-amber-500/30 transition-colors">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">{icon}</span>
-            <span class="text-xs text-gray-600 font-mono">{step}</span>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/programs"
+              class="inline-flex items-center rounded-xl bg-[linear-gradient(135deg,#72DBF2,#2173A6)] px-7 py-3.5 text-sm font-bold text-[#011826] transition-transform hover:-translate-y-0.5"
+            >
+              Explore Programs
+            </a>
+            <a
+              href="/blog"
+              class="inline-flex items-center rounded-xl border border-[#2173A6] px-7 py-3.5 text-sm font-semibold text-[#72DBF2] transition-colors hover:bg-[#2173A6]/10"
+            >
+              Read Reviews
+            </a>
           </div>
-          <h3 class="font-bold text-white mb-2">{title}</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">{desc}</p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            {trustPoints.map((point) => (
+              <span class="inline-flex rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+                {point}
+              </span>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-    <div class="text-center mt-10">
-      <a href="/tools" class="text-amber-500 hover:text-amber-400 font-semibold">See all 52 skills →</a>
+
+        <aside class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#72DBF2]">Next Best Route</p>
+          <h2 class="mt-3 text-2xl font-bold text-[#daeef5]">Choose the layer that matches where you are in the decision.</h2>
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/65 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Programs</p>
+              <p class="mt-2 text-sm leading-7 text-[#89c0d4]">Use the directory when you already know the category and want the best-fit entries fast.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/65 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Blog</p>
+              <p class="mt-2 text-sm leading-7 text-[#89c0d4]">Use reviews and comparisons when you need context, trade-offs, and stronger evaluation support.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/65 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Offers</p>
+              <p class="mt-2 text-sm leading-7 text-[#89c0d4]">Use decision pages when you still need help finding the right route before choosing a program.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
-  <!-- 5. TOP AFFILIATE PROGRAMS -->
-  <section class="py-20 px-6 bg-gray-900/30 border-y border-gray-800">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-black mb-3">Top Performing Affiliate Programs</h2>
-        <p class="text-gray-400 text-lg">Handpicked for high EPC, recurring commissions, and AI-tool audiences</p>
+  <section class="border-b border-[#0d2d40] bg-[#011826]/95">
+    <div class="mx-auto max-w-[1400px] px-4 py-6 md:px-6">
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {routingCards.map((card) => (
+          <a
+            href={card.href}
+            class="group rounded-[24px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.92),rgba(4,26,39,0.96))] p-6 transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40 hover:shadow-2xl hover:shadow-[#011826]"
+          >
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#72DBF2]">{card.eyebrow}</p>
+            <h2 class="mt-4 text-2xl font-black text-[#daeef5] transition-colors group-hover:text-white">{card.title}</h2>
+            <p class="mt-3 text-sm leading-7 text-[#89c0d4]">{card.description}</p>
+            <div class="mt-6 flex items-center justify-between border-t border-[#0d2d40] pt-4 text-sm font-semibold text-[#72DBF2]">
+              <span>{card.cta}</span>
+              <span aria-hidden="true">→</span>
+            </div>
+          </a>
+        ))}
       </div>
-      {programs.length > 0 ? (
-        <div class="grid md:grid-cols-3 gap-6">
-          {programs.map(p => (
-            <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 hover:border-amber-500/30 transition-colors flex flex-col">
-              <div class="mb-2">
-                <span class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-1 rounded font-semibold uppercase">
-                  {p.data.category}
-                </span>
-              </div>
-              <h3 class="text-xl font-bold mt-3 mb-2">{p.data.name}</h3>
-              <p class="text-gray-400 text-sm mb-4 flex-1">{p.data.description}</p>
-              {p.data.commission && (
-                <div class="text-sm text-green-400 font-semibold mb-4">
-                  {p.data.commission.rate} · {p.data.commission.type}
+    </div>
+  </section>
+
+  <section class="border-b border-[#0d2d40] bg-[#011826]">
+    <div class="mx-auto max-w-[1400px] px-4 py-16 md:px-6">
+      <div class="mb-10 text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">How It Works</p>
+        <h2 class="mt-3 text-3xl font-black text-[#daeef5] md:text-4xl">A clearer path from discovery to decision.</h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {[
+          {
+            step: '01',
+            title: 'Discover',
+            description: 'Browse programs, review categories, and see what kinds of tools or monetization paths are actually in play.',
+          },
+          {
+            step: '02',
+            title: 'Compare',
+            description: 'Use reviews, comparison articles, and structured offer pages to understand fit, trade-offs, and practical differences.',
+          },
+          {
+            step: '03',
+            title: 'Choose',
+            description: 'Move into the right program, offer path, or related article with more confidence and less friction.',
+          },
+        ].map((item) => (
+          <div class="rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-7">
+            <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#72DBF2]">
+              Step {item.step}
+            </span>
+            <h3 class="mt-5 text-2xl font-bold text-[#daeef5]">{item.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-[#0d2d40] bg-[#011826]">
+    <div class="mx-auto max-w-[1400px] px-4 py-16 md:px-6">
+      <div class="mb-8 flex items-center justify-between gap-4">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Featured Programs</p>
+          <h2 class="mt-2 text-3xl font-black text-[#daeef5]">Start with stronger entries, not a random list.</h2>
+        </div>
+        <a href="/programs" class="hidden text-sm font-semibold text-[#72DBF2] transition-colors hover:text-[#daeef5] md:block">View all programs →</a>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {featuredPrograms.map((program) => (
+          <article class="group flex h-full flex-col overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#0B3B59] transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40 hover:shadow-2xl hover:shadow-[#011826]">
+            <a href={`/programs/${program.id}`} class="relative block h-56 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#011826] via-[#0B3B59] to-[#1a4560]"></div>
+              <div class="absolute inset-0 opacity-[0.08]" style="background-image: radial-gradient(circle at 20% 18%, rgba(255,255,255,0.18) 0%, transparent 26%), repeating-linear-gradient(45deg, rgba(255,255,255,0.36) 0px, rgba(255,255,255,0.36) 1px, transparent 1px, transparent 15px);"></div>
+              <div class="absolute inset-0 p-4">
+                <div class="relative flex h-full overflow-hidden rounded-[22px] border border-[#72DBF2]/15 bg-[#011826]/40">
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <ProgramLogo name={program.data.name} logo={program.data.logo} size="lg" class="h-28 w-28 rounded-[28px]" />
+                  </div>
+                  <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
+                    <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#72DBF2]">
+                      {categoryLabel[program.data.category]}
+                    </span>
+                    <span class="rounded-full border border-[#1a4560] bg-[#011826]/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#89c0d4]">
+                      {program.data.commission.type}
+                    </span>
+                  </div>
                 </div>
-              )}
-              <div class="flex gap-3">
-                <a href={`/programs/${p.id}`} class="text-sm text-amber-500 hover:underline">Read Review →</a>
-                <AffiliateButton program={p.id} label="Join →" size="sm" />
+              </div>
+            </a>
+
+            <div class="flex flex-1 flex-col p-5">
+              <div class="flex flex-wrap items-center gap-3 text-[11px] text-[#3d7a96]">
+                <span>{program.data.commission.rate}</span>
+                <span class="text-[#1a4560]">•</span>
+                <span>{program.data.commission.cookieDuration} cookie</span>
+              </div>
+              <h3 class="mt-3 text-xl font-bold leading-tight text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">
+                <a href={`/programs/${program.id}`}>{program.data.name}</a>
+              </h3>
+              <p class="mt-3 flex-1 text-sm leading-7 text-[#89c0d4]">{program.data.description}</p>
+              <div class="mt-5 flex items-center justify-between border-t border-[#0d2d40] pt-4">
+                <span class="text-sm text-[#89c0d4]">{program.data.rating.toFixed(1)} / 5</span>
+                <a href={`/programs/${program.id}`} class="text-sm font-bold text-[#72DBF2] transition-transform group-hover:translate-x-1">View program →</a>
               </div>
             </div>
-          ))}
-        </div>
-      ) : (
-        <p class="text-center text-gray-500">Loading programs...</p>
-      )}
-      <div class="text-center mt-10">
-        <a href="/programs" class="text-amber-500 hover:text-amber-400 font-semibold">View all programs →</a>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- 6. SKILLS SHOWCASE TEASER -->
-  <section class="py-24 px-6 max-w-6xl mx-auto">
-    <div class="text-center mb-12">
-      <h2 class="text-4xl font-black mb-3">52 AI Skills. 73% Run Free.</h2>
-      <p class="text-gray-400 text-lg">The Free Ride Engine routes 38 skills to free-tier models — $0 API cost</p>
+  <section class="border-b border-[#0d2d40] bg-[#011826]/98">
+    <div class="mx-auto max-w-[1400px] px-4 py-16 md:px-6">
+      <div class="mb-10 text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Why MoltyFlywheel</p>
+        <h2 class="mt-3 text-3xl font-black text-[#daeef5] md:text-4xl">Built to support choices, not just clicks.</h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {whyCards.map((card) => (
+          <div class="rounded-[24px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.86),rgba(1,24,38,0.96))] p-7">
+            <h3 class="text-xl font-bold text-[#daeef5]">{card.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{card.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
-    <div class="grid md:grid-cols-3 gap-6 mb-10">
-      {featuredSkills.map(skill => (
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-3xl">{skill.icon}</span>
-            <div class="flex gap-2">
-              <span class="text-xs bg-gray-800 text-gray-400 px-2 py-1 rounded font-mono">{skill.tier}</span>
-              <span class={`text-xs font-bold px-2 py-1 rounded ${skill.cost === 'FREE' ? 'text-green-400 bg-green-500/10' : 'text-amber-400 bg-amber-500/10'}`}>
-                {skill.cost}
+  </section>
+
+  <section class="border-b border-[#0d2d40] bg-[#011826]">
+    <div class="mx-auto max-w-[1400px] px-4 py-16 md:px-6">
+      <div class="mb-8 flex items-center justify-between gap-4">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Latest Reviews & Comparisons</p>
+          <h2 class="mt-2 text-3xl font-black text-[#daeef5]">Read before you click through.</h2>
+        </div>
+        <a href="/blog" class="hidden text-sm font-semibold text-[#72DBF2] transition-colors hover:text-[#daeef5] md:block">View all articles →</a>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {(reviewAndComparisonPosts.length > 0 ? reviewAndComparisonPosts : latestPosts).map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="group rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-6 transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40"
+          >
+            <div class="flex items-center gap-3 text-[11px] text-[#3d7a96]">
+              <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 font-bold uppercase tracking-[0.18em] text-[#72DBF2]">
+                {post.data.category}
               </span>
             </div>
-          </div>
-          <h3 class="font-bold text-white mb-2">{skill.name}</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">{skill.desc}</p>
+            <h3 class="mt-5 text-xl font-bold leading-tight text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">{post.data.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{post.data.description}</p>
+            <div class="mt-6 flex items-center justify-between border-t border-[#0d2d40] pt-4 text-sm font-semibold text-[#72DBF2]">
+              <span>Read article</span>
+              <span aria-hidden="true">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-[#0d2d40] bg-[#011826]/98">
+    <div class="mx-auto max-w-[1400px] px-4 py-16 md:px-6">
+      <div class="mb-8 flex items-center justify-between gap-4">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Offer Spotlight</p>
+          <h2 class="mt-2 text-3xl font-black text-[#daeef5]">Use guided offer pages when the path still is not obvious.</h2>
         </div>
-      ))}
-    </div>
-    <div class="text-center">
-      <a href="/tools" class="inline-flex items-center px-6 py-3 border border-amber-500/50 text-amber-500 hover:bg-amber-500/10 rounded-lg font-semibold transition-all">
-        Explore all 52 skills →
-      </a>
-    </div>
-  </section>
-
-  <!-- 7. NICHE CATEGORIES -->
-  <section class="py-20 px-6 bg-gray-900/30 border-y border-gray-800">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-black mb-3">6 High-Converting Niches</h2>
-        <p class="text-gray-400 text-lg">Each niche has dedicated keyword clusters, programs, and content templates</p>
+        <a href="/offers" class="hidden text-sm font-semibold text-[#72DBF2] transition-colors hover:text-[#daeef5] md:block">View all offers →</a>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {niches.map(niche => (
-          <a href={`/niche/${niche.slug}`} class="bg-gray-950 border border-gray-800 rounded-xl p-5 hover:border-amber-500/40 transition-all group">
-            <div class="text-3xl mb-3">{niche.icon}</div>
-            <h3 class="font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">{niche.title}</h3>
-            <p class="text-gray-500 text-sm">{niche.desc}</p>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        {offerSpotlights.map((offer) => (
+          <a
+            href={offer.href}
+            class="group rounded-[24px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.92),rgba(4,26,39,0.96))] p-7 transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40"
+          >
+            <div class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#72DBF2]">
+              {offer.type}
+            </div>
+            <h3 class="mt-5 text-2xl font-black leading-tight text-[#daeef5] transition-colors group-hover:text-white">{offer.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{offer.description}</p>
+            <div class="mt-6 flex items-center justify-between border-t border-[#0d2d40] pt-5 text-sm font-semibold text-[#72DBF2]">
+              <span>Open page</span>
+              <span aria-hidden="true">→</span>
+            </div>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 8. LATEST BLOG POSTS -->
-  <section class="py-24 px-6 max-w-6xl mx-auto">
-    <div class="flex items-center justify-between mb-10">
-      <div>
-        <h2 class="text-4xl font-black mb-2">From the Blog</h2>
-        <p class="text-gray-400">Published by OpenClaw's affiliate-blog-builder skill</p>
+  <section class="border-b border-[#0d2d40] bg-[#011826]">
+    <div class="mx-auto max-w-[1400px] px-4 py-12 md:px-6">
+      <div class="mb-6 text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Category Strip</p>
       </div>
-      <a href="/blog" class="text-amber-500 hover:text-amber-400 font-semibold hidden md:block">View all posts →</a>
-    </div>
-    {posts.length > 0 ? (
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map(post => (
-          <a href={`/blog/${post.id}`} class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-amber-500/50 transition-all group">
-            <span class="text-xs text-amber-500 uppercase tracking-wider font-semibold">{post.data.category}</span>
-            <h3 class="text-lg font-semibold mt-2 mb-3 group-hover:text-amber-400 transition-colors leading-snug">{post.data.title}</h3>
-            <p class="text-gray-400 text-sm line-clamp-2">{post.data.description}</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {categoryStrip.map((item) => (
+          <a
+            href={item.href}
+            class="inline-flex rounded-full border border-[#1a4560] bg-[#0B3B59] px-4 py-2.5 text-sm font-medium text-[#89c0d4] transition-all hover:border-[#72DBF2]/40 hover:text-[#daeef5]"
+          >
+            {item.label}
           </a>
         ))}
       </div>
-    ) : (
-      <p class="text-gray-500">No posts yet — check back soon.</p>
-    )}
-    <div class="text-center mt-10 md:hidden">
-      <a href="/blog" class="text-amber-500 hover:text-amber-400 font-semibold">View all posts →</a>
     </div>
   </section>
 
-  <!-- 9. LEAD MAGNET -->
-  <section class="py-20 px-6">
-    <div class="max-w-3xl mx-auto bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/30 rounded-3xl p-12 text-center">
-      <div class="text-5xl mb-6">📘</div>
-      <h2 class="text-4xl font-black mb-3">The Flywheel Complete Guide</h2>
-      <p class="text-gray-400 text-lg mb-8">Free PDF: How to build a $3,000/month AI affiliate system with OpenClaw</p>
-      <ul class="text-left max-w-md mx-auto mb-10 space-y-3">
-        {[
-          'Full 52-skill breakdown with use cases',
-          'Budget calculator ($71/mo operating cost explained)',
-          '12-week launch timeline',
-          'Real revenue projections with assumptions',
-        ].map(item => (
-          <li class="flex items-start gap-3 text-gray-300 text-sm">
-            <span class="text-green-400 mt-0.5 shrink-0">✓</span>
-            {item}
-          </li>
+  <section class="border-b border-[#0d2d40] bg-[#011826]/98">
+    <div class="mx-auto max-w-[960px] px-4 py-16 md:px-6">
+      <div class="text-center">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">FAQ</p>
+        <h2 class="mt-3 text-3xl font-black text-[#daeef5] md:text-4xl">What visitors usually need to know first.</h2>
+      </div>
+
+      <div class="mt-10 space-y-4">
+        {faqs.map((faq) => (
+          <div class="rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-6">
+            <h3 class="text-xl font-bold text-[#daeef5]">{faq.question}</h3>
+            <p class="mt-4 text-sm leading-7 text-[#89c0d4]">{faq.answer}</p>
+          </div>
         ))}
-      </ul>
-      <a href="/free-guide" class="inline-flex items-center px-8 py-4 bg-[#2173A6] hover:bg-[#1a5d8c] text-white font-bold text-lg rounded-lg transition-all shadow-lg hover:shadow-xl">
-        Download Free Guide →
-      </a>
-      <p class="text-gray-600 text-xs mt-4">No spam. Unsubscribe anytime.</p>
+      </div>
     </div>
   </section>
 
-  <!-- 10. BOTTOM CTA BANNER -->
-  <section class="py-20 px-6 bg-gradient-to-br from-gray-900 via-gray-950 to-black border-t border-gray-800">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-4xl font-black mb-4">Ready to Build Your Flywheel?</h2>
-      <p class="text-gray-400 text-lg mb-8">
-        Start with Claude Pro — the AI powering MoltyFlywheel's entire content engine
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <AffiliateButton program="claude-pro" label="Get Claude Pro →" size="lg" />
-        <a href="/free-guide" class="inline-flex items-center px-8 py-4 text-lg border border-gray-700 hover:border-gray-500 rounded-lg text-gray-400 hover:text-white transition-all">
-          Or explore the free guide first
-        </a>
+  <section class="bg-[#011826]">
+    <div class="mx-auto max-w-[1200px] px-4 py-20 md:px-6">
+      <div class="rounded-[32px] border border-[#0d2d40] bg-[linear-gradient(135deg,rgba(11,59,89,0.96),rgba(33,115,166,0.88),rgba(94,164,191,0.86))] p-8 md:p-12">
+        <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/75">Final CTA</p>
+            <h2 class="mt-3 text-3xl font-black leading-tight text-white md:text-4xl">
+              Start with the right layer, then go deeper only when the fit is clear.
+            </h2>
+            <p class="mt-4 text-base leading-8 text-[#e4f5fb]">
+              If you already know what category you want, go to Programs. If you still need help deciding, use the Offer pages first. If you want more evaluation context, read the latest reviews and comparisons.
+            </p>
+          </div>
+          <div class="flex w-full max-w-[320px] flex-col gap-3">
+            <a
+              href="/programs"
+              class="w-full rounded-xl bg-white px-6 py-3.5 text-center text-sm font-bold text-[#0B3B59] transition-transform hover:-translate-y-0.5"
+            >
+              Explore Programs
+            </a>
+            <a
+              href="/offers"
+              class="w-full rounded-xl border border-white/35 px-6 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            >
+              Browse Offers
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
