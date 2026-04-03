@@ -6,6 +6,7 @@ category: "guide"
 keyword: "match affiliate offers"
 cluster: "beginner"
 tags: ["offer-matching", "affiliate-marketing", "strategy"]
+ogImage: "/images/blog/from-niche-to-program-match-affiliate-offers-cover.webp"
 draft: false
 ---
 

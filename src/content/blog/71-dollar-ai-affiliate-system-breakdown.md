@@ -5,6 +5,7 @@ pubDate: 2026-03-25
 category: guide
 tags: ["budget", "openclaw", "cost", "free-ride"]
 affiliatePrograms: ["claude-pro"]
+ogImage: "/images/blog/71-dollar-ai-affiliate-system-breakdown-cover.webp"
 draft: false
 ---
 

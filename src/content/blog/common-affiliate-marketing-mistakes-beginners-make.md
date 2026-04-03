@@ -6,6 +6,7 @@ category: "guide"
 keyword: "common affiliate marketing mistakes beginners make"
 cluster: "beginner"
 tags: ["mistakes", "beginners", "affiliate-marketing"]
+ogImage: "/images/blog/common-affiliate-marketing-mistakes-beginners-make-cover.webp"
 draft: false
 ---
 

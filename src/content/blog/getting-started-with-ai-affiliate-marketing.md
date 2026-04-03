@@ -5,6 +5,7 @@ pubDate: 2026-03-28
 category: guide
 tags: ["ai", "affiliate-marketing", "getting-started"]
 affiliatePrograms: ["claude-pro"]
+ogImage: "/images/blog/getting-started-with-ai-affiliate-marketing-cover.webp"
 draft: false
 ---
 

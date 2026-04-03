@@ -5,6 +5,7 @@ pubDate: 2026-03-26
 category: review
 tags: ["affiliate-programs", "recurring", "ai-tools", "saas"]
 affiliatePrograms: ["koala-writer", "convertkit", "surfer-seo"]
+ogImage: "/images/blog/best-recurring-affiliate-programs-ai-tools-2026-cover.webp"
 draft: false
 ---
 
