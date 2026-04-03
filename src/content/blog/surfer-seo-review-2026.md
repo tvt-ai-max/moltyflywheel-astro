@@ -2,9 +2,11 @@
 title: "Surfer SEO Review 2026: Tool Tối Ưu Content AI Tốt Nhất Để Rank Top?"
 description: "Review Surfer SEO 2026 chân thực nhất. Công cụ AI này có xứng đáng với giá tiền để giúp blog affiliate của bạn vượt bão cập nhật thuật toán Google?"
 pubDate: 2026-04-03
+category: review
 keyword: "surfer seo review 2026"
 cluster: "seo-content-tools"
 tags: ["surfer-seo", "seo", "content-optimization", "affiliate-marketing"]
+ogImage: "/images/blog/surfer-seo-review-2026-cover.webp"
 draft: false
 ---
 

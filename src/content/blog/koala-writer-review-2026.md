@@ -2,9 +2,11 @@
 title: "Koala Writer Review 2026: Tool Viết Bài AI Tốt Nhất Cho SEO?"
 description: "Review Koala Writer chi tiết cập nhật 2026. Công cụ này có đáng để đầu tư tự động hóa viết bài SEO và Affiliate Marketing? Xem đánh giá thực tế."
 pubDate: 2026-04-03
+category: review
 keyword: "koala writer review 2026"
 cluster: "ai-writing-tools"
 tags: ["koala-writer", "ai-writing", "seo", "affiliate-marketing"]
+ogImage: "/images/blog/koala-writer-review-2026-cover.webp"
 draft: false
 ---
 

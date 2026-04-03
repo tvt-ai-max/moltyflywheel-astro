@@ -2,9 +2,11 @@
 title: "Best AI Writing Tool For Affiliate Blogs 2026: Đâu Là Số 1?"
 description: "Đi tìm best ai writing tool cho affiliate blogs năm 2026. Bảng xếp hạng 3 công cụ AI viết bài chuẩn SEO tạo chuyển đổi cực mạnh từ case study thật."
 pubDate: 2026-04-03
+category: comparison
 keyword: "best ai writing tool for affiliate blogs"
 cluster: "ai-writing-tools"
 tags: ["ai-writing", "affiliate-marketing", "seo", "koala-writer"]
+ogImage: "/images/blog/best-ai-writing-tool-affiliate-blogs-cover.webp"
 draft: false
 ---
 
