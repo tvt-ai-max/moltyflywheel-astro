@@ -6,6 +6,7 @@ category: "guide"
 keyword: "how to compare affiliate platforms"
 cluster: "workflow"
 tags: ["affiliate-networks", "platforms", "workflow"]
+ogImage: "/images/blog/how-to-compare-affiliate-platforms-cover.webp"
 draft: false
 ---
 

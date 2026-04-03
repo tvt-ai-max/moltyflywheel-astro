@@ -6,6 +6,7 @@ category: "guide"
 keyword: "affiliate workflow for content creators"
 cluster: "workflow"
 tags: ["workflow", "content-creators", "systemization"]
+ogImage: "/images/blog/affiliate-workflow-for-content-creators-cover.webp"
 draft: false
 ---
 

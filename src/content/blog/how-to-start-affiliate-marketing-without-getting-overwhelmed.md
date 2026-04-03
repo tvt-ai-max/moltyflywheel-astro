@@ -6,6 +6,7 @@ category: "guide"
 keyword: "how to start affiliate marketing"
 cluster: "beginner"
 tags: ["affiliate-marketing", "beginners", "getting-started"]
+ogImage: "/images/blog/how-to-start-affiliate-marketing-without-getting-overwhelmed-cover.webp"
 draft: false
 ---
 

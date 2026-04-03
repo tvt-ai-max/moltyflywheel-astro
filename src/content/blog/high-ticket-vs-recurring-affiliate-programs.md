@@ -6,6 +6,7 @@ category: "guide"
 keyword: "high-ticket vs recurring affiliate programs"
 cluster: "offer-model"
 tags: ["high-ticket", "recurring-commissions", "affiliate-strategy"]
+ogImage: "/images/blog/high-ticket-vs-recurring-affiliate-programs-cover.webp"
 draft: false
 ---
 

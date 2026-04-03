@@ -5,6 +5,7 @@ pubDate: 2026-03-23
 category: comparison
 tags: ["claude", "chatgpt", "comparison", "ai-writing"]
 affiliatePrograms: ["claude-pro"]
+ogImage: "/images/blog/claude-pro-vs-chatgpt-plus-affiliate-marketing-cover.webp"
 draft: false
 ---
 
