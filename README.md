@@ -47,3 +47,14 @@ To avoid re-reading the entire repository on every session, this project maintai
 - `docs/CODEBASE_MEMORY.md`
 
 For future analysis, review this file first, then scan only the files changed since the last log entry or the files directly relevant to the current task. Update the memory file after major codebase reads, architecture changes, or significant implementation work.
+
+---
+
+## 🗂️ AI Tools Taxonomy Assets
+
+The approved AI tools taxonomy has been operationalized into tracked repo assets for future directory and CMS work:
+
+- `src/data/tools/directory-schema-v1.md`
+- `src/data/tools/migration-map-v1.json`
+
+Use these as the source of truth before refactoring the current tools dataset, building category pages, or implementing new filters/search for the tools directory.
