@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import OfferLayout from '../../layouts/OfferLayout.astro';
 import AffiliateButton from '../../components/affiliate/AffiliateButton.astro';
 
@@ -9,38 +9,67 @@ export async function getStaticPaths() {
 }
 
 const { offer } = Astro.props;
+const { Content } = await render(offer);
 ---
 <OfferLayout title={offer.data.title} description={offer.data.headline}>
-  <section class="min-h-screen py-24 px-6 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
-    <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-600 text-sm font-bold px-4 py-2 rounded-full mb-8 uppercase tracking-wider">
-      Limited Time Bonus Included
+  <section class="bg-[#f7fbfd]">
+    <div class="mx-auto max-w-5xl px-6 py-20 md:py-24">
+      <div class="max-w-4xl">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[#2173A6]/20 bg-[#2173A6]/8 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#2173A6]">
+          Starter Offer
+        </div>
+        <h1 class="mt-8 text-4xl font-black leading-tight text-[#0b2230] md:text-6xl">
+          {offer.data.headline}
+        </h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-[#476879]">
+          A decision-first offer page for readers who want to start with a strong general AI system before expanding into more specialized tools.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <AffiliateButton program={offer.data.targetProgram} label={offer.data.cta} size="lg" />
+          <a href="#offer-details" class="inline-flex items-center rounded-lg border-2 border-[#2173A6] px-6 py-3 text-sm font-semibold text-[#2173A6] transition-colors hover:bg-[#2173A6]/8">
+            Read the details
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-12 rounded-[28px] border border-[#d8e7ee] bg-white p-8 shadow-[0_18px_60px_rgba(11,59,89,0.08)]">
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="rounded-2xl border border-[#e3eef3] bg-[#f8fcfe] p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c8294]">Best for</p>
+            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Readers who want one capable AI layer for research, drafting, and operator workflows.</p>
+          </div>
+          <div class="rounded-2xl border border-[#e3eef3] bg-[#f8fcfe] p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c8294]">Primary angle</p>
+            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Beginner-friendly foundation tool with practical workflow upside.</p>
+          </div>
+          <div class="rounded-2xl border border-[#e3eef3] bg-[#f8fcfe] p-5">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c8294]">CTA logic</p>
+            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Start with the tool first, then use the included blueprint to turn it into a repeatable workflow.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="offer-details" class="prose prose-slate mt-14 max-w-none prose-headings:text-[#0b2230] prose-p:text-[#355564] prose-p:leading-8 prose-li:text-[#355564] prose-strong:text-[#0b2230] prose-h2:mt-12 prose-h2:text-3xl prose-h3:text-xl">
+        <Content />
+      </div>
+
+      <div class="mt-14 rounded-[28px] border border-[#cfe2ea] bg-[linear-gradient(135deg,#0B3B59_0%,#2173A6_58%,#72DBF2_100%)] p-8 text-white shadow-[0_22px_70px_rgba(11,59,89,0.22)]">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/75">Final CTA</p>
+        <h2 class="mt-3 text-3xl font-black leading-tight">Start with Claude Pro if the goal is one strong AI foundation, not a fragmented stack.</h2>
+        <p class="mt-4 max-w-3xl text-base leading-8 text-[#e9f7fc]">
+          This offer is strongest for readers who want a dependable first system for research, drafting, and planning, then want a clearer path for how to actually use it inside a MoltyFlywheel-style workflow.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <AffiliateButton program={offer.data.targetProgram} label={offer.data.cta} size="lg" />
+          <a href="/programs/claude-pro" class="inline-flex items-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5">
+            View Claude Pro Review
+          </a>
+        </div>
+        <p class="mt-4 text-xs italic text-white/80">
+          Bonus delivery and activation guidance should stay aligned with the current offer workflow and only promise assets that actually exist.
+        </p>
+      </div>
     </div>
-    <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
-      {offer.data.headline}
-    </h1>
-    <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-      Unlock the power of {offer.data.targetProgram} with MoltyFlywheel's exclusive AI content automation strategy.
-    </p>
-    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8 mb-12 w-full max-w-lg">
-      <h3 class="text-lg font-bold mb-4">What's Inside:</h3>
-      <ul class="text-left space-y-3 mb-8 text-gray-700">
-        <li class="flex items-start gap-2">
-          <span class="text-green-500 font-bold">✓</span>
-          Complete Setup Blueprint
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-green-500 font-bold">✓</span>
-          Custom Content Automation Workflows
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-green-500 font-bold">✓</span>
-          1-Click SEO Audit Tool
-        </li>
-      </ul>
-      <AffiliateButton program={offer.data.targetProgram} label={offer.data.cta} size="lg" />
-    </div>
-    <p class="text-xs text-gray-400 italic">
-      This offer is delivered automatically after signup via the link above.
-    </p>
   </section>
 </OfferLayout>
