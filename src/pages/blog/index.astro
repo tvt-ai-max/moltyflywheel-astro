@@ -226,11 +226,22 @@ const socialProof = [
                 <div class="grid min-h-full md:grid-cols-[1.1fr_minmax(0,1fr)]">
                   <div class="relative min-h-[240px] overflow-hidden">
                     {post.thumbnail ? (
-                      <img
-                        src={post.thumbnail}
-                        alt={post.data.title}
-                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      />
+                      <>
+                        <div
+                          class="absolute inset-0 bg-gradient-to-br from-[#011826] via-[#0B3B59] to-[#1a4560]"
+                        ></div>
+                        <div
+                          class="absolute inset-0 opacity-[0.08]"
+                          style="background-image: radial-gradient(circle at 22% 18%, rgba(255,255,255,0.18) 0%, transparent 28%), repeating-linear-gradient(45deg, rgba(255,255,255,0.38) 0px, rgba(255,255,255,0.38) 1px, transparent 1px, transparent 14px);"
+                        ></div>
+                        <img
+                          src={post.thumbnail}
+                          alt={post.data.title}
+                          loading="lazy"
+                          decoding="async"
+                          class="absolute inset-0 h-full w-full object-contain p-4 md:p-5 transition-transform duration-300 group-hover:scale-[1.02]"
+                        />
+                      </>
                     ) : (
                       <div class:list={['h-full w-full bg-gradient-to-br', style.gradient]}>
                         <div
@@ -311,11 +322,22 @@ const socialProof = [
             >
               <a href={`/blog/${post.id}`} class="relative block h-52 overflow-hidden">
                 {post.thumbnail ? (
-                  <img
-                    src={post.thumbnail}
-                    alt={post.data.title}
-                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                  />
+                  <>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-br from-[#011826] via-[#0B3B59] to-[#1a4560]"
+                    ></div>
+                    <div
+                      class="absolute inset-0 opacity-[0.08]"
+                      style="background-image: radial-gradient(circle at 20% 18%, rgba(255,255,255,0.18) 0%, transparent 26%), repeating-linear-gradient(45deg, rgba(255,255,255,0.36) 0px, rgba(255,255,255,0.36) 1px, transparent 1px, transparent 15px);"
+                    ></div>
+                    <img
+                      src={post.thumbnail}
+                      alt={post.data.title}
+                      loading="lazy"
+                      decoding="async"
+                      class="absolute inset-0 h-full w-full object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </>
                 ) : (
                   <div class:list={['h-full w-full bg-gradient-to-br', style.gradient]}>
                     <div
