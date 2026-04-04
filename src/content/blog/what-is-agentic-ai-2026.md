@@ -6,7 +6,7 @@ category: guide
 tags: ["agentic-ai", "ai-agents", "automation", "2026", "artificial-intelligence"]
 keyword: "agentic AI"
 cluster: "cluster-a-agentic-ai"
-ogImage: "/images/blog/agentic-ai-what-is-it-2026.webp"
+ogImage: "/images/blog/agentic-ai-what-is-it-2026-v2.webp"
 draft: false
 featured: true
 ---
