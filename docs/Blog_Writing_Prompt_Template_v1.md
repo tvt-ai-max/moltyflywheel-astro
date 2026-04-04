@@ -136,6 +136,7 @@ If the task includes image generation:
 - verify that every `.webp` is a real WebP before commit
 - do not rename JPG or PNG files to `.webp` manually
 - validate dimensions and render compatibility for article hero and card usage
+- if a live blog cover had a broken format or severe cache/render issue, regenerate to a new filename/path instead of overwriting the old file in place
 
 If no image is requested, do not invent one.
 

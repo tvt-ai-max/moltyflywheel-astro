@@ -78,6 +78,11 @@ If a blog image is generated or replaced, validate:
 - dimensions
 - render compatibility with article hero and card usage
 
+If a live blog cover image had a broken format or a severe cache/render issue:
+- regenerate to a new filename/path
+- update the article to the new path
+- do not overwrite the old file in place as the default fix
+
 ## 8. Git rule
 
 A content task is not complete until `git push` succeeds.
