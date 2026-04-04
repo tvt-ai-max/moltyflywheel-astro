@@ -36,6 +36,31 @@ Default language rule:
 Execution rule:
 - A blog task is not complete until the final file is created, build validation passes, and Git push succeeds.
 
+## Program Page Writing Rule
+
+All production program pages must follow the current Programs system before drafting begins.
+
+Required source files to read first:
+- `src/content.config.ts`
+- `src/pages/programs/index.astro`
+- `src/pages/programs/[program].astro`
+- `docs/Program_Page_Writing_Prompt_Template_v1.md`
+
+Execution rule:
+- A program-page task is not complete until the content file is created or updated, build validation passes, and Git push succeeds.
+
+## Offer Page Writing Rule
+
+All production offer pages must follow the current offer framework and execution layer before drafting begins.
+
+Required source files to read first:
+- `docs/MoltyFlywheel_Offer_Copy_Framework_v1.md`
+- `src/content/_engine/offer-page-template-v1.md`
+- `docs/Offer_Page_Writing_Prompt_Template_v1.md`
+
+Execution rule:
+- An offer-page task is not complete until the content file is created or updated, build validation passes, and Git push succeeds.
+
 ---
 
 ## 🛠️ Project Setup & Commands
