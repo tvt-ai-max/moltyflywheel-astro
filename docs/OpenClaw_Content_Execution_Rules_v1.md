@@ -66,7 +66,19 @@ Use the existing blog production system already defined in the repo.
 
 Do not imply scheduled publishing exists unless the actual build/deploy flow supports it.
 
-## 7. Git rule
+## 7. Image verification rule
+
+For any file saved as `.webp`:
+- verify the file is a real WebP before commit
+- do not rename JPG or PNG files to `.webp` by hand
+- do not treat extension alone as proof of format validity
+
+If a blog image is generated or replaced, validate:
+- actual file format
+- dimensions
+- render compatibility with article hero and card usage
+
+## 8. Git rule
 
 A content task is not complete until `git push` succeeds.
 
@@ -76,7 +88,7 @@ Do not confuse:
 
 They are separate.
 
-## 8. Return format rule
+## 9. Return format rule
 
 Return only:
 - Status

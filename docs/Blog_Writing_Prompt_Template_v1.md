@@ -133,6 +133,9 @@ If the task includes image generation:
 - keep it crop-safe
 - save it using the project naming convention
 - attach it using the currently supported image field
+- verify that every `.webp` is a real WebP before commit
+- do not rename JPG or PNG files to `.webp` manually
+- validate dimensions and render compatibility for article hero and card usage
 
 If no image is requested, do not invent one.
 
