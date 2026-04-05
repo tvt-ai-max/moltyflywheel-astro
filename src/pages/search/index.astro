@@ -239,6 +239,24 @@ const starterLinks = [
         </p>
       </div>
 
+      <div class="mb-8 flex flex-wrap gap-3" data-type-controls>
+        <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#2173A6] px-4 py-2 text-sm font-semibold text-white" type="button" data-type-filter="all">
+          All <span class="ml-1 opacity-70">{totals.all}</span>
+        </button>
+        <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#0B3B59]/45 px-4 py-2 text-sm font-semibold text-[#b7d8e5]" type="button" data-type-filter="blog">
+          Blog <span class="ml-1 opacity-70">{totals.blog}</span>
+        </button>
+        <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#0B3B59]/45 px-4 py-2 text-sm font-semibold text-[#b7d8e5]" type="button" data-type-filter="program">
+          Programs <span class="ml-1 opacity-70">{totals.program}</span>
+        </button>
+        <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#0B3B59]/45 px-4 py-2 text-sm font-semibold text-[#b7d8e5]" type="button" data-type-filter="offer">
+          Offers <span class="ml-1 opacity-70">{totals.offer}</span>
+        </button>
+        <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#0B3B59]/45 px-4 py-2 text-sm font-semibold text-[#b7d8e5]" type="button" data-type-filter="skill">
+          Skills <span class="ml-1 opacity-70">{totals.skill}</span>
+        </button>
+      </div>
+
       <div id="site-search-grid" class="grid grid-cols-1 gap-5 md:grid-cols-2">
         {searchItems.map((item) => (
           <a
@@ -287,13 +305,34 @@ const starterLinks = [
   const searchInput = document.getElementById('site-search-input');
   const clearButton = document.getElementById('site-search-clear');
   const emptyStateClear = document.getElementById('site-search-empty-clear');
+  const typeButtons = document.querySelectorAll('.search-type-btn');
   const cards = document.querySelectorAll('.search-card');
   const countEl = document.getElementById('search-results-count');
   const grid = document.getElementById('site-search-grid');
   const emptyState = document.getElementById('site-search-empty');
   const defaultState = document.getElementById('search-default-state');
+  let activeType = 'all';
 
   if (searchInput && cards.length && countEl && grid && emptyState && defaultState) {
+    const getCountLabel = (visible, query, type) => {
+      const typeSuffix = type !== 'all' ? ` in ${type}${type === 'blog' ? ' posts' : type === 'program' ? 's' : ''}` : '';
+      return query
+        ? `${visible} result${visible !== 1 ? 's' : ''} matching "${query}"${typeSuffix}`
+        : type === 'all'
+          ? `${cards.length} searchable entries`
+          : `${visible} ${type}${visible !== 1 && type !== 'blog' ? 's' : type === 'blog' && visible !== 1 ? ' posts' : ''}`;
+    };
+
+    const updateTypeButtons = () => {
+      typeButtons.forEach((button) => {
+        const isActive = button.getAttribute('data-type-filter') === activeType;
+        button.classList.toggle('bg-[#2173A6]', isActive);
+        button.classList.toggle('text-white', isActive);
+        button.classList.toggle('bg-[#0B3B59]/45', !isActive);
+        button.classList.toggle('text-[#b7d8e5]', !isActive);
+      });
+    };
+
     const initialCountLabel = initialQuery
       ? `Searching for "${initialQuery}"`
       : `${cards.length} searchable entries`;
@@ -304,7 +343,10 @@ const starterLinks = [
 
       cards.forEach((card) => {
         const haystack = card.getAttribute('data-search') || '';
-        const match = !query || haystack.includes(query);
+        const type = card.getAttribute('data-type') || '';
+        const queryMatch = !query || haystack.includes(query);
+        const typeMatch = activeType === 'all' || type === activeType;
+        const match = queryMatch && typeMatch;
         card.toggleAttribute('hidden', !match);
 
         if (match) {
@@ -312,14 +354,14 @@ const starterLinks = [
         }
       });
 
-      countEl.textContent = query
-        ? `${visible} result${visible !== 1 ? 's' : ''} matching "${query}"`
+      countEl.textContent = query || activeType !== 'all'
+        ? getCountLabel(visible, query, activeType)
         : initialCountLabel;
 
-      defaultState.classList.toggle('hidden', query !== '');
-      grid.toggleAttribute('hidden', query !== '' && visible === 0);
-      emptyState.classList.toggle('hidden', !(query !== '' && visible === 0));
-      emptyState.classList.toggle('flex', query !== '' && visible === 0);
+      defaultState.classList.toggle('hidden', query !== '' || activeType !== 'all');
+      grid.toggleAttribute('hidden', visible === 0);
+      emptyState.classList.toggle('hidden', visible !== 0);
+      emptyState.classList.toggle('flex', visible === 0);
 
       if (clearButton) {
         clearButton.classList.toggle('hidden', query === '');
@@ -332,13 +374,23 @@ const starterLinks = [
 
     const clearSearch = () => {
       searchInput.value = '';
+      activeType = 'all';
+      updateTypeButtons();
       applySearch();
       searchInput.focus();
     };
 
     searchInput.addEventListener('input', applySearch);
+    typeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        activeType = button.getAttribute('data-type-filter') || 'all';
+        updateTypeButtons();
+        applySearch();
+      });
+    });
     clearButton?.addEventListener('click', clearSearch);
     emptyStateClear?.addEventListener('click', clearSearch);
+    updateTypeButtons();
     applySearch();
   }
 </script>
