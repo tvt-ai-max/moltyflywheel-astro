@@ -9,6 +9,8 @@ export async function getStaticPaths() {
 }
 
 const { offer } = Astro.props;
+const programs = await getCollection('programs');
+const matchedProgram = programs.find((program) => program.id === offer.data.targetProgram);
 const { Content } = await render(offer);
 ---
 <OfferLayout title={offer.data.title} description={offer.data.headline}>
@@ -16,13 +18,13 @@ const { Content } = await render(offer);
     <div class="mx-auto max-w-5xl px-6 py-20 md:py-24">
       <div class="max-w-4xl">
         <div class="inline-flex items-center gap-2 rounded-full border border-[#2173A6]/20 bg-[#2173A6]/8 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#2173A6]">
-          Starter Offer
+          Offer Page
         </div>
         <h1 class="mt-8 text-4xl font-black leading-tight text-[#0b2230] md:text-6xl">
           {offer.data.headline}
         </h1>
         <p class="mt-6 max-w-3xl text-lg leading-8 text-[#476879]">
-          A decision-first offer page for readers who want to start with a strong general AI system before expanding into more specialized tools.
+          A decision-first page designed to help the reader judge fit, constraints, and the most practical next click before committing.
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
@@ -37,15 +39,15 @@ const { Content } = await render(offer);
         <div class="grid gap-4 md:grid-cols-3">
           <div class="rounded-2xl border border-[#e3eef3] bg-[#f8fcfe] p-5">
             <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c8294]">Best for</p>
-            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Readers who want one capable AI layer for research, drafting, and operator workflows.</p>
+            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Readers who need a clearer decision frame before choosing a tool, program, or platform.</p>
           </div>
           <div class="rounded-2xl border border-[#e3eef3] bg-[#f8fcfe] p-5">
             <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c8294]">Primary angle</p>
-            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Beginner-friendly foundation tool with practical workflow upside.</p>
+            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Decision support first, promotion second, with fit and trade-offs kept explicit.</p>
           </div>
           <div class="rounded-2xl border border-[#e3eef3] bg-[#f8fcfe] p-5">
             <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5c8294]">CTA logic</p>
-            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Start with the tool first, then use the included blueprint to turn it into a repeatable workflow.</p>
+            <p class="mt-3 text-sm leading-7 text-[#2d4b5a]">Click through only when the use case, constraints, and operating reality all line up.</p>
           </div>
         </div>
       </div>
@@ -78,18 +80,24 @@ const { Content } = await render(offer);
 
       <div class="mt-14 rounded-[28px] border border-[#cfe2ea] bg-[linear-gradient(135deg,#0B3B59_0%,#2173A6_58%,#72DBF2_100%)] p-8 text-white shadow-[0_22px_70px_rgba(11,59,89,0.22)]">
         <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/75">Final CTA</p>
-        <h2 class="mt-3 text-3xl font-black leading-tight">Start with Claude Pro if the goal is one strong AI foundation, not a fragmented stack.</h2>
+        <h2 class="mt-3 text-3xl font-black leading-tight">Take the next step only if {offer.data.title} matches the real need, not just the surface pitch.</h2>
         <p class="mt-4 max-w-3xl text-base leading-8 text-[#e9f7fc]">
-          This offer is strongest for readers who want a dependable first system for research, drafting, and planning, then want a clearer path for how to actually use it inside a MoltyFlywheel-style workflow.
+          The strongest offer pages on MoltyFlywheel help the reader move with better judgment, not faster hype. If the fit is real, use the CTA. If not, take the related path that solves the earlier bottleneck first.
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
           <AffiliateButton program={offer.data.targetProgram} label={offer.data.cta} size="lg" />
-          <a href="/programs/claude-pro" class="inline-flex items-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5">
-            View Claude Pro Review
-          </a>
+          {matchedProgram ? (
+            <a href={`/programs/${matchedProgram.id}`} class="inline-flex items-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5">
+              View {matchedProgram.data.name} Review
+            </a>
+          ) : (
+            <a href="/offers/" class="inline-flex items-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5">
+              Browse Offer Pages
+            </a>
+          )}
         </div>
         <p class="mt-4 text-xs italic text-white/80">
-          Bonus delivery and activation guidance should stay aligned with the current offer workflow and only promise assets that actually exist.
+          Offer pages should only promise assets, outcomes, and next steps that are already real in the live system.
         </p>
       </div>
     </div>
