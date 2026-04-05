@@ -1,0 +1,344 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import skillsData from '../../data/skills.json';
+import migrationMap from '../../data/tools/migration-map-v1.json';
+
+const query = (Astro.url.searchParams.get('q') ?? '').trim();
+
+const blogPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const programs = (await getCollection('programs'))
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.rating - a.data.rating);
+
+const contentOffers = (await getCollection('offers', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const staticOffers = [
+  {
+    title: 'Find Your Best Affiliate Fit',
+    href: '/offers/find-your-best-affiliate-fit',
+    type: 'Offer',
+    description: 'Decision page for choosing the most practical affiliate direction for your current stage.',
+    meta: 'Best-fit offers',
+    searchIndex: 'find your best affiliate fit offer decision page best fit affiliate direction current stage',
+  },
+  {
+    title: 'Best Affiliate Programs For Beginners',
+    href: '/offers/best-affiliate-programs-for-beginners',
+    type: 'Offer',
+    description: 'A cleaner shortlist for readers who want easier programs to understand, promote, and grow into.',
+    meta: 'Beginner offers',
+    searchIndex: 'best affiliate programs for beginners offer beginner easier programs shortlist',
+  },
+  {
+    title: 'Recurring Commission Affiliate Programs',
+    href: '/offers/recurring-commission-affiliate-programs',
+    type: 'Offer',
+    description: 'Explore offers that support steadier long-term payout logic instead of one-off commissions only.',
+    meta: 'Recurring offers',
+    searchIndex: 'recurring commission affiliate programs offer recurring steady long term payout',
+  },
+  {
+    title: 'High-Ticket Affiliate Programs',
+    href: '/offers/high-ticket-affiliate-programs',
+    type: 'Offer',
+    description: 'Compare offer types where higher-value conversions matter more than raw volume.',
+    meta: 'High-ticket offers',
+    searchIndex: 'high ticket affiliate programs offer higher value conversions',
+  },
+  {
+    title: 'Affiliate Programs By Niche',
+    href: '/offers/affiliate-programs-by-niche',
+    type: 'Offer',
+    description: 'Match the monetization path to your niche so the offer logic fits the audience you already have.',
+    meta: 'Niche fit',
+    searchIndex: 'affiliate programs by niche offer niche fit monetization audience',
+  },
+  {
+    title: 'Compare Affiliate Platforms',
+    href: '/offers/compare-affiliate-platforms',
+    type: 'Offer',
+    description: 'Use this page when platform choice is the real decision bottleneck behind your monetization plan.',
+    meta: 'Platform comparison',
+    searchIndex: 'compare affiliate platforms offer platform comparison monetization plan',
+  },
+  {
+    title: 'Affiliate Tools For Content Creators',
+    href: '/offers/affiliate-tools-for-content-creators',
+    type: 'Offer',
+    description: 'A practical guide for creators who need tools and offers that support a repeatable publishing workflow.',
+    meta: 'Creator workflow',
+    searchIndex: 'affiliate tools for content creators offer creator workflow repeatable publishing',
+  },
+];
+
+const migrationById = new Map(
+  migrationMap.records.map((record) => [record.legacy_id, record]),
+);
+
+const searchItems = [
+  ...blogPosts.map((post) => ({
+    title: post.data.title,
+    href: `/blog/${post.id}/`,
+    type: 'Blog',
+    description: post.data.description,
+    meta: `${post.data.category} article`,
+    searchIndex: [
+      post.data.title,
+      post.data.description,
+      ...(post.data.tags ?? []),
+      post.data.category,
+      'blog article post',
+    ].join(' ').toLowerCase(),
+  })),
+  ...programs.map((program) => ({
+    title: program.data.name,
+    href: `/programs/${program.id}/`,
+    type: 'Program',
+    description: program.data.description,
+    meta: `${program.data.category} • ${program.data.commission.type}`,
+    searchIndex: [
+      program.data.name,
+      program.data.description,
+      program.data.category,
+      program.data.commission.type,
+      program.data.commission.rate,
+      program.data.commission.cookieDuration,
+      'program tool affiliate software',
+    ].join(' ').toLowerCase(),
+  })),
+  ...staticOffers,
+  ...contentOffers.map((offer) => ({
+    title: offer.data.title,
+    href: `/p/${offer.id}/`,
+    type: 'Offer',
+    description: offer.data.headline,
+    meta: 'Content-driven offer',
+    searchIndex: [
+      offer.data.title,
+      offer.data.headline,
+      offer.id,
+      'offer decision page',
+    ].join(' ').toLowerCase(),
+  })),
+  ...skillsData.map((skill) => {
+    const mapped = migrationById.get(skill.id);
+    return {
+      title: skill.name,
+      href: `/tools/#skill-${skill.id}`,
+      type: 'Skill',
+      description: skill.description,
+      meta: mapped?.primary_category?.replace(/-/g, ' ') ?? skill.category,
+      searchIndex: [
+        skill.name,
+        skill.description,
+        skill.category,
+        skill.tier,
+        skill.cost,
+        ...(mapped?.suggested_tags ?? []),
+        mapped?.primary_category ?? '',
+        mapped?.secondary_category ?? '',
+        'skill workflow capability',
+      ].join(' ').toLowerCase(),
+    };
+  }),
+];
+
+const totals = {
+  all: searchItems.length,
+  blog: searchItems.filter((item) => item.type === 'Blog').length,
+  program: searchItems.filter((item) => item.type === 'Program').length,
+  offer: searchItems.filter((item) => item.type === 'Offer').length,
+  skill: searchItems.filter((item) => item.type === 'Skill').length,
+};
+
+const starterLinks = [
+  { label: 'Browse latest blog posts', href: '/blog/' },
+  { label: 'Compare affiliate programs', href: '/programs/' },
+  { label: 'Use offer decision pages', href: '/offers/' },
+  { label: 'Explore tools and skills', href: '/tools/' },
+];
+---
+
+<BaseLayout
+  title="Search MoltyFlywheel"
+  description="Search blog posts, programs, offer pages, and skills across the current MoltyFlywheel content system."
+>
+  <section class="border-b border-[#0d2d40] bg-[radial-gradient(circle_at_top,rgba(114,219,242,0.14),transparent_34%),linear-gradient(180deg,#011826_0%,#0B3B59_52%,#011826_100%)]">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-2 rounded-full border border-[#72DBF2]/25 bg-[#72DBF2]/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">
+          Search
+        </span>
+        <h1 class="mt-6 text-4xl font-black leading-tight text-[#daeef5] md:text-6xl">
+          Search the current content system without leaving the site.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-[#89c0d4]">
+          Search across blog posts, programs, offer pages, and skills using the public data already built into MoltyFlywheel.
+        </p>
+      </div>
+
+      <div class="mt-10 rounded-[28px] border border-[#1a4560] bg-[#011826]/80 p-5 shadow-[0_22px_70px_rgba(1,24,38,0.28)] md:p-6">
+        <div class="relative">
+          <svg class="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#3d7a96]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <input
+            id="site-search-input"
+            type="text"
+            value={query}
+            placeholder="Search blog posts, programs, offers, and skills"
+            class="w-full rounded-2xl border border-[#1a4560] bg-[#0B3B59] py-4 pl-12 pr-14 text-base text-[#daeef5] outline-none transition-colors placeholder:text-[#3d7a96] focus:border-[#72DBF2]"
+          />
+          <button
+            id="site-search-clear"
+            type="button"
+            class="absolute right-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#1a4560] bg-[#011826] text-[#89c0d4] transition-colors hover:border-[#72DBF2]/35 hover:text-[#daeef5]"
+            aria-label="Clear site search"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="mt-5 flex flex-wrap gap-3 text-sm text-[#89c0d4]">
+          <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.blog} blog posts</span>
+          <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.program} programs</span>
+          <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.offer} offers</span>
+          <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.skill} skills</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#011826]">
+    <div class="mx-auto max-w-6xl px-6 py-12 md:py-14">
+      <div id="search-default-state" class={query ? 'hidden rounded-[28px] border border-[#14384f] bg-[#0B3B59]/30 p-8' : 'rounded-[28px] border border-[#14384f] bg-[#0B3B59]/30 p-8'}>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Start Here</p>
+        <h2 class="mt-3 text-2xl font-black text-[#daeef5]">Use search when you know the topic, not just the section.</h2>
+        <p class="mt-4 max-w-2xl text-sm leading-7 text-[#9dc6d8]">
+          Search is best when you already know the tool, workflow, or question you want. If not, these routes are a better first step.
+        </p>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          {starterLinks.map((link) => (
+            <a href={link.href} class="rounded-2xl border border-[#16374c] bg-[#08283d]/70 px-5 py-4 text-sm font-semibold text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+              {link.label} →
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="mb-8 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Results</p>
+          <h2 class="mt-2 text-3xl font-bold text-[#daeef5]">Find the right route faster</h2>
+        </div>
+        <p id="search-results-count" class="text-sm text-[#5ea4bf]">
+          {query ? `Searching for "${query}"` : `${searchItems.length} searchable entries`}
+        </p>
+      </div>
+
+      <div id="site-search-grid" class="grid grid-cols-1 gap-5 md:grid-cols-2">
+        {searchItems.map((item) => (
+          <a
+            href={item.href}
+            class="search-card group rounded-[24px] border border-[#1a4560] bg-[#0B3B59] p-6 transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40 hover:shadow-2xl hover:shadow-[#011826]"
+            data-search={item.searchIndex}
+            data-type={item.type.toLowerCase()}
+          >
+            <div class="flex items-start justify-between gap-4">
+              <span class:list={[
+                'inline-flex rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em]',
+                item.type === 'Blog' && 'border-[#1f5f82] bg-[#2173A6]/15 text-[#72DBF2]',
+                item.type === 'Program' && 'border-[#55F2C3]/25 bg-[#55F2C3]/10 text-[#55F2C3]',
+                item.type === 'Offer' && 'border-[#89C0D4]/25 bg-[#89C0D4]/10 text-[#bfe8f5]',
+                item.type === 'Skill' && 'border-[#36536a] bg-[#09283d] text-[#9dc6d8]',
+              ]}>
+                {item.type}
+              </span>
+              <span class="text-xs uppercase tracking-[0.2em] text-[#5ea4bf]">{item.meta}</span>
+            </div>
+
+            <h3 class="mt-5 text-2xl font-black leading-tight text-[#daeef5] transition-colors group-hover:text-[#72DBF2]">
+              {item.title}
+            </h3>
+            <p class="mt-4 text-sm leading-7 text-[#9dc6d8]">{item.description}</p>
+            <div class="mt-6 border-t border-[#0d2d40] pt-4 text-sm font-semibold text-[#72DBF2]">
+              Open result →
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div id="site-search-empty" class="hidden flex-col items-center justify-center rounded-[24px] border border-dashed border-[#1a4560] bg-[#0B3B59]/35 px-6 py-20 text-center">
+        <div class="text-5xl text-[#72DBF2]">/</div>
+        <h3 class="mt-4 text-xl font-bold text-[#daeef5]">No results matched that search</h3>
+        <p class="mt-2 max-w-md text-sm leading-7 text-[#5ea4bf]">
+          Try a broader keyword, switch the wording, or clear the search to browse the main content routes instead.
+        </p>
+        <button id="site-search-empty-clear" type="button" class="mt-6 text-sm font-semibold text-[#72DBF2] hover:text-[#daeef5]">Clear search →</button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ initialQuery: query }}>
+  const searchInput = document.getElementById('site-search-input');
+  const clearButton = document.getElementById('site-search-clear');
+  const emptyStateClear = document.getElementById('site-search-empty-clear');
+  const cards = document.querySelectorAll('.search-card');
+  const countEl = document.getElementById('search-results-count');
+  const grid = document.getElementById('site-search-grid');
+  const emptyState = document.getElementById('site-search-empty');
+  const defaultState = document.getElementById('search-default-state');
+
+  if (searchInput && cards.length && countEl && grid && emptyState && defaultState) {
+    const initialCountLabel = initialQuery
+      ? `Searching for "${initialQuery}"`
+      : `${cards.length} searchable entries`;
+
+    const applySearch = () => {
+      const query = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const haystack = card.getAttribute('data-search') || '';
+        const match = !query || haystack.includes(query);
+        card.toggleAttribute('hidden', !match);
+
+        if (match) {
+          visible += 1;
+        }
+      });
+
+      countEl.textContent = query
+        ? `${visible} result${visible !== 1 ? 's' : ''} matching "${query}"`
+        : initialCountLabel;
+
+      defaultState.classList.toggle('hidden', query !== '');
+      grid.toggleAttribute('hidden', query !== '' && visible === 0);
+      emptyState.classList.toggle('hidden', !(query !== '' && visible === 0));
+      emptyState.classList.toggle('flex', query !== '' && visible === 0);
+
+      if (clearButton) {
+        clearButton.classList.toggle('hidden', query === '');
+        clearButton.classList.toggle('flex', query !== '');
+      }
+
+      const nextUrl = query ? `/search/?q=${encodeURIComponent(query)}` : '/search/';
+      window.history.replaceState({}, '', nextUrl);
+    };
+
+    const clearSearch = () => {
+      searchInput.value = '';
+      applySearch();
+      searchInput.focus();
+    };
+
+    searchInput.addEventListener('input', applySearch);
+    clearButton?.addEventListener('click', clearSearch);
+    emptyStateClear?.addEventListener('click', clearSearch);
+    applySearch();
+  }
+</script>
