@@ -89,12 +89,26 @@ const editorialFeatures = [...explicitlyFeatured, ...fallbackFeatured]
     ...post,
     thumbnail: getThumbnail(post),
     readTime: estimateReadTime(post.body),
+    searchIndex: [
+      post.data.title,
+      post.data.description,
+      ...(post.data.tags ?? []),
+      post.data.category,
+      categoryLabel[post.data.category] ?? post.data.category,
+    ].join(' ').toLowerCase(),
   }));
 
 const articleCards = filteredPosts.map((post) => ({
   ...post,
   thumbnail: getThumbnail(post),
   readTime: estimateReadTime(post.body),
+  searchIndex: [
+    post.data.title,
+    post.data.description,
+    ...(post.data.tags ?? []),
+    post.data.category,
+    categoryLabel[post.data.category] ?? post.data.category,
+  ].join(' ').toLowerCase(),
 }));
 
 const socialProof = [
@@ -199,13 +213,21 @@ const socialProof = [
             placeholder="Search guides, reviews, and comparisons"
             class="w-full rounded-full border border-[#1a4560] bg-[#0B3B59] py-3 pl-11 pr-4 text-sm text-[#daeef5] outline-none transition-colors placeholder:text-[#3d7a96] focus:border-[#72DBF2]"
           />
+          <button
+            id="blog-search-clear"
+            type="button"
+            class="absolute right-3 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-[#1a4560] bg-[#011826] text-[#89c0d4] transition-colors hover:border-[#72DBF2]/35 hover:text-[#daeef5]"
+            aria-label="Clear blog search"
+          >
+            ×
+          </button>
         </div>
       </div>
     </div>
   </section>
 
   {editorialFeatures.length > 0 && (
-    <section class="border-b border-[#0d2d40] bg-[#011826]">
+    <section id="featured-reads-section" class="border-b border-[#0d2d40] bg-[#011826]">
       <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-10 md:py-12">
         <div class="mb-6 flex items-center justify-between gap-4">
           <div>
@@ -223,6 +245,8 @@ const socialProof = [
             return (
               <a
                 href={`/blog/${post.id}`}
+                data-search={post.searchIndex}
+                data-featured-card
                 class="group overflow-hidden rounded-[28px] border border-[#1a4560] bg-[#0B3B59] transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40 hover:shadow-2xl hover:shadow-[#011826]"
               >
                 <div class="grid min-h-full md:grid-cols-[1.1fr_minmax(0,1fr)]">
@@ -317,10 +341,7 @@ const socialProof = [
           return (
             <article
               class="blog-card group flex h-full flex-col overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#0B3B59] transition-all hover:-translate-y-1 hover:border-[#72DBF2]/40 hover:shadow-2xl hover:shadow-[#011826]"
-              data-title={post.data.title.toLowerCase()}
-              data-desc={post.data.description.toLowerCase()}
-              data-tags={(post.data.tags ?? []).join(' ').toLowerCase()}
-              data-category={label.toLowerCase()}
+              data-search={post.searchIndex}
             >
               <a href={`/blog/${post.id}`} class="relative block h-52 overflow-hidden">
                 {post.thumbnail ? (
@@ -402,7 +423,7 @@ const socialProof = [
         <p class="mt-2 max-w-md text-sm leading-7 text-[#5ea4bf]">
           Try a broader keyword, switch categories, or clear the current query to see the full editorial archive.
         </p>
-        <a href="/blog" class="mt-6 text-sm font-semibold text-[#72DBF2] hover:text-[#daeef5]">Clear search →</a>
+        <button id="empty-state-clear" type="button" class="mt-6 text-sm font-semibold text-[#72DBF2] hover:text-[#daeef5]">Clear search →</button>
       </div>
     </div>
   </section>
@@ -446,31 +467,40 @@ const socialProof = [
 
 <script>
   const searchInput = document.getElementById('blog-search');
+  const clearButton = document.getElementById('blog-search-clear');
+  const emptyStateClear = document.getElementById('empty-state-clear');
   const cards = document.querySelectorAll('.blog-card');
+  const featuredCards = document.querySelectorAll('[data-featured-card]');
+  const featuredSection = document.getElementById('featured-reads-section');
   const countEl = document.getElementById('results-count');
   const grid = document.getElementById('blog-grid');
   const emptyState = document.getElementById('empty-state');
 
   if (searchInput && cards.length && countEl && grid && emptyState) {
     const initialCountLabel = countEl.textContent || '';
-
-    searchInput.addEventListener('input', () => {
+    const applySearch = () => {
       const query = searchInput.value.trim().toLowerCase();
       let visible = 0;
+      let visibleFeatured = 0;
 
       cards.forEach((card) => {
-        const haystack = [
-          card.getAttribute('data-title') || '',
-          card.getAttribute('data-desc') || '',
-          card.getAttribute('data-tags') || '',
-          card.getAttribute('data-category') || '',
-        ].join(' ');
+        const haystack = card.getAttribute('data-search') || '';
 
         const match = !query || haystack.includes(query);
-        card.style.display = match ? '' : 'none';
+        card.toggleAttribute('hidden', !match);
 
         if (match) {
           visible += 1;
+        }
+      });
+
+      featuredCards.forEach((card) => {
+        const haystack = card.getAttribute('data-search') || '';
+        const match = !query || haystack.includes(query);
+        card.toggleAttribute('hidden', !match);
+
+        if (match) {
+          visibleFeatured += 1;
         }
       });
 
@@ -478,8 +508,28 @@ const socialProof = [
         ? `${visible} article${visible !== 1 ? 's' : ''} matching "${query}"`
         : initialCountLabel;
 
-      grid.style.display = visible === 0 ? 'none' : '';
-      emptyState.style.display = visible === 0 ? 'flex' : 'none';
-    });
+      grid.toggleAttribute('hidden', visible === 0);
+      emptyState.classList.toggle('hidden', visible !== 0);
+      emptyState.classList.toggle('flex', visible === 0);
+
+      if (featuredSection) {
+        featuredSection.toggleAttribute('hidden', query !== '' && visibleFeatured === 0);
+      }
+
+      if (clearButton) {
+        clearButton.classList.toggle('hidden', query === '');
+        clearButton.classList.toggle('flex', query !== '');
+      }
+    };
+
+    const clearSearch = () => {
+      searchInput.value = '';
+      applySearch();
+      searchInput.focus();
+    };
+
+    searchInput.addEventListener('input', applySearch);
+    clearButton?.addEventListener('click', clearSearch);
+    emptyStateClear?.addEventListener('click', clearSearch);
   }
 </script>
