@@ -63,7 +63,7 @@ If you decide to explore Affitor as an advertiser, the path is simple:
 
 Use the advertiser link to begin the signup process:
 
-[`Start as an Advertiser`](/go/advertiser)
+<a href="/go/advertiser" onclick="if(typeof plausible!=='undefined'){plausible('offer_click_outbound_affiliate',{props:{program:'advertiser'}})}">Start as an Advertiser</a>
 
 ### Step 2 — Sign up as a new advertiser
 
