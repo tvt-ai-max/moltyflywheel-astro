@@ -87,4 +87,4 @@ No. Most beginners start as sole proprietors using their Social Security Number 
 Very little. If you choose blogging, you only need web hosting (around $5/month) and a domain ($15/year). If you use social media, starting is virtually free, though you pay with your time and effort.
 
 **Should I pay for an expensive affiliate course?**
-Not immediately. Learn the basics through free resources. Once you understand the mechanics and have chosen your [niches](/niches) and [programs](/programs), you can consider courses that teach specific, advanced traffic strategies.
+Not immediately. Learn the basics through free resources. Once you understand the mechanics and have chosen your [niche](/offers/affiliate-programs-by-niche) and [programs](/programs), you can consider courses that teach specific, advanced traffic strategies.

@@ -19,8 +19,10 @@ const { title, description, ogImage } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <SEO title={title} description={description} ogImage={ogImage} />
-  <!-- Plausible Analytics (self-hosted on Mac Mini) -->
-  <script defer data-domain="moltyflywheel.com" src="https://plausible.moltyflywheel.com/js/script.js"></script>
+  <!-- Plausible Analytics (self-hosted) — outbound-links + tagged-events variant -->
+  <!-- outbound-links: auto-tracks external link clicks as "Outbound Link: Click" -->
+  <!-- tagged-events: enables plausible() JS calls for custom named events -->
+  <script defer data-domain="moltyflywheel.com" src="https://plausible.moltyflywheel.com/js/script.outbound-links.tagged-events.js"></script>
 </head>
 <body class="bg-gray-950 text-gray-100 font-sans antialiased">
   <Header />

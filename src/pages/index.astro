@@ -216,12 +216,14 @@ const faqs = [
             <a
               href="/programs"
               class="inline-flex items-center rounded-xl bg-[linear-gradient(135deg,#72DBF2,#2173A6)] px-7 py-3.5 text-sm font-bold text-[#011826] transition-transform hover:-translate-y-0.5"
+              onclick="if(typeof plausible!=='undefined'){plausible('homepage_click_explore_programs')}"
             >
               Explore Programs
             </a>
             <a
               href="/blog"
               class="inline-flex items-center rounded-xl border border-[#2173A6] px-7 py-3.5 text-sm font-semibold text-[#72DBF2] transition-colors hover:bg-[#2173A6]/10"
+              onclick="if(typeof plausible!=='undefined'){plausible('homepage_click_read_reviews')}"
             >
               Read Reviews
             </a>
@@ -543,12 +545,14 @@ const faqs = [
             <a
               href="/programs"
               class="w-full rounded-xl bg-white px-6 py-3.5 text-center text-sm font-bold text-[#0B3B59] transition-transform hover:-translate-y-0.5"
+              onclick="if(typeof plausible!=='undefined'){plausible('homepage_click_explore_programs',{props:{source:'bottom-cta'}})}"
             >
               Explore Programs
             </a>
             <a
               href="/offers"
               class="w-full rounded-xl border border-white/35 px-6 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              onclick="if(typeof plausible!=='undefined'){plausible('homepage_click_browse_offers')}"
             >
               Browse Offers
             </a>

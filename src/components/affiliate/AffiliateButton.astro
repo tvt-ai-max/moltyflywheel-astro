@@ -4,8 +4,16 @@ interface Props {
   label?: string;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'primary' | 'outline';
+  eventName?: string;
 }
-const { program, label = 'Get Started →', size = 'md', variant = 'primary' } = Astro.props;
+const {
+  program,
+  label = 'Get Started →',
+  size = 'md',
+  variant = 'primary',
+  // Allow callers to override the event name; default fires offer_click_outbound_affiliate
+  eventName = 'offer_click_outbound_affiliate',
+} = Astro.props;
 
 // Internal redirect path — managed via public/_redirects
 // Cloudflare Pages routes /go/[program] → real affiliate URL
@@ -23,6 +31,7 @@ const href = `/go/${program}`;
   ]}
   rel="nofollow sponsored"
   target="_blank"
+  onclick={`if(typeof plausible!=='undefined'){plausible('${eventName}',{props:{program:'${program}'}})}` }
 >
   {label}
 </a>

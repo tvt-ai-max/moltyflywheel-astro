@@ -57,7 +57,7 @@ Look at the top five YouTube creators or bloggers in your exact sub-niche. What 
 - [ ] Is the price point appropriate for my audience's demographic?
 - [ ] Does the product's landing page look professional and trustworthy over desktop and mobile?
 - [ ] Do I actually understand how this product works?
-- [ ] Is there an alternative program in [our niche directory](/niches) that might provide better support or higher recurring commissions?
+- [ ] Is there an alternative program in [our niche directory](/offers/affiliate-programs-by-niche) that might provide better support or higher recurring commissions?
 
 <div class="bg-gray-800 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
   <h3 class="text-xl font-bold text-white mb-2">Stop Guessing What to Promote</h3>
