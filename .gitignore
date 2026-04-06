@@ -34,3 +34,6 @@ shared_context.json
 affiliate-skills/
 seo-writer/
 docs/
+
+# server-side automation scripts (contain token loading, stay local)
+scripts/
