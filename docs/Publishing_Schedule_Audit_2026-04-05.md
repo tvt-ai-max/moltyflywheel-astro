@@ -64,3 +64,22 @@ Audit scope: compare the publishing spreadsheet against the current blog content
 As of `2026-04-05`, there is no scheduled post that is already past due and still missing from the repo.
 
 The main issue is not missed publishing. The main issue is spreadsheet status drift.
+
+---
+
+## Update — 2026-04-08
+
+- `C0` is now present in the repo and already pushed to `main`.
+- Matching repo file:
+  - `src/content/blog/what-is-ai-flywheel-2026.md`
+- Current frontmatter state:
+  - `pubDate: 2026-04-08`
+  - `draft: false`
+- Matching content commit:
+  - `c5c9e10` — `content(blog): add C0 AI Flywheel article — Cluster C, pubDate 2026-04-08`
+
+### Updated status note for `C0`
+
+| ID | Publish date | Planned title | Repo status | Matching repo file | Action |
+|---|---|---|---|---|---|
+| C0 | 2026-04-08 | What is AI Flywheel? | In repo and pushed | `src/content/blog/what-is-ai-flywheel-2026.md` | Update sheet status from `⬜ Chưa viết` |
