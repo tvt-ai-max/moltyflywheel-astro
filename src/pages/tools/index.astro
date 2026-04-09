@@ -477,7 +477,7 @@ const groupedSkills = Object.entries(categoryMeta)
                     {item.kind === 'tool'
                       ? item.tool.external
                         ? 'Open tool →'
-                        : 'View tool →'
+                        : 'View program review →'
                       : 'View skill →'}
                   </a>
                 </div>
@@ -561,7 +561,7 @@ const groupedSkills = Object.entries(categoryMeta)
                   target={tool.external ? '_blank' : undefined}
                   rel={tool.external ? 'noreferrer' : undefined}
                 >
-                  {tool.external ? 'Open tool →' : 'View tool →'}
+                  {tool.external ? 'Open tool →' : 'View program review →'}
                 </a>
               </div>
             </article>
