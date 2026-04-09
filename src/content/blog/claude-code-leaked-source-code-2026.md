@@ -1,7 +1,7 @@
 ---
 title: "What Claude Code's Source Code Leak Reveals About Agentic AI"
 description: "Claude Code's source code went viral with 2.4M views. Here's what it actually reveals about how agentic AI systems are built — and what it means for you."
-pubDate: 2026-04-10
+pubDate: 2026-04-09
 category: guide
 tags: ["claude-code", "agentic-ai", "source-code", "ai-news", "2026"]
 keyword: "Claude Code leaked source code"
