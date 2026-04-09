@@ -93,8 +93,38 @@ const tools = programs
     href: `/programs/${entry.slug}/`,
     jobFamily: toolCategoryToJobFamily[entry.data.category],
     featured: entry.data.featured,
+    external: false,
+    categoryLabel: entry.data.category.replace('-', ' '),
+    metaBadges: [entry.data.commission.type.toUpperCase(), entry.data.commission.cookieDuration],
+    footerMeta: `${entry.data.rating.toFixed(1)} / 5 editorial score`,
   }))
   .sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name));
+
+const externalTools = [
+  {
+    kind: 'tool' as const,
+    slug: 'higgsfield',
+    name: 'Higgsfield',
+    description:
+      'A creator-focused AI video and image platform built around cinematic controls, camera logic, and faster visual production workflows.',
+    logo: '',
+    category: 'general-ai',
+    rating: 4.6,
+    commission: null,
+    href: 'https://higgsfield.ai/',
+    jobFamily: 'content-production',
+    featured: true,
+    external: true,
+    categoryLabel: 'creator video',
+    metaBadges: ['External tool', 'Video & image AI'],
+    footerMeta: 'Best fit for creator-side visual workflows',
+    tags: ['video-generation', 'image-generation', 'creator-tools'],
+  },
+];
+
+const toolsWithExternal = [...tools, ...externalTools].sort(
+  (a, b) => b.rating - a.rating || a.name.localeCompare(b.name),
+);
 
 const featuredSkillIds = [
   'affiliate-blog-builder',
@@ -109,7 +139,7 @@ const featuredSkills = featuredSkillIds
   .map((id) => skills.find((skill) => skill.id === id))
   .filter(Boolean);
 
-const featuredTools = tools.filter((tool) => tool.featured).slice(0, 6);
+const featuredTools = toolsWithExternal.filter((tool) => tool.featured).slice(0, 6);
 
 const workflowCollections = [
   {
@@ -134,7 +164,7 @@ const workflowCollections = [
     title: 'Repurpose content across channels',
     description: 'Turn one core asset into social, video, and email distribution layers.',
     skills: ['content-repurposer', 'twitter-thread-writer', 'email-drip-sequence'],
-    tools: ['beehiiv', 'merlin-ai'],
+    tools: ['beehiiv', 'higgsfield'],
   },
   {
     title: 'Measure and optimize performance',
@@ -189,15 +219,19 @@ const faqItems = [
 ];
 
 const libraryItems = [
-  ...tools.map((tool) => ({
+  ...toolsWithExternal.map((tool) => ({
     id: `tool-${tool.slug}`,
     kind: tool.kind,
     name: tool.name,
     description: tool.description,
     href: tool.href,
-    label: tool.category.replace('-', ' '),
+    label: tool.categoryLabel,
     filterCategory: tool.jobFamily,
-    tags: [tool.category, tool.commission.type, `${tool.rating.toFixed(1)}-rating`],
+    tags: tool.tags ?? [
+      tool.category,
+      ...(tool.commission ? [tool.commission.type] : []),
+      `${tool.rating.toFixed(1)}-rating`,
+    ],
     tool,
   })),
   ...skills.map((skill) => ({
@@ -215,7 +249,7 @@ const libraryItems = [
 
 const libraryCounts = {
   all: libraryItems.length,
-  tools: tools.length,
+  tools: toolsWithExternal.length,
   skills: skills.length,
 };
 
@@ -254,7 +288,7 @@ const groupedSkills = Object.entries(categoryMeta)
               </a>
             </div>
             <div class="mt-8 flex flex-wrap gap-3 text-sm text-[#89b8cb]">
-              <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{tools.length} tools</span>
+              <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{toolsWithExternal.length} tools</span>
               <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{skills.length} skills</span>
               <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">7 job families</span>
             </div>
@@ -264,7 +298,7 @@ const groupedSkills = Object.entries(categoryMeta)
             <div class="grid gap-4 sm:grid-cols-2">
               <div class="rounded-3xl border border-[#1a4560] bg-[#082b40]/75 p-5">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#72DBF2]">Tools</p>
-                <p class="mt-3 text-2xl font-black tracking-[-0.04em] text-[#f4fbff]">{tools.length}</p>
+                <p class="mt-3 text-2xl font-black tracking-[-0.04em] text-[#f4fbff]">{toolsWithExternal.length}</p>
                 <p class="mt-2 text-sm leading-6 text-[#8fb7c9]">Apps, platforms, and products people use directly.</p>
               </div>
               <div class="rounded-3xl border border-[#1a4560] bg-[#082b40]/75 p-5">
@@ -294,7 +328,7 @@ const groupedSkills = Object.entries(categoryMeta)
           <article class="rounded-[32px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.82),rgba(1,24,38,0.92))] p-7 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
             <div class="flex items-center justify-between gap-4">
               <span class="rounded-full border border-[#1f5f82] bg-[#2173A6]/15 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Tools</span>
-              <span class="text-sm text-[#89b8cb]">{tools.length} entries</span>
+              <span class="text-sm text-[#89b8cb]">{toolsWithExternal.length} entries</span>
             </div>
             <h3 class="mt-5 text-2xl font-black tracking-[-0.04em] text-[#f4fbff]">Products, apps, and platforms you use directly.</h3>
             <p class="mt-4 text-base leading-7 text-[#9dc6d8]">
@@ -397,7 +431,7 @@ const groupedSkills = Object.entries(categoryMeta)
                     <ProgramLogo name={item.name} logo={item.tool.logo} size="sm" />
                     <div class="min-w-0">
                       <h3 class="text-xl font-black tracking-[-0.04em] text-[#f4fbff]">{item.name}</h3>
-                      <p class="mt-1 text-sm text-[#89b8cb] capitalize">{item.tool.category.replace('-', ' ')} tool</p>
+                      <p class="mt-1 text-sm text-[#89b8cb] capitalize">{item.tool.categoryLabel} tool</p>
                     </div>
                   </div>
                 ) : (
@@ -425,15 +459,26 @@ const groupedSkills = Object.entries(categoryMeta)
                 <div class="mt-6 flex items-center justify-between gap-4 border-t border-[#133448] pt-5">
                   {item.kind === 'tool' ? (
                     <div class="text-xs text-[#89b8cb]">
-                      {item.tool.commission.type.toUpperCase()} • {item.tool.rating.toFixed(1)} / 5
+                      {item.tool.commission
+                        ? `${item.tool.commission.type.toUpperCase()} • ${item.tool.rating.toFixed(1)} / 5`
+                        : item.tool.footerMeta}
                     </div>
                   ) : (
                     <div class="text-xs text-[#89b8cb]">
                       {item.skill.cost} cost • {item.skill.manualReview ? 'reviewed manually' : 'library-ready'}
                     </div>
                   )}
-                  <a href={item.href} class="text-sm font-semibold text-[#72DBF2] transition hover:text-white">
-                    {item.kind === 'tool' ? 'View tool →' : 'View skill →'}
+                  <a
+                    href={item.href}
+                    class="text-sm font-semibold text-[#72DBF2] transition hover:text-white"
+                    target={item.kind === 'tool' && item.tool.external ? '_blank' : undefined}
+                    rel={item.kind === 'tool' && item.tool.external ? 'noreferrer' : undefined}
+                  >
+                    {item.kind === 'tool'
+                      ? item.tool.external
+                        ? 'Open tool →'
+                        : 'View tool →'
+                      : 'View skill →'}
                   </a>
                 </div>
               </div>
@@ -497,19 +542,27 @@ const groupedSkills = Object.entries(categoryMeta)
                 <ProgramLogo name={tool.name} logo={tool.logo} size="sm" />
                 <div>
                   <span class="rounded-full border border-[#1f5f82] bg-[#2173A6]/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#72DBF2]">
-                    {tool.category.replace('-', ' ')}
+                    {tool.categoryLabel}
                   </span>
                   <h3 class="mt-3 text-2xl font-black tracking-[-0.04em] text-[#f4fbff]">{tool.name}</h3>
                 </div>
               </div>
               <p class="mt-5 text-sm leading-7 text-[#b8d9e6]">{tool.description}</p>
               <div class="mt-5 flex flex-wrap gap-2">
-                <span class="rounded-full border border-[#16374c] bg-[#08283d]/65 px-3 py-1.5 text-[11px] text-[#89b8cb]">{tool.commission.type.toUpperCase()}</span>
-                <span class="rounded-full border border-[#16374c] bg-[#08283d]/65 px-3 py-1.5 text-[11px] text-[#89b8cb]">{tool.commission.cookieDuration}</span>
+                {tool.metaBadges.map((badge) => (
+                  <span class="rounded-full border border-[#16374c] bg-[#08283d]/65 px-3 py-1.5 text-[11px] text-[#89b8cb]">{badge}</span>
+                ))}
               </div>
               <div class="mt-6 flex items-center justify-between gap-4 border-t border-[#133448] pt-5">
-                <span class="text-xs text-[#89b8cb]">{tool.rating.toFixed(1)} / 5 editorial score</span>
-                <a href={tool.href} class="text-sm font-semibold text-[#72DBF2] transition hover:text-white">View tool →</a>
+                <span class="text-xs text-[#89b8cb]">{tool.footerMeta}</span>
+                <a
+                  href={tool.href}
+                  class="text-sm font-semibold text-[#72DBF2] transition hover:text-white"
+                  target={tool.external ? '_blank' : undefined}
+                  rel={tool.external ? 'noreferrer' : undefined}
+                >
+                  {tool.external ? 'Open tool →' : 'View tool →'}
+                </a>
               </div>
             </article>
           ))}
@@ -542,7 +595,7 @@ const groupedSkills = Object.entries(categoryMeta)
                   <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#72DBF2]">Tools</p>
                   <ul class="mt-3 space-y-2 text-sm text-[#b7d8e5]">
                     {collection.tools.map((slug) => {
-                      const tool = tools.find((item) => item.slug === slug);
+                      const tool = toolsWithExternal.find((item) => item.slug === slug);
                       return tool ? <li>{tool.name}</li> : null;
                     })}
                   </ul>
