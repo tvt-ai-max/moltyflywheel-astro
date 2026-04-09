@@ -239,7 +239,7 @@ const libraryItems = [
     kind: skill.kind,
     name: skill.name,
     description: skill.description,
-    href: `#skill-${skill.slug}`,
+    href: `#job-family-${skill.primaryCategory}`,
     label: categoryMeta[skill.primaryCategory].shortLabel,
     filterCategory: skill.primaryCategory,
     tags: skill.tags,
@@ -476,7 +476,7 @@ const groupedSkills = Object.entries(categoryMeta)
                       ? item.tool.destinationType === 'tool-detail'
                         ? 'View tool page →'
                         : 'View program review →'
-                      : 'View skill →'}
+                      : 'View job family →'}
                   </a>
                 </div>
               </div>
@@ -516,7 +516,7 @@ const groupedSkills = Object.entries(categoryMeta)
                 ))}
               </div>
               <div class="mt-6 border-t border-[#133448] pt-5">
-                <a href="#library" class="text-sm font-semibold text-[#72DBF2] transition hover:text-white">View in library →</a>
+                <a href={`#job-family-${skill.primaryCategory}`} class="text-sm font-semibold text-[#72DBF2] transition hover:text-white">View job family →</a>
               </div>
             </article>
           ))}
@@ -611,7 +611,7 @@ const groupedSkills = Object.entries(categoryMeta)
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {groupedSkills.map((group) => (
-            <article class="rounded-[30px] border border-[#14384f] bg-[linear-gradient(180deg,rgba(7,41,62,0.9),rgba(1,24,38,0.95))] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
+            <article id={`job-family-${group.key}`} class="rounded-[30px] border border-[#14384f] bg-[linear-gradient(180deg,rgba(7,41,62,0.9),rgba(1,24,38,0.95))] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
               <span class="rounded-full border border-[#36536a] bg-[#09283d] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#9dc6d8]">
                 {group.meta.label}
               </span>
