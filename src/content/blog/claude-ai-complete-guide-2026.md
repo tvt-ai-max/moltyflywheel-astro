@@ -6,7 +6,7 @@ category: guide
 tags: ["claude-ai", "anthropic", "ai-tools", "guide", "2026"]
 keyword: "how to use claude ai 2026"
 cluster: "cluster-b-claude-ai"
-ogImage: "/images/blog/claude-ai-complete-guide-2026-cover.webp"
+ogImage: "/images/blog/claude-ai-complete-guide-2026-cover-v3.webp"
 draft: false
 featured: true
 ---
