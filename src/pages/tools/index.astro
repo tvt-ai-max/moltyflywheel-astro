@@ -474,7 +474,7 @@ const groupedSkills = Object.entries(categoryMeta)
                   >
                     {item.kind === 'tool'
                       ? item.tool.destinationType === 'tool-detail'
-                        ? 'View tool detail →'
+                        ? 'View tool page →'
                         : 'View program review →'
                       : 'View skill →'}
                   </a>
@@ -557,7 +557,7 @@ const groupedSkills = Object.entries(categoryMeta)
                   href={tool.href}
                   class="text-sm font-semibold text-[#72DBF2] transition hover:text-white"
                 >
-                  {tool.destinationType === 'tool-detail' ? 'View tool detail →' : 'View program review →'}
+                  {tool.destinationType === 'tool-detail' ? 'View tool page →' : 'View program review →'}
                 </a>
               </div>
             </article>
