@@ -7,7 +7,7 @@ tags: ["claude-ai", "claude-code", "mythos-preview", "anthropic", "ai-news"]
 keyword: "Claude update April 2026"
 cluster: "cluster-d-ai-news"
 ogImage: "/images/blog/claude-code-monthly-roundup-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
