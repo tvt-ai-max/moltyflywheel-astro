@@ -7,7 +7,7 @@ tags: ["agentic-ai", "ai-business", "automation", "monetization", "2026"]
 keyword: "make money with agentic ai"
 cluster: "cluster-c-ai-business-strategy"
 ogImage: "/images/blog/make-money-with-agentic-ai-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
