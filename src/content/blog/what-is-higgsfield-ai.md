@@ -7,7 +7,7 @@ tags: ["higgsfield", "ai-video", "ai-image", "creator-tools", "visual-ai"]
 keyword: "what is higgsfield ai"
 cluster: "cluster-h-higgsfield"
 ogImage: "/images/blog/what-is-higgsfield-ai-cover.webp"
-draft: true
+draft: false
 ---
 
 If you keep seeing Higgsfield show up in creator and AI-tool conversations, the real question is not whether it looks impressive in a demo. The real question is whether it solves a meaningful workflow problem for your team.
