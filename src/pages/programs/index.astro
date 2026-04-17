@@ -362,12 +362,20 @@ function formatCategory(category: Exclude<CategoryKey, 'all'>) {
         </div>
 
         <div class="mt-6 md:mt-0 md:shrink-0">
-          <a
-            href="/free-guide"
-            class="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5"
-          >
-            Get the Free Guide →
-          </a>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a
+              href="/free-guide"
+              class="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-[#0B3B59] transition-transform hover:-translate-y-0.5"
+            >
+              Get the Free Guide →
+            </a>
+            <a
+              href="/tools/abacus-ai/"
+              class="inline-flex items-center justify-center rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            >
+              Review Abacus AI →
+            </a>
+          </div>
         </div>
       </div>
     </div>
