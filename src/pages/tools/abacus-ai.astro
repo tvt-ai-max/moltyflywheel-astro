@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramLogo from '../../components/programs/ProgramLogo.astro';
+
+const title = 'Abacus AI Tool Detail | MoltyFlywheel';
+const description =
+  'A practical Abacus AI overview for operators who want one AI workspace for top models, Deep Agent workflows, and a hosted Abacus Claw path instead of self-managing OpenClaw.';
+
+const currentModelHighlights = [
+  'Current public product pages highlight GPT 5.4 and GPT 5.4 Thinking/Pro in the model lineup.',
+  'Claude coverage is positioned around Sonnet 4.6 and Opus 4.6 for stronger reasoning and coding work.',
+  'Gemini 3.1 Pro, Llama-4, Abacus Smaug, and Grok 4.x are also presented as part of the active model stack.',
+  'The main product promise is not one model alone. It is centralized access to many leading models inside one workflow layer.',
+];
+
+const strengths = [
+  'Good fit when a team wants one AI workspace instead of juggling separate subscriptions for multiple models.',
+  'Deep Agent gives the platform a stronger workflow and execution layer than a simple chat-only interface.',
+  'Abacus Claw creates a hosted path for teams that want an OpenClaw-style agent setup without running the infrastructure themselves.',
+  'Useful when model access, agent workflows, and operational convenience matter more than picking one single-model winner.',
+];
+
+const constraints = [
+  'An all-in-one platform can be overkill if you only need one model for one narrow job.',
+  'The exact model lineup and version naming can change quickly, so teams should verify current availability before committing.',
+  'Hosted convenience is helpful, but it does not remove the need to define a real workflow and ownership model.',
+  'If you already have a clean stack and strong internal tooling, switching platforms may add migration overhead instead of reducing it.',
+];
+
+const bestFits = [
+  'Operators who want broad model access in one place without stitching together multiple AI subscriptions manually.',
+  'Teams exploring agent workflows, browser automation, and tool-connected AI tasks from one vendor layer.',
+  'Users currently interested in OpenClaw-style persistent agents but who would prefer a managed hosted path.',
+];
+
+const lessIdealFits = [
+  'Teams that only need one text model and do not benefit from a broader multi-model or agent platform.',
+  'Users who want a pure affiliate-program review page with payout logic rather than an operating-platform review.',
+  'Builders who prefer full self-hosting control and do not want a managed product layer around the agent stack.',
+];
+
+const useCases = [
+  'Run one AI workspace across multiple model families for writing, reasoning, coding, and research.',
+  'Use Deep Agent for broader workflow execution, automation, and task orchestration.',
+  'Evaluate Abacus Claw as the managed path when you want persistent OpenClaw-style agents without self-hosting them.',
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="relative overflow-hidden border-b border-[#0d2d40] bg-[#011826]">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(114,219,242,0.14),transparent_32%),radial-gradient(circle_at_82%_18%,rgba(33,115,166,0.24),transparent_22%),linear-gradient(180deg,rgba(11,59,89,0.18),transparent_55%)]"></div>
+    <div class="absolute inset-0 opacity-[0.08]" style="background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 72px 72px;"></div>
+
+    <div class="relative mx-auto max-w-[1400px] px-4 py-14 md:px-6 md:py-18">
+      <div class="grid gap-10 xl:grid-cols-[minmax(0,1.15fr)_380px] xl:items-start">
+        <div class="max-w-4xl">
+          <nav class="flex items-center gap-2 text-xs text-[#3d7a96]" aria-label="Breadcrumb">
+            <a href="/" class="transition-colors hover:text-[#72DBF2]">Home</a>
+            <span>/</span>
+            <a href="/tools" class="transition-colors hover:text-[#72DBF2]">Tools</a>
+            <span>/</span>
+            <span class="text-[#5ea4bf]">Abacus AI</span>
+          </nav>
+
+          <div class="mt-5 flex flex-wrap items-center gap-2">
+            <span class="inline-flex rounded-full border border-[#B8D9E8]/20 bg-[#B8D9E8]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#B8D9E8]">
+              Agent Platform
+            </span>
+            <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#72DBF2]">
+              Tool Detail
+            </span>
+          </div>
+
+          <h1 class="mt-6 max-w-4xl text-4xl font-black leading-[1.05] text-[#daeef5] md:text-6xl">
+            Abacus AI is worth evaluating when you want top models, workflow agents, and a managed Claw path in one operating layer.
+          </h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#5ea4bf] md:text-[19px]">
+            This page is the practical layer: what Abacus AI appears to bundle together, which model lineup currently stands out, and why Abacus Claw matters if you want a managed replacement path instead of self-running OpenClaw.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <div class="flex items-center gap-2 rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              4.7 / 5 editorial fit
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              External platform
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              Models + agents + hosted Claw
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="https://abacus.ai/"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center rounded-full bg-[#2173A6] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2d88bf]"
+            >
+              Open Abacus AI →
+            </a>
+            <a
+              href="https://claw.abacus.ai/"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center rounded-full border border-[#72DBF2]/25 bg-[#72DBF2]/10 px-6 py-3 text-sm font-semibold text-[#72DBF2] transition-colors hover:bg-[#72DBF2]/16"
+            >
+              View Abacus Claw →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+          <div class="relative overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#011826]/50 p-5">
+            <div class="absolute -left-10 -top-10 h-36 w-36 rounded-full blur-3xl bg-[#72DBF2]/20"></div>
+            <div class="relative flex items-center gap-4">
+              <ProgramLogo name="Abacus AI" logo="" size="md" />
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#72DBF2]">Signal Snapshot</p>
+                <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">All-in-one AI workspace</h2>
+              </div>
+            </div>
+            <p class="mt-5 text-sm leading-7 text-[#89c0d4]">
+              The strongest public signal is consolidation: one place for current top model families, agent workflows through Deep Agent, and a hosted Abacus Claw path for persistent OpenClaw-style agents.
+            </p>
+          </div>
+
+          <div class="mt-5 space-y-4">
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Best for</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Operators who want many leading models plus agent workflows without assembling every layer manually.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Why Claw matters</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Abacus Claw is positioned as the managed version of OpenClaw, which makes it the clearest replacement path for teams that want hosted persistence, channels, and cron jobs.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">What to compare</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Model access, agent quality, hosted convenience, workflow depth, and whether the bundle reduces real operating complexity for your team.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="editorial-review" class="border-b border-[#0d2d40] bg-[#041f31]">
+    <div class="mx-auto max-w-[1200px] px-4 py-14 md:px-6 md:py-18">
+      <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <article class="space-y-10">
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">What Abacus AI Looks Like Right Now</h2>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              Abacus AI currently presents itself as a bundled AI workspace rather than a single-model product. The public positioning centers on ChatLLM Teams for broad model access, Deep Agent for more capable task execution, and Abacus Claw for hosted persistent agents.
+            </p>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              That makes the platform relevant for people who are less interested in picking one winner and more interested in reducing stack fragmentation across models, workflows, and agent operations.
+            </p>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">Current Model Highlights</h2>
+            <ul class="mt-5 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+              {currentModelHighlights.map((item) => <li>• {item}</li>)}
+            </ul>
+            <p class="mt-5 text-base leading-8 text-[#9dc6d8]">
+              Inference: the practical value here is not just "one more AI tool." It is having many model families in one place when your team needs to compare fit across writing, reasoning, coding, research, image, or agent-heavy work.
+            </p>
+          </section>
+
+          <section class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Good Fit</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {bestFits.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Less Ideal Fit</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {lessIdealFits.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">Why Abacus Claw Matters</h2>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              According to the current documentation, Abacus Claw is the hosted, managed version of OpenClaw. That is the most important product signal for this repo specifically.
+            </p>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              If your current thinking is, “We like what OpenClaw does, but we do not want to self-host the whole thing,” then Abacus Claw becomes a real evaluation path. The attraction is persistent memory, a cloud computer, multi-channel operation, cron jobs, and built-in tool integrations without managing the infrastructure layer yourself.
+            </p>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              That does not automatically make it the right choice. But it does make it the clearest replacement candidate when the question is hosted convenience versus self-managed OpenClaw operations.
+            </p>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">What It Seems Best At</h2>
+            <ul class="mt-5 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+              {useCases.map((item) => <li>• {item}</li>)}
+            </ul>
+          </section>
+
+          <section class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Strengths</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {strengths.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Constraints</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {constraints.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">Related Paths</h2>
+            <div class="mt-5 grid gap-4 md:grid-cols-2">
+              <a href="/blog/how-openclaw-generates-1-blog-post-per-day/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Review the current OpenClaw-based workflow before deciding to replace it →
+              </a>
+              <a href="/p/claude-flywheel-starter/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Start with a simpler Claude-centered setup if you do not need the full platform yet →
+              </a>
+              <a href="/tools/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Go back to the tools and skills operating library →
+              </a>
+              <a href="/search/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Search for adjacent agent, workflow, and automation content →
+              </a>
+            </div>
+          </section>
+        </article>
+
+        <aside class="space-y-5">
+          <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.9),rgba(1,24,38,0.92))] p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#72DBF2]">Decision Note</p>
+            <p class="mt-4 text-sm leading-7 text-[#b8d9e6]">
+              The most important decision is not whether Abacus AI has many models. It is whether the bundle reduces actual workflow friction for your team and whether Abacus Claw is a better operating choice than self-managing OpenClaw.
+            </p>
+          </div>
+
+          <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.9),rgba(1,24,38,0.92))] p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#72DBF2]">Next Click</p>
+            <a
+              href="https://abacus.ai/"
+              target="_blank"
+              rel="noreferrer"
+              class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#2173A6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#2d88bf]"
+            >
+              Open Abacus AI →
+            </a>
+            <a
+              href="https://claw.abacus.ai/"
+              target="_blank"
+              rel="noreferrer"
+              class="mt-3 inline-flex w-full items-center justify-center rounded-full border border-[#72DBF2]/25 bg-[#72DBF2]/10 px-5 py-3 text-sm font-semibold text-[#72DBF2] transition hover:bg-[#72DBF2]/16"
+            >
+              Open Abacus Claw →
+            </a>
+            <p class="mt-4 text-xs leading-6 text-[#89c0d4]">
+              External platform. Verify current model lineup, pricing, hosted Claw details, and product fit directly before adopting it.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
