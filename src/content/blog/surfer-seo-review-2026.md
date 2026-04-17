@@ -87,6 +87,6 @@ Not absolutely. A Green Score is your ticket for Google to consider ranking your
 - 🎁 An extension supporting direct insertion and checking within WordPress.
 - 🎁 Proprietary semantic NLP Keywords helping you rank thousands of long-tail variations.
 
-**[→ Claim Promotions and Register for Surfer SEO Here](https://moltyflywheel.com/go/surfer-seo?utm_source=blog&utm_medium=internal&utm_campaign=surfer-seo-review-2026)** | Offers a basic trial tier
+**[→ Claim Promotions and Register for Surfer SEO Here](https://www.moltyflywheel.com/go/surfer-seo?utm_source=blog&utm_medium=internal&utm_campaign=surfer-seo-review-2026)** | Offers a basic trial tier
 
 *Join over 100,000 optimization experts globally ascending to page one.*

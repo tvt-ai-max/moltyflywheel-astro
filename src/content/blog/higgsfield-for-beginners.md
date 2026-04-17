@@ -226,7 +226,7 @@ If you still cannot name one practical use case after the first session, the pla
 
 💡 **Next step**
 
-If you want the internal decision layer before running more tests, start with the [Higgsfield tool page →](https://moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-for-beginners).
+If you want the internal decision layer before running more tests, start with the [Higgsfield tool page →](https://www.moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-for-beginners).
 
 ## Sources
 

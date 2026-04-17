@@ -22,7 +22,7 @@ draft: false
 author: "MoltyFlywheel Team"
 
 # SEO fields
-canonical: "https://moltyflywheel.com/blog/[slug]"
+canonical: "https://www.moltyflywheel.com/blog/[slug]"
 og_image: "/images/blog/[slug]-og.png"
 
 # Cluster tracking (internal — not rendered)
@@ -247,7 +247,7 @@ BOTTOM CTA — Always end with affiliate CTA
 [1-2 sentences of urgency or social proof. E.g., "Join 50,000+ creators who use [X] to publish AI content that ranks."]
 
 **[Button Text — e.g., Start Your Free Trial →]**
-→ [/go/program-id](https://moltyflywheel.com/go/[program-id])
+→ [/go/program-id](https://www.moltyflywheel.com/go/[program-id])
 
 ---
 

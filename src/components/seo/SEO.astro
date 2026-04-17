@@ -2,7 +2,7 @@
 const {
   title,
   description,
-  canonical = Astro.url.href,
+  canonical = new URL(`${Astro.url.pathname}${Astro.url.search}`, Astro.site).toString(),
   ogImage = '/assets/og-default.png'
 } = Astro.props;
 const fullTitle = `${title} | MoltyFlywheel`;

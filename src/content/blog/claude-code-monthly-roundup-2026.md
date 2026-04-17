@@ -255,4 +255,4 @@ If you mainly want to understand Claude better, read the full Claude guide. If y
 
 If you want fewer hype cycles and more practical guidance on what is actually worth using, start with the MoltyFlywheel decision layer.
 
-[See the practical starter path →](https://moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=claude-code-monthly-roundup-2026)
+[See the practical starter path →](https://www.moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=claude-code-monthly-roundup-2026)

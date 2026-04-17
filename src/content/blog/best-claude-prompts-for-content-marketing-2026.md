@@ -367,4 +367,4 @@ Usually it is not a fancier prompt. It is clearer task scoping, better examples,
 
 If you want the next layer after prompt lists, the best move is to learn how Claude fits into a broader content workflow with better structure, internal routing, and output quality.
 
-[Read the complete Claude AI guide →](https://moltyflywheel.com/blog/claude-ai-complete-guide-2026?utm_source=blog&utm_medium=internal&utm_campaign=best-claude-prompts-for-content-marketing-2026)
+[Read the complete Claude AI guide →](https://www.moltyflywheel.com/blog/claude-ai-complete-guide-2026?utm_source=blog&utm_medium=internal&utm_campaign=best-claude-prompts-for-content-marketing-2026)

@@ -260,7 +260,7 @@ Keep Higgsfield on the visual-production layer. Let other tools or systems handl
 
 💡 **Next step**
 
-If you want the internal decision layer before testing ad workflows more deeply, start with the [Higgsfield tool page →](https://moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=how-to-use-higgsfield-for-ai-ad-creatives).
+If you want the internal decision layer before testing ad workflows more deeply, start with the [Higgsfield tool page →](https://www.moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=how-to-use-higgsfield-for-ai-ad-creatives).
 
 ## Sources
 

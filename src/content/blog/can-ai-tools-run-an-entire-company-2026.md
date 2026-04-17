@@ -246,4 +246,4 @@ AI can run more of a company than before, but the companies that benefit most ar
 
 If you want the next layer after this review, the most useful follow-up is the AI flywheel piece. It explains how repeated AI workflows create compounding leverage instead of one-off output.
 
-[Read the AI Flywheel guide →](https://moltyflywheel.com/blog/what-is-ai-flywheel-2026?utm_source=blog&utm_medium=internal&utm_campaign=can-ai-tools-run-an-entire-company-2026)
+[Read the AI Flywheel guide →](https://www.moltyflywheel.com/blog/what-is-ai-flywheel-2026?utm_source=blog&utm_medium=internal&utm_campaign=can-ai-tools-run-an-entire-company-2026)

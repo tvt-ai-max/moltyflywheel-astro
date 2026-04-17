@@ -238,7 +238,7 @@ Test one real workflow in Higgsfield and one likely alternative on the same day.
 
 💡 **Next step**
 
-If you want the internal decision layer before testing more alternatives, start with the [Higgsfield tool page →](https://moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-alternatives).
+If you want the internal decision layer before testing more alternatives, start with the [Higgsfield tool page →](https://www.moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-alternatives).
 
 ## Sources
 

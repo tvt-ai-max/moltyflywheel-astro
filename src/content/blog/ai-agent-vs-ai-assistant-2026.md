@@ -247,4 +247,4 @@ An AI assistant helps you work through a task, while an AI agent helps a system 
 
 If you are trying to understand where assistants end and more autonomous workflows begin, the best next read is the full Agentic AI foundation piece.
 
-[Read the complete Agentic AI overview →](https://moltyflywheel.com/blog/what-is-agentic-ai-2026?utm_source=blog&utm_medium=internal&utm_campaign=ai-agent-vs-ai-assistant-2026)
+[Read the complete Agentic AI overview →](https://www.moltyflywheel.com/blog/what-is-agentic-ai-2026?utm_source=blog&utm_medium=internal&utm_campaign=ai-agent-vs-ai-assistant-2026)

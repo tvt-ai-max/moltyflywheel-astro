@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 import tailwindv4 from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://moltyflywheel.com',
+  site: 'https://www.moltyflywheel.com',
   output: 'static',
   vite: {
     plugins: [tailwindv4()],

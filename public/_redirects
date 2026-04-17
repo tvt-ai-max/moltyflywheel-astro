@@ -1,3 +1,7 @@
+# Canonical host redirect
+https://moltyflywheel.com/*  https://www.moltyflywheel.com/:splat  301!
+http://moltyflywheel.com/*   https://www.moltyflywheel.com/:splat  301!
+
 # ============================================================
 # MoltyFlywheel Affiliate Redirects — Cloudflare Pages
 # Format: /go/[program-id]   [affiliate-url]   301

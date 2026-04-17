@@ -301,4 +301,4 @@ Only after the first workflow produces reliable value. If you expand too early, 
 
 If you want the next layer after this article, the most useful move is to study a system where research, drafting, and workflow handoff already connect more cleanly.
 
-[Explore the MoltyFlywheel Starter →](https://moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=build-your-first-ai-agent-for-content-marketing-2026)
+[Explore the MoltyFlywheel Starter →](https://www.moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=build-your-first-ai-agent-for-content-marketing-2026)

@@ -235,7 +235,7 @@ No. A smaller, more structured test usually tells you more than broad exploratio
 
 💡 **Next step**
 
-If you want the internal fit summary before running more visual tests, go to the [Higgsfield tool page →](https://moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-use-cases).
+If you want the internal fit summary before running more visual tests, go to the [Higgsfield tool page →](https://www.moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-use-cases).
 
 ## Sources
 

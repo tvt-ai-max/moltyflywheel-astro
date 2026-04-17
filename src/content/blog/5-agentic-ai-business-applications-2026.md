@@ -103,4 +103,4 @@ Instead of building your automation from scratch, many small businesses use the 
 - ✅ Eliminate manual formatting and data entry
 - ✅ Scale production without hiring extra staff
 
-[View the complete demo and download templates →](https://moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=5-agentic-ai-business-applications-2026) *(Free to explore)*
+[View the complete demo and download templates →](https://www.moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=5-agentic-ai-business-applications-2026) *(Free to explore)*

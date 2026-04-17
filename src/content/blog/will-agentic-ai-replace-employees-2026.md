@@ -284,4 +284,4 @@ Learn how AI fits into real workflows. People who can design, review, guide, and
 
 If you want to understand how the work shift happens in practice, the best next read is the case-study piece on real Agentic AI applications in small businesses.
 
-[Read 5 practical Agentic AI applications →](https://moltyflywheel.com/blog/5-agentic-ai-business-applications-2026?utm_source=blog&utm_medium=internal&utm_campaign=will-agentic-ai-replace-employees-2026)
+[Read 5 practical Agentic AI applications →](https://www.moltyflywheel.com/blog/5-agentic-ai-business-applications-2026?utm_source=blog&utm_medium=internal&utm_campaign=will-agentic-ai-replace-employees-2026)

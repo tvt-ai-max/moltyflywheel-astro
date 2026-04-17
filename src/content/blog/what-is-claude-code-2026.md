@@ -277,7 +277,7 @@ Understanding an unfamiliar project and making one small, reversible change is u
 
 If Claude Code is the engineering-facing side of the system, the next useful piece is understanding how the wider Claude ecosystem fits into writing, analysis, and structured work.
 
-[Read the full Claude AI guide →](https://moltyflywheel.com/blog/claude-ai-complete-guide-2026?utm_source=blog&utm_medium=internal&utm_campaign=what-is-claude-code-2026)
+[Read the full Claude AI guide →](https://www.moltyflywheel.com/blog/claude-ai-complete-guide-2026?utm_source=blog&utm_medium=internal&utm_campaign=what-is-claude-code-2026)
 
 ---
 

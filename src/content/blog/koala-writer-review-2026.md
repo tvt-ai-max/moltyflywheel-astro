@@ -89,6 +89,6 @@ Koala Writer can completely replace the outlining, brainstorming, and drafting o
 - 🎁 1-Click Publishing to the WordPress platform
 - 🎁 Support for Auto-Amazon affiliate tables
 
-**[→ Experience Koala Writer Now (Start Trial)](https://moltyflywheel.com/go/koala-writer?utm_source=blog&utm_medium=internal&utm_campaign=koala-writer-review-2026)** | Simple setup
+**[→ Experience Koala Writer Now (Start Trial)](https://www.moltyflywheel.com/go/koala-writer?utm_source=blog&utm_medium=internal&utm_campaign=koala-writer-review-2026)** | Simple setup
 
 *Join over 25,000+ marketers automating their systems with cutting-edge AI.*

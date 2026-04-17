@@ -212,4 +212,4 @@ In some teams, yes. One model may be better for drafting while another is better
 
 If your main use case is serious content production, Claude is still one of the strongest starting points in 2026 because it reduces cleanup and handles structured long-form work unusually well.
 
-[See the Claude Pro program review →](https://moltyflywheel.com/programs/claude-pro/?utm_source=blog&utm_medium=internal&utm_campaign=claude-vs-chatgpt-vs-gemini-2026)
+[See the Claude Pro program review →](https://www.moltyflywheel.com/programs/claude-pro/?utm_source=blog&utm_medium=internal&utm_campaign=claude-vs-chatgpt-vs-gemini-2026)

@@ -255,7 +255,7 @@ A workflow tool like n8n is a good fit when you need repeatable routing, notific
 
 💡 **Next step**
 
-If you want the internal fit summary before testing this stack yourself, start with the [Higgsfield tool page →](https://moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-claude-automation-workflow).
+If you want the internal fit summary before testing this stack yourself, start with the [Higgsfield tool page →](https://www.moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-claude-automation-workflow).
 
 ## Sources
 

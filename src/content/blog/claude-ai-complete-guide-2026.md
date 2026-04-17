@@ -120,4 +120,4 @@ Mastering Claude AI is just the first step in building a modern, highly leverage
 
 If you are a creator or marketer looking for tools that actually generate ROI, see our curated list:
 
-[Explore Affiliate Tools for Content Creators →](https://moltyflywheel.com/offers/affiliate-tools-for-content-creators?utm_source=blog&utm_medium=internal&utm_campaign=claude-ai-complete-guide-2026)
+[Explore Affiliate Tools for Content Creators →](https://www.moltyflywheel.com/offers/affiliate-tools-for-content-creators?utm_source=blog&utm_medium=internal&utm_campaign=claude-ai-complete-guide-2026)

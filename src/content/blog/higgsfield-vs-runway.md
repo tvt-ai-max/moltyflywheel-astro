@@ -272,7 +272,7 @@ Possibly, but only if each tool solves a different recurring problem. Otherwise 
 
 💡 **Next step**
 
-If you want the internal fit summary before testing either route more deeply, see the [Higgsfield tool page →](https://moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-vs-runway).
+If you want the internal fit summary before testing either route more deeply, see the [Higgsfield tool page →](https://www.moltyflywheel.com/tools/higgsfield/?utm_source=blog&utm_medium=internal&utm_campaign=higgsfield-vs-runway).
 
 ## Sources
 

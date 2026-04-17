@@ -318,4 +318,4 @@ Niche clarity, repeatable workflows, strong review standards, and the ability to
 
 If you want the practical foundation behind this business logic, the best next read is the piece on making money with Agentic AI through repeatable workflow models.
 
-[Read 5 ways to make money with Agentic AI →](https://moltyflywheel.com/blog/make-money-with-agentic-ai-2026?utm_source=blog&utm_medium=internal&utm_campaign=ai-agency-model-2026)
+[Read 5 ways to make money with Agentic AI →](https://www.moltyflywheel.com/blog/make-money-with-agentic-ai-2026?utm_source=blog&utm_medium=internal&utm_campaign=ai-agency-model-2026)

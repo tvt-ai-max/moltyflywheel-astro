@@ -126,4 +126,4 @@ The main actionable change is understanding that Claude Code's behavior is rule-
 
 Claude Code is one signal in a faster-moving landscape. If you want a regular read on what's changing — which tools are worth attention, which developments actually matter — the MoltyFlywheel newsletter covers it without the hype.
 
-[Get the weekly AI brief →](https://moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=claude-code-leaked-source-code-2026)
+[Get the weekly AI brief →](https://www.moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=claude-code-leaked-source-code-2026)

@@ -338,4 +338,4 @@ But do not start with the plumbing just because it feels advanced.
 
 Start with the workflow that already matters, then connect Claude to it with the lightest setup that still stays usable.
 
-[Start with the Claude setup page first →](https://moltyflywheel.com/p/claude-flywheel-starter/?utm_source=blog&utm_medium=internal&utm_campaign=claude-api-workflow-guide-2026)
+[Start with the Claude setup page first →](https://www.moltyflywheel.com/p/claude-flywheel-starter/?utm_source=blog&utm_medium=internal&utm_campaign=claude-api-workflow-guide-2026)

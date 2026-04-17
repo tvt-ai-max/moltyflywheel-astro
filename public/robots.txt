@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://moltyflywheel.com/sitemap-index.xml
+Sitemap: https://www.moltyflywheel.com/sitemap-index.xml

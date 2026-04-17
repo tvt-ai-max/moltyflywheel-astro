@@ -170,4 +170,4 @@ Feeding all outputs back indiscriminately. If you include low-performing outputs
 
 The flywheel is one component of a broader strategy for using AI to compound business output without scaling headcount. If you want to see how these systems come together — from the first AI task to a self-improving production architecture — the MoltyFlywheel Starter breaks it down step by step.
 
-[Explore the MoltyFlywheel system →](https://moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=what-is-ai-flywheel-2026)
+[Explore the MoltyFlywheel system →](https://www.moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=what-is-ai-flywheel-2026)

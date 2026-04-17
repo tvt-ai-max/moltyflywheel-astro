@@ -227,4 +227,4 @@ An agentic model uses AI across a multi-step goal: gathering inputs, structuring
 
 The strongest monetization paths usually come from structured workflows, not random prompt hustle. If you want to see how a compact AI operating system can connect research, writing, and commercial routing more cleanly, start here:
 
-[Explore the MoltyFlywheel Starter →](https://moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=make-money-with-agentic-ai-2026)
+[Explore the MoltyFlywheel Starter →](https://www.moltyflywheel.com/p/claude-flywheel-starter?utm_source=blog&utm_medium=internal&utm_campaign=make-money-with-agentic-ai-2026)
