@@ -7,7 +7,7 @@ tags: ["higgsfield", "ai-video", "ai-image", "creator-tools", "beginner-guide"]
 keyword: "higgsfield for beginners"
 cluster: "cluster-h-higgsfield"
 ogImage: "/images/blog/higgsfield-for-beginners-cover.webp"
-draft: true
+draft: false
 ---
 
 If you are new to Higgsfield, the fastest way to waste time is to test everything at once.

@@ -7,7 +7,7 @@ tags: ["claude", "chatgpt", "gemini", "ai-content", "comparison"]
 keyword: "claude vs chatgpt vs gemini"
 cluster: "cluster-b-claude-ai"
 ogImage: "/images/blog/claude-vs-chatgpt-vs-gemini-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 

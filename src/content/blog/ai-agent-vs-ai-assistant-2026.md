@@ -7,7 +7,7 @@ tags: ["ai-agent", "ai-assistant", "agentic-ai", "automation", "comparison"]
 keyword: "AI agent vs AI assistant"
 cluster: "cluster-a-agentic-ai"
 ogImage: "/images/blog/ai-agent-vs-ai-assistant-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 

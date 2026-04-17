@@ -7,7 +7,7 @@ tags: ["higgsfield", "short-form-video", "creator-workflow", "ai-video", "conten
 keyword: "higgsfield use cases"
 cluster: "cluster-h-higgsfield"
 ogImage: "/images/blog/higgsfield-use-cases-cover.webp"
-draft: true
+draft: false
 ---
 
 The easiest way to misjudge Higgsfield is to ask whether it is “good” in general.
