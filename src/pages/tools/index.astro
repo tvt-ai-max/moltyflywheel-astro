@@ -122,6 +122,25 @@ const externalTools = [
   },
   {
     kind: 'tool' as const,
+    slug: 'topview-ai',
+    name: 'Topview AI',
+    description:
+      'An AI video agent built around UGC-style marketing videos, product-led ads, reference-based video recreation, and faster ad creative workflows.',
+    logo: '',
+    category: 'general-ai',
+    rating: 4.6,
+    commission: null,
+    href: '/tools/topview-ai/',
+    jobFamily: 'content-production',
+    featured: true,
+    destinationType: 'tool-detail' as const,
+    categoryLabel: 'video ads',
+    metaBadges: ['External tool', 'AI video agent'],
+    footerMeta: 'Best fit for ad creatives, UGC-style content, and product videos',
+    tags: ['ugc-video', 'ai-ads', 'product-video', 'affiliate-marketing'],
+  },
+  {
+    kind: 'tool' as const,
     slug: 'higgsfield',
     name: 'Higgsfield',
     description:
@@ -183,7 +202,7 @@ const workflowCollections = [
     title: 'Repurpose content across channels',
     description: 'Turn one core asset into social, video, and email distribution layers.',
     skills: ['content-repurposer', 'twitter-thread-writer', 'email-drip-sequence'],
-    tools: ['beehiiv', 'higgsfield'],
+    tools: ['beehiiv', 'topview-ai'],
   },
   {
     title: 'Measure and optimize performance',
