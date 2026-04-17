@@ -11,13 +11,13 @@ Quy uoc cap nhat:
 
 ## Current Snapshot
 
-Last updated: 2026-04-03
+Last updated: 2026-04-17
 
 ### Stack
 - Astro 6 static site
 - Tailwind CSS v4 via Vite plugin
 - Content Collections for `blog`, `programs`, `offers`, `niches`
-- Static hosting target configured for `https://moltyflywheel.com`
+- Static hosting target configured for `https://www.moltyflywheel.com`
 
 ### Primary Structure
 - `src/pages`: public routes
@@ -28,11 +28,13 @@ Last updated: 2026-04-03
 - `src/content/_engine`: keyword clusters and content templates
 - `seo-writer`: local-only SEO/GEO writing workflow and references
 - `public/_redirects`: affiliate redirect mapping for `/go/*`
+- `public/robots.txt`: crawl rules and sitemap declaration
 
 ### Public Site Model
 - Homepage is now a decision hub that routes traffic into `Programs`, `Blog`, and `Offers`.
 - Blog pages are generated from `src/content/blog` via `src/pages/blog/[slug].astro`.
 - Blog index is a premium editorial hub with category filters, search, featured cards, and real thumbnail/fallback handling.
+- Header now includes a real search entry point routed to `src/pages/search/index.astro`.
 - Program review pages are generated from `src/content/programs` via `src/pages/programs/[program].astro`.
 - Programs index is a dark directory page with filters, search, featured programs, and local logo/fallback rendering.
 - Program detail pages are now decision-oriented review pages with hero, scorecard, sticky sidebar, alternatives, FAQ, and richer CTA structure.
@@ -40,7 +42,9 @@ Last updated: 2026-04-03
 - Offer landing pages are generated from `src/content/offers` via `src/pages/p/[offer].astro`, and that route now renders markdown body content.
 - Static offer pages live under `src/pages/offers/*.astro` and now share an article-style layout aligned to the blog reading system.
 - `/offers/` now exists as a hub route at `src/pages/offers/index.astro`.
-- Tools hub is driven by `src/data/skills.json`, but tool detail pages are still placeholder/static.
+- Tools hub is driven by `src/data/skills.json` plus local interpretation in `src/pages/tools/index.astro`.
+- Tools now include dedicated internal detail pages for `Higgsfield` and `Abacus AI`.
+- Canonical, sitemap, and robots have been standardized to the `www` host.
 
 ### Important Files
 - `src/content.config.ts`: collection schemas
@@ -54,7 +58,13 @@ Last updated: 2026-04-03
 - `src/pages/offers/index.astro`: offers hub
 - `src/pages/p/[offer].astro`: content-driven offer route
 - `src/content/_engine/offer-page-template-v1.md`: execution template for offer content
-- `src/pages/tools/index.astro`: skills overview
+- `src/pages/tools/index.astro`: tools and skills operating library
+- `src/pages/tools/higgsfield.astro`: tool detail page
+- `src/pages/tools/abacus-ai.astro`: tool detail page
+- `src/pages/search/index.astro`: lightweight site search page
+- `src/components/nav/Header.astro`: shared nav including search entry point
+- `src/components/seo/SEO.astro`: canonical/OG meta generation
+- `astro.config.mjs`: canonical site host
 - `seo-writer/SKILL.md`: required workflow for long-form SEO/GEO content requests
 - `src/content/_engine/seo-keyword-clusters.json`: content roadmap
 - `src/data/tools/directory-schema-v1.md`: approved tools directory schema spec
@@ -62,12 +72,12 @@ Last updated: 2026-04-03
 - `docs/MoltyFlywheel_System_Snapshot_v1.md`: higher-level project snapshot for future sessions
 
 ### Content Inventory At Last Read
-- Blog posts: 18
+- Blog posts: 43
 - Program reviews: 20
-- Offer markdown files: 1
+- Offer markdown files: 2
 - Static offer pages: 7
 - Niche pages: 6
-- Blog cover images: 21
+- Blog cover images: 48
 - Program logo files: 10
 
 ### Behavioral Notes
@@ -76,13 +86,17 @@ Last updated: 2026-04-03
 - Offer pages under `/offers/*` now intentionally mirror the blog detail reading experience while shifting content blocks toward decision support and CTA fit.
 - Affiliate buttons route internally to `/go/[program]`, then redirect via `public/_redirects`.
 - `SEO.astro` supports `ogImage` with fallback from legacy `og_image`.
+- Canonical URLs should resolve to `https://www.moltyflywheel.com/...` regardless of incoming host.
+- `public/robots.txt` and Astro sitemap output must stay aligned to the `www` host.
 - Program cards and program detail pages use local logos where available and a branded fallback otherwise.
 - Homepage review/comparison cards now render blog thumbnails from `ogImage` and fall back cleanly if needed.
+- This repo should be treated as SEO-first by default: prefer canonical safety, stable public URLs, internal-link clarity, and search-intent consistency over cosmetic shortcuts.
 
 ### Known Mismatches / Follow-up Checks
 - Several offer pages link to `/niches`, but the repo currently exposes `/niche/[niche]`, not `/niches`.
 - `src/pages/tools/[skill].astro` only defines 4 static placeholder routes and is not synced with `src/data/skills.json`.
 - The content-driven offer system (`/p/[offer]`) and the static `/offers/*` layer now both exist; future work should keep their UX and copy system aligned instead of letting them drift.
+- GSC verification and host unification are in place, but Google recrawl/index consolidation still depends on time and reindexing, not more repo changes alone.
 
 ### Verification At Last Read
 - `npm run build` succeeded on 2026-04-03.
@@ -123,3 +137,11 @@ Last updated: 2026-04-03
   - `/offers/` hub route
 - Navigation was updated so Home and Offers appear in shared site navigation, including offer layouts.
 - Outcome: the repo now has a stable public content system snapshot that should be read first before future route, content, or design work.
+
+### 2026-04-17 - SEO-first memory refresh and host consolidation snapshot
+- Canonical host was standardized to `https://www.moltyflywheel.com` in Astro config, SEO component output, `robots.txt`, and sitemap generation.
+- Google Search Console HTML verification tag was added and verified successfully.
+- Header search entry point and dedicated `/search/` page are live and part of the public IA.
+- Tools layer expanded beyond placeholder routing with real internal detail pages for `Higgsfield` and `Abacus AI`.
+- Content inventory increased significantly through scheduled article production; counts in `README.md` and this memory file were refreshed.
+- Operational rule clarified: future agents should treat the repo as SEO-first by default and protect canonical, sitemap, robots, route clarity, and internal-link integrity before shipping changes.

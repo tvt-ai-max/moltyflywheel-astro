@@ -5,6 +5,26 @@ Language: English
 Purpose: active daily content execution rules
 Last updated: 2026-04-04
 
+## 0. SEO-first operating rule
+
+Treat SEO integrity as a default operating constraint for this repo.
+
+Before shipping content, route, layout, image, or metadata changes, check:
+- canonical and host consistency
+- title, description, and indexability
+- internal linking and route clarity
+- robots and sitemap compatibility
+- image and OG compatibility where relevant
+
+Current canonical host:
+- `https://www.moltyflywheel.com`
+
+Do not casually introduce:
+- mixed `www` and non-`www` public URLs
+- route changes that fragment search intent
+- metadata shortcuts that weaken canonical clarity
+- image/path changes that create stale or broken crawl signals
+
 ## 1. Active planning source
 
 `docs/lich_xuat_ban_moltyflywheel.xlsx` is the active content production board.

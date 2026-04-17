@@ -4,6 +4,31 @@ A high-performance Astro-based project integrated with a local SEO and GEO (Gene
 
 ---
 
+## SEO-First Rule
+
+This repo is SEO-first by default.
+
+Before shipping route, content, image, metadata, or layout changes, check:
+- canonical and host consistency
+- title, description, and indexability
+- internal linking and route clarity
+- robots and sitemap compatibility
+- image/OG compatibility when assets are involved
+
+Current canonical host:
+- `https://www.moltyflywheel.com`
+
+Do not introduce changes that weaken:
+- `www` canonical consistency
+- sitemap/robots alignment
+- search intent clarity
+- internal-link structure
+- stable public URL patterns
+
+If there is a tradeoff between a quick UI shortcut and SEO integrity, prefer the SEO-safe path.
+
+---
+
 ## 🚀 Local SEO Writing Workflow
 
 This project features a dedicated local skill pack for content creation, located in the `seo-writer/` directory. This system is designed to produce high-quality, "Answer-first" content that is optimized for both traditional search engines (Google) and AI-powered search (GEO/SGE).
@@ -92,6 +117,10 @@ To avoid re-reading the entire repository on every session, this project maintai
 
 For future analysis, review this file first, then scan only the files changed since the last log entry or the files directly relevant to the current task. Update the memory file after major codebase reads, architecture changes, or significant implementation work.
 
+For SEO-sensitive work, also read:
+
+- `docs/OpenClaw_Content_Execution_Rules_v1.md`
+
 ---
 
 ## 🗂️ AI Tools Taxonomy Assets
@@ -115,22 +144,26 @@ As of the latest implementation sweep, the public site now has:
 - a redesigned `/programs` directory plus richer program detail pages
 - a local logo system for program cards and program detail heroes
 - a full `/offers/` hub plus article-style offer detail pages
-- one content-driven offer route at `/p/[offer]`
+- content-driven offer routes at `/p/[offer]`
+- a working site search entry point in the header plus `/search/`
+- a tools library in `src/pages/tools/index.astro` with internal tool pages
+- canonical, robots, and sitemap standardized to `https://www.moltyflywheel.com`
 
 Current tracked content inventory:
 
-- `18` blog posts in `src/content/blog/`
+- `43` blog posts in `src/content/blog/`
 - `20` program entries in `src/content/programs/`
-- `7` static offer pages in `src/pages/offers/`
-- `1` content-driven offer entry in `src/content/offers/`
+- `7` static offer detail pages in `src/pages/offers/` plus the `/offers/` hub
+- `2` content-driven offer entries in `src/content/offers/`
 - `6` niche pages in `src/content/niches/`
-- `21` blog cover assets in `public/images/blog/`
+- `48` blog cover assets in `public/images/blog/`
 - `10` program logo assets in `public/images/programs/logos/`
 
 If you are continuing work on this repo, review these files first:
 
 - `docs/CODEBASE_MEMORY.md`
 - `docs/MoltyFlywheel_System_Snapshot_v1.md`
+- `docs/OpenClaw_Content_Execution_Rules_v1.md`
 - `src/content.config.ts`
 - `src/pages/index.astro`
 - `src/pages/blog/index.astro`
@@ -139,6 +172,11 @@ If you are continuing work on this repo, review these files first:
 - `src/pages/programs/[program].astro`
 - `src/layouts/OfferArticleLayout.astro`
 - `src/pages/offers/index.astro`
+- `src/pages/search/index.astro`
+- `src/components/nav/Header.astro`
+- `src/components/seo/SEO.astro`
+- `astro.config.mjs`
+- `public/robots.txt`
 
 ---
 
