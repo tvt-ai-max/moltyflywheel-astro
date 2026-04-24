@@ -7,7 +7,7 @@ tags: ["claude", "prompts", "content-marketing", "ai-writing", "tutorial"]
 keyword: "Claude prompts for content marketing"
 cluster: "cluster-b-claude-ai"
 ogImage: "/images/blog/best-claude-prompts-for-content-marketing-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 

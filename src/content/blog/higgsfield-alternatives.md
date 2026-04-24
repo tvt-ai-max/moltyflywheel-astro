@@ -7,7 +7,7 @@ tags: ["higgsfield", "ai-video", "ai-image", "creator-tools", "alternatives"]
 keyword: "higgsfield alternatives"
 cluster: "cluster-h-higgsfield"
 ogImage: "/images/blog/higgsfield-alternatives-cover.webp"
-draft: true
+draft: false
 ---
 
 If you are looking for Higgsfield alternatives, the goal should not be to find a random list of tools that look similar.

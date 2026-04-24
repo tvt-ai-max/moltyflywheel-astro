@@ -7,7 +7,7 @@ tags: ["higgsfield", "runway", "ai-video", "creator-tools", "comparison"]
 keyword: "higgsfield vs runway"
 cluster: "cluster-h-higgsfield"
 ogImage: "/images/blog/higgsfield-vs-runway-cover.webp"
-draft: true
+draft: false
 ---
 
 If you are comparing Higgsfield and Runway, the goal should not be to crown a universal winner.

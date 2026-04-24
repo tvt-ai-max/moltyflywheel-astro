@@ -7,7 +7,7 @@ tags: ["higgsfield", "ai-ad-creatives", "creator-workflow", "visual-ai", "market
 keyword: "how to use higgsfield"
 cluster: "cluster-h-higgsfield"
 ogImage: "/images/blog/how-to-use-higgsfield-for-ai-ad-creatives-cover.webp"
-draft: true
+draft: false
 ---
 
 Most teams do not struggle with AI ad creatives because there are no tools.

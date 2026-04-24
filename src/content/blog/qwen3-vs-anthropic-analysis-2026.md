@@ -7,7 +7,7 @@ tags: ["qwen3", "anthropic", "claude", "open-source-ai", "analysis"]
 keyword: "Qwen3 vs Anthropic"
 cluster: "cluster-d-ai-news"
 ogImage: "/images/blog/qwen3-vs-anthropic-analysis-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
