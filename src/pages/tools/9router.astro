@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramLogo from '../../components/programs/ProgramLogo.astro';
+
+const title = '9Router Tool Detail | MoltyFlywheel';
+const description =
+  'A practical 9Router overview for developers and operators who want a local AI router with 3-tier fallback, quota tracking, and one OpenAI-compatible localhost endpoint for coding workflows.';
+
+const productSignals = [
+  '9Router currently positions itself as a local AI router for coding tools like Codex CLI, Cursor, Cline, and Claude Desktop.',
+  'The public site emphasizes 3-tier routing across subscription, cheap, and free model tiers with automatic fallback.',
+  'The main integration model is a localhost OpenAI-compatible endpoint at http://localhost:20128/v1 after local install.',
+  'Public messaging also highlights quota tracking, multi-account support, and local operation instead of a pure hosted gateway.',
+];
+
+const strengths = [
+  'The local-router model is useful when you want one coding endpoint without handing routing control to a separate hosted layer.',
+  '3-tier fallback is a practical fit for developer workflows where rate limits or exhausted quotas interrupt active sessions.',
+  'OpenAI-compatible localhost routing lowers adoption friction for tools that already support custom endpoints.',
+  'Quota visibility is operationally useful when the real goal is to maximize existing subscriptions before falling back to cheaper models.',
+];
+
+const constraints = [
+  'This is primarily built around coding and developer workflows, not a general-purpose business AI stack.',
+  'Because it runs locally, setup and maintenance are still your responsibility rather than a fully managed hosted service.',
+  'The public site makes strong value claims, but you should validate real model quality and fallback behavior in your own workflow.',
+  'If you only use one provider and rarely hit limits, the routing layer may add less value.',
+];
+
+const bestFits = [
+  'Codex CLI, Cursor, Cline, and Claude Desktop users who want one local routing layer.',
+  'Developers trying to combine subscription access, cheaper backup models, and free emergency fallback.',
+  'Operators who want more control over coding-model routing without depending entirely on a hosted gateway.',
+];
+
+const useCases = [
+  'Route coding sessions through one localhost endpoint instead of switching providers manually.',
+  'Use subscription quota first, then fall back to cheap or free models automatically.',
+  'Keep coding tools running during quota exhaustion or provider limits without changing app configuration every time.',
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="relative overflow-hidden border-b border-[#0d2d40] bg-[#011826]">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(114,219,242,0.14),transparent_32%),radial-gradient(circle_at_82%_18%,rgba(33,115,166,0.24),transparent_22%),linear-gradient(180deg,rgba(11,59,89,0.18),transparent_55%)]"></div>
+    <div class="absolute inset-0 opacity-[0.08]" style="background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 72px 72px;"></div>
+
+    <div class="relative mx-auto max-w-[1400px] px-4 py-14 md:px-6 md:py-18">
+      <div class="grid gap-10 xl:grid-cols-[minmax(0,1.15fr)_380px] xl:items-start">
+        <div class="max-w-4xl">
+          <nav class="flex items-center gap-2 text-xs text-[#3d7a96]" aria-label="Breadcrumb">
+            <a href="/" class="transition-colors hover:text-[#72DBF2]">Home</a>
+            <span>/</span>
+            <a href="/tools" class="transition-colors hover:text-[#72DBF2]">Tools</a>
+            <span>/</span>
+            <span class="text-[#5ea4bf]">9Router</span>
+          </nav>
+
+          <div class="mt-5 flex flex-wrap items-center gap-2">
+            <span class="inline-flex rounded-full border border-[#B8D9E8]/20 bg-[#B8D9E8]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#B8D9E8]">
+              Local Router
+            </span>
+            <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#72DBF2]">
+              Tool Detail
+            </span>
+          </div>
+
+          <h1 class="mt-6 max-w-4xl text-4xl font-black leading-[1.05] text-[#daeef5] md:text-6xl">
+            9Router is worth testing when your coding stack needs local routing, quota awareness, and fallback across multiple AI providers.
+          </h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#5ea4bf] md:text-[19px]">
+            This page is the practical layer: where 9Router fits, what the local-router model changes, and why a localhost OpenAI-compatible endpoint can simplify active coding workflows.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <div class="flex items-center gap-2 rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              4.6 / 5 editorial fit
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              External platform
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              Localhost routing + fallback
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="https://9router.com/"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center rounded-full bg-[#2173A6] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2d88bf]"
+            >
+              Open 9Router →
+            </a>
+            <a
+              href="https://github.com/9router/9router"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center rounded-full border border-[#72DBF2]/25 bg-[#72DBF2]/10 px-6 py-3 text-sm font-semibold text-[#72DBF2] transition-colors hover:bg-[#72DBF2]/16"
+            >
+              View docs →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+          <div class="relative overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#011826]/50 p-5">
+            <div class="absolute -left-10 -top-10 h-36 w-36 rounded-full blur-3xl bg-[#72DBF2]/20"></div>
+            <div class="relative flex items-center gap-4">
+              <ProgramLogo name="9Router" logo="" size="md" />
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#72DBF2]">Signal Snapshot</p>
+                <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Coding-first router</h2>
+              </div>
+            </div>
+            <p class="mt-5 text-sm leading-7 text-[#89c0d4]">
+              The strongest public signal is local control: install once, point coding tools to localhost, then let 9Router handle fallback between subscription, cheap, and free tiers.
+            </p>
+          </div>
+
+          <div class="mt-5 space-y-4">
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Best for</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Developer stacks using Codex CLI, Cursor, Cline, Claude Desktop, or similar tools with custom OpenAI endpoints.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">What stands out</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">3-tier automatic fallback, quota tracking, multi-account support, and local routing instead of a hosted-only gateway model.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">What to compare</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Fallback reliability, local setup cost, supported providers, and whether localhost routing is a better fit than a hosted API gateway for your stack.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="editorial-review" class="border-b border-[#0d2d40] bg-[#041f31]">
+    <div class="mx-auto max-w-[1200px] px-4 py-14 md:px-6 md:py-18">
+      <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <article class="space-y-10">
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">What 9Router Looks Like Right Now</h2>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              9Router currently presents itself as a local AI router for developers who want to keep coding tools pointed at one OpenAI-compatible localhost endpoint while the router handles provider switching in the background.
+            </p>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              That framing makes it more relevant for active coding environments than for broader business AI orchestration. The product logic is about preserving flow during quota exhaustion, rate limits, or provider switching rather than replacing application-level workflow tools.
+            </p>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">Current Product Signals</h2>
+            <ul class="mt-5 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+              {productSignals.map((item) => <li>• {item}</li>)}
+            </ul>
+            <p class="mt-5 text-base leading-8 text-[#9dc6d8]">
+              Official public messaging also emphasizes two-command setup, support for tools with custom OpenAI endpoints, and a routing model built around subscription maximization before falling back to cheaper or free options.
+            </p>
+          </section>
+
+          <section class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Good Fit</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {bestFits.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Less Ideal Fit</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {constraints.slice(0, 3).map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">What It Seems Best At</h2>
+            <ul class="mt-5 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+              {useCases.map((item) => <li>• {item}</li>)}
+            </ul>
+          </section>
+
+          <section class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Strengths</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {strengths.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Constraints</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {constraints.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">Related Paths</h2>
+            <div class="mt-5 grid gap-4 md:grid-cols-2">
+              <a href="/blog/what-is-claude-code-2026/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Read the practical Claude Code guide before optimizing router logic →
+              </a>
+              <a href="/tools/kyma-api/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Compare a local router with a hosted model gateway before deciding on the right layer →
+              </a>
+              <a href="/tools/abacus-ai/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                If you want a larger all-in-one agent platform, review Abacus AI too →
+              </a>
+              <a href="/tools/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Go back to the tools and skills operating library →
+              </a>
+            </div>
+          </section>
+        </article>
+
+        <aside class="space-y-5">
+          <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.9),rgba(1,24,38,0.92))] p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#72DBF2]">Decision Note</p>
+            <p class="mt-4 text-sm leading-7 text-[#b8d9e6]">
+              Treat 9Router as a developer productivity and reliability layer. The core question is whether local routing and fallback remove enough friction from your day-to-day coding stack to justify the extra local component.
+            </p>
+          </div>
+
+          <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.9),rgba(1,24,38,0.92))] p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#72DBF2]">Next Click</p>
+            <a
+              href="https://9router.com/"
+              target="_blank"
+              rel="noreferrer"
+              class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#2173A6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#2d88bf]"
+            >
+              Open 9Router →
+            </a>
+            <p class="mt-4 text-xs leading-6 text-[#89c0d4]">
+              External platform. Check the live provider mix, docs, and local setup path before adopting it in production.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
