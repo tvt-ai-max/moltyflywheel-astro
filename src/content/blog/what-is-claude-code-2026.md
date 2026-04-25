@@ -7,7 +7,7 @@ tags: ["claude-code", "claude-ai", "coding", "agentic-ai", "tutorial"]
 keyword: "what is Claude Code"
 cluster: "cluster-b-claude-ai"
 ogImage: "/images/blog/what-is-claude-code-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 

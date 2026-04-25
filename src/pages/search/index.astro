@@ -74,6 +74,36 @@ const staticOffers = [
   },
 ];
 
+const toolPages = [
+  {
+    title: 'Higgsfield',
+    href: '/tools/higgsfield/',
+    type: 'Tool',
+    description: 'Creator-focused AI video and image workflows with stronger cinematic and visual-production positioning.',
+    meta: 'Creator video',
+    searchIndex:
+      'higgsfield tool creator video image generation cinematic controls creator workflows visual production ai tool',
+  },
+  {
+    title: 'Abacus AI',
+    href: '/tools/abacus-ai/',
+    type: 'Tool',
+    description: 'An all-in-one AI workspace built around top models, Deep Agent workflows, and the managed Abacus Claw path.',
+    meta: 'Agent platform',
+    searchIndex:
+      'abacus ai tool chatllm deep agent abacus claw openclaw alternative models agents workflow platform',
+  },
+  {
+    title: 'Topview AI',
+    href: '/tools/topview-ai/',
+    type: 'Tool',
+    description: 'An AI video agent focused on UGC-style marketing videos, product-led ads, and faster ad creative workflows.',
+    meta: 'Video ads',
+    searchIndex:
+      'topview ai tool ai video agent ugc videos product videos ad creatives marketing videos affiliate ads ecommerce',
+  },
+];
+
 const migrationById = new Map(
   migrationMap.records.map((record) => [record.legacy_id, record]),
 );
@@ -123,6 +153,7 @@ const searchItems = [
       'offer decision page',
     ].join(' ').toLowerCase(),
   })),
+  ...toolPages,
   ...skillsData.map((skill) => {
     const mapped = migrationById.get(skill.id);
     return {
@@ -151,6 +182,7 @@ const totals = {
   blog: searchItems.filter((item) => item.type === 'Blog').length,
   program: searchItems.filter((item) => item.type === 'Program').length,
   offer: searchItems.filter((item) => item.type === 'Offer').length,
+  tool: searchItems.filter((item) => item.type === 'Tool').length,
   skill: searchItems.filter((item) => item.type === 'Skill').length,
 };
 
@@ -164,7 +196,7 @@ const starterLinks = [
 
 <BaseLayout
   title="Search MoltyFlywheel"
-  description="Search blog posts, programs, offer pages, and skills across the current MoltyFlywheel content system."
+  description="Search blog posts, programs, offer pages, tools, and skills across the current MoltyFlywheel content system."
 >
   <section class="border-b border-[#0d2d40] bg-[radial-gradient(circle_at_top,rgba(114,219,242,0.14),transparent_34%),linear-gradient(180deg,#011826_0%,#0B3B59_52%,#011826_100%)]">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
@@ -176,7 +208,7 @@ const starterLinks = [
           Search the current content system without leaving the site.
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-8 text-[#89c0d4]">
-          Search across blog posts, programs, offer pages, and skills using the public data already built into MoltyFlywheel.
+          Search across blog posts, programs, offer pages, tools, and skills using the public data already built into MoltyFlywheel.
         </p>
       </div>
 
@@ -189,7 +221,7 @@ const starterLinks = [
             id="site-search-input"
             type="text"
             value={query}
-            placeholder="Search blog posts, programs, offers, and skills"
+            placeholder="Search blog posts, programs, offers, tools, and skills"
             class="w-full rounded-2xl border border-[#1a4560] bg-[#0B3B59] py-4 pl-12 pr-14 text-base text-[#daeef5] outline-none transition-colors placeholder:text-[#3d7a96] focus:border-[#72DBF2]"
           />
           <button
@@ -206,6 +238,7 @@ const starterLinks = [
           <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.blog} blog posts</span>
           <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.program} programs</span>
           <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.offer} offers</span>
+          <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.tool} tools</span>
           <span class="rounded-full border border-[#14384f] bg-[#0B3B59]/35 px-3 py-2">{totals.skill} skills</span>
         </div>
       </div>
@@ -252,6 +285,9 @@ const starterLinks = [
         <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#0B3B59]/45 px-4 py-2 text-sm font-semibold text-[#b7d8e5]" type="button" data-type-filter="offer">
           Offers <span class="ml-1 opacity-70">{totals.offer}</span>
         </button>
+        <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#0B3B59]/45 px-4 py-2 text-sm font-semibold text-[#b7d8e5]" type="button" data-type-filter="tool">
+          Tools <span class="ml-1 opacity-70">{totals.tool}</span>
+        </button>
         <button class="search-type-btn rounded-full border border-[#1a4560] bg-[#0B3B59]/45 px-4 py-2 text-sm font-semibold text-[#b7d8e5]" type="button" data-type-filter="skill">
           Skills <span class="ml-1 opacity-70">{totals.skill}</span>
         </button>
@@ -271,6 +307,7 @@ const starterLinks = [
                 item.type === 'Blog' && 'border-[#1f5f82] bg-[#2173A6]/15 text-[#72DBF2]',
                 item.type === 'Program' && 'border-[#55F2C3]/25 bg-[#55F2C3]/10 text-[#55F2C3]',
                 item.type === 'Offer' && 'border-[#89C0D4]/25 bg-[#89C0D4]/10 text-[#bfe8f5]',
+                item.type === 'Tool' && 'border-[#f2ba72]/25 bg-[#f2ba72]/10 text-[#ffd9a2]',
                 item.type === 'Skill' && 'border-[#36536a] bg-[#09283d] text-[#9dc6d8]',
               ]}>
                 {item.type}
