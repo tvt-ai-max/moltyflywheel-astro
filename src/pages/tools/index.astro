@@ -122,6 +122,25 @@ const externalTools = [
   },
   {
     kind: 'tool' as const,
+    slug: 'kyma-api',
+    name: 'Kyma API',
+    description:
+      'An OpenAI-compatible model gateway built around one API key, curated active models, 4-layer auto-failover, prompt caching, and direct OpenClaw compatibility.',
+    logo: '',
+    category: 'general-ai',
+    rating: 4.7,
+    commission: null,
+    href: '/tools/kyma-api/',
+    jobFamily: 'platform-operations',
+    featured: true,
+    destinationType: 'tool-detail' as const,
+    categoryLabel: 'api gateway',
+    metaBadges: ['External tool', 'Models + routing'],
+    footerMeta: 'Best fit for model routing, agent reliability, and lower-friction API ops',
+    tags: ['openai-compatible', 'openclaw', 'api-gateway', 'prompt-caching'],
+  },
+  {
+    kind: 'tool' as const,
     slug: 'topview-ai',
     name: 'Topview AI',
     description:
@@ -208,7 +227,7 @@ const workflowCollections = [
     title: 'Measure and optimize performance',
     description: 'Track what is working, detect decay, and improve the live system intentionally.',
     skills: ['conversion-tracker', 'content-decay-detector', 'performance-report'],
-    tools: ['semrush', 'link-whisper'],
+    tools: ['semrush', 'kyma-api'],
   },
 ];
 
