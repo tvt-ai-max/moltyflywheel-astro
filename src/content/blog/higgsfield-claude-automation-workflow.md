@@ -7,7 +7,7 @@ tags: ["higgsfield", "claude", "automation", "creator-workflow", "ai-tools"]
 keyword: "higgsfield workflow"
 cluster: "cluster-h-higgsfield"
 ogImage: "/images/blog/higgsfield-claude-automation-workflow-cover.webp"
-draft: true
+draft: false
 ---
 
 One of the biggest mistakes in AI workflow building is trying to turn one tool into the entire system.
