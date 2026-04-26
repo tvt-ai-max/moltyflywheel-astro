@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramLogo from '../../components/programs/ProgramLogo.astro';
+
+const title = 'OpenRouter Tool Detail | MoltyFlywheel';
+const description =
+  'A practical OpenRouter overview for operators and developers who want one OpenAI-compatible API, broad model access, multi-provider routing, and a cleaner gateway layer for AI workflows.';
+
+const productSignals = [
+  'OpenRouter currently positions itself as a unified interface for LLMs with one API across major labs and providers.',
+  'The public site highlights 300+ models across 60+ active providers, with routing and fallback as core product logic.',
+  'Its main integration signal is that the OpenAI SDK works out of the box, which lowers switching cost for existing clients.',
+  'Public messaging also emphasizes pricing flexibility, uptime, edge delivery, and configurable data policies.',
+];
+
+const strengths = [
+  'Broad model and provider coverage makes OpenRouter useful when you want optionality rather than a tightly curated gateway.',
+  'OpenAI-compatible setup reduces migration friction for teams already using standard client libraries.',
+  'Routing and fallback across providers can improve resilience when a single provider becomes unstable or rate-limited.',
+  'The platform is strong for experimentation, evaluation, and workloads that benefit from easy model switching.',
+];
+
+const constraints = [
+  'More choice can also mean more operational ambiguity if your team has not already defined model-selection rules.',
+  'A broad gateway is not automatically cheaper for every workload; real cost depends on the models and providers you choose.',
+  'If you want a tighter curated layer with fewer decisions, another gateway may be operationally simpler.',
+  'You still need clear data-policy, routing, and quality standards before using many providers in production.',
+];
+
+const bestFits = [
+  'Developers and operators who want one gateway for many frontier and open models.',
+  'Teams evaluating models across multiple labs without rewriting their integration every time.',
+  'Agent or app builders who need provider flexibility and broader routing options.',
+];
+
+const useCases = [
+  'Use one OpenAI-compatible API to test, compare, and ship across many models.',
+  'Add provider redundancy to agent or product workflows that cannot depend on one vendor alone.',
+  'Keep model access flexible while preserving a stable client integration surface.',
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="relative overflow-hidden border-b border-[#0d2d40] bg-[#011826]">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(114,219,242,0.14),transparent_32%),radial-gradient(circle_at_82%_18%,rgba(33,115,166,0.24),transparent_22%),linear-gradient(180deg,rgba(11,59,89,0.18),transparent_55%)]"></div>
+    <div class="absolute inset-0 opacity-[0.08]" style="background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 72px 72px;"></div>
+
+    <div class="relative mx-auto max-w-[1400px] px-4 py-14 md:px-6 md:py-18">
+      <div class="grid gap-10 xl:grid-cols-[minmax(0,1.15fr)_380px] xl:items-start">
+        <div class="max-w-4xl">
+          <nav class="flex items-center gap-2 text-xs text-[#3d7a96]" aria-label="Breadcrumb">
+            <a href="/" class="transition-colors hover:text-[#72DBF2]">Home</a>
+            <span>/</span>
+            <a href="/tools" class="transition-colors hover:text-[#72DBF2]">Tools</a>
+            <span>/</span>
+            <span class="text-[#5ea4bf]">OpenRouter</span>
+          </nav>
+
+          <div class="mt-5 flex flex-wrap items-center gap-2">
+            <span class="inline-flex rounded-full border border-[#B8D9E8]/20 bg-[#B8D9E8]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#B8D9E8]">
+              Model Gateway
+            </span>
+            <span class="inline-flex rounded-full border border-[#72DBF2]/20 bg-[#72DBF2]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#72DBF2]">
+              Tool Detail
+            </span>
+          </div>
+
+          <h1 class="mt-6 max-w-4xl text-4xl font-black leading-[1.05] text-[#daeef5] md:text-6xl">
+            OpenRouter is worth testing when you want one API surface across many models and providers without locking your workflow to a single lab.
+          </h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-[#5ea4bf] md:text-[19px]">
+            This page is the practical layer: where OpenRouter fits, why the broad gateway model matters, and when provider flexibility is useful versus when a tighter curated stack may be simpler.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <div class="flex items-center gap-2 rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              4.8 / 5 editorial fit
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              External platform
+            </div>
+            <div class="rounded-full border border-[#1a4560] bg-[#0B3B59]/70 px-4 py-2 text-sm font-medium text-[#89c0d4]">
+              300+ models + routing
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="https://openrouter.ai/"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center rounded-full bg-[#2173A6] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2d88bf]"
+            >
+              Open OpenRouter →
+            </a>
+            <a
+              href="https://openrouter.ai/docs"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center rounded-full border border-[#72DBF2]/25 bg-[#72DBF2]/10 px-6 py-3 text-sm font-semibold text-[#72DBF2] transition-colors hover:bg-[#72DBF2]/16"
+            >
+              Read docs →
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-6 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+          <div class="relative overflow-hidden rounded-[24px] border border-[#1a4560] bg-[#011826]/50 p-5">
+            <div class="absolute -left-10 -top-10 h-36 w-36 rounded-full blur-3xl bg-[#72DBF2]/20"></div>
+            <div class="relative flex items-center gap-4">
+              <ProgramLogo name="OpenRouter" logo="" size="md" />
+              <div>
+                <p class="text-[11px] uppercase tracking-[0.24em] text-[#72DBF2]">Signal Snapshot</p>
+                <h2 class="mt-2 text-2xl font-bold text-[#daeef5]">Broad provider layer</h2>
+              </div>
+            </div>
+            <p class="mt-5 text-sm leading-7 text-[#89c0d4]">
+              The strongest public signal is breadth: one OpenAI-compatible interface, large model coverage, and provider routing for teams that value flexibility more than a tightly limited model menu.
+            </p>
+          </div>
+
+          <div class="mt-5 space-y-4">
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">Best for</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Teams that want broad model access, provider redundancy, and one stable integration surface.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">What stands out</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">300+ models, 60+ providers, OpenAI-compatible setup, and a clear public emphasis on routing, uptime, and flexibility.</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4">
+              <p class="text-[11px] uppercase tracking-[0.24em] text-[#3d7a96]">What to compare</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Model choice complexity, effective pricing, provider stability, and whether broad access is better than a narrower curated gateway for your team.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="editorial-review" class="border-b border-[#0d2d40] bg-[#041f31]">
+    <div class="mx-auto max-w-[1200px] px-4 py-14 md:px-6 md:py-18">
+      <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <article class="space-y-10">
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">What OpenRouter Looks Like Right Now</h2>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              OpenRouter currently presents itself as a unified LLM interface where one API gives access to a large catalog of models across many providers. The public framing is breadth, flexibility, and reliability through routed access instead of direct dependence on one lab.
+            </p>
+            <p class="mt-4 text-base leading-8 text-[#9dc6d8]">
+              That makes it especially relevant for developers, AI product teams, and operators who want to compare models or preserve optionality without replacing their client integration every time they change providers.
+            </p>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">Current Product Signals</h2>
+            <ul class="mt-5 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+              {productSignals.map((item) => <li>• {item}</li>)}
+            </ul>
+          </section>
+
+          <section class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Good Fit</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {bestFits.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Less Ideal Fit</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {constraints.slice(0, 3).map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">What It Seems Best At</h2>
+            <ul class="mt-5 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+              {useCases.map((item) => <li>• {item}</li>)}
+            </ul>
+          </section>
+
+          <section class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Strengths</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {strengths.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+            <div class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+              <h2 class="text-2xl font-bold text-[#daeef5]">Constraints</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+                {constraints.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+          </section>
+
+          <section class="rounded-[28px] border border-[#1a4560] bg-[#0B3B59]/35 p-7">
+            <h2 class="text-2xl font-bold text-[#daeef5]">Related Paths</h2>
+            <div class="mt-5 grid gap-4 md:grid-cols-2">
+              <a href="/tools/kyma-api/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Compare a broad model gateway with a more curated routing layer →
+              </a>
+              <a href="/tools/9router/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                If you want local routing for coding stacks, compare OpenRouter with 9Router →
+              </a>
+              <a href="/blog/how-openclaw-generates-1-blog-post-per-day/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Review the current OpenClaw workflow before changing the model gateway layer →
+              </a>
+              <a href="/tools/" class="rounded-2xl border border-[#1a4560] bg-[#011826]/55 p-4 text-sm leading-7 text-[#b8d9e6] transition hover:border-[#72DBF2]/35 hover:text-white">
+                Go back to the tools and skills operating library →
+              </a>
+            </div>
+          </section>
+        </article>
+
+        <aside class="space-y-5">
+          <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.9),rgba(1,24,38,0.92))] p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#72DBF2]">Decision Note</p>
+            <p class="mt-4 text-sm leading-7 text-[#b8d9e6]">
+              Treat OpenRouter as a flexibility and routing decision. The key question is whether broad provider access improves your stack more than a narrower, more opinionated gateway would.
+            </p>
+          </div>
+
+          <div class="rounded-[28px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.9),rgba(1,24,38,0.92))] p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#72DBF2]">Next Click</p>
+            <a
+              href="https://openrouter.ai/"
+              target="_blank"
+              rel="noreferrer"
+              class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#2173A6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#2d88bf]"
+            >
+              Open OpenRouter →
+            </a>
+            <p class="mt-4 text-xs leading-6 text-[#89c0d4]">
+              External platform. Check the live model list, provider routing behavior, and pricing before using it in production.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
