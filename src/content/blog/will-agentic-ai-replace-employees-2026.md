@@ -7,7 +7,7 @@ tags: ["agentic-ai", "future-of-work", "automation", "ai-jobs", "2026"]
 keyword: "will Agentic AI replace employees"
 cluster: "cluster-a-agentic-ai"
 ogImage: "/images/blog/will-agentic-ai-replace-employees-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
