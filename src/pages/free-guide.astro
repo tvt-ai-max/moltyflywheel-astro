@@ -1,24 +1,273 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const signupEndpoint = import.meta.env.PUBLIC_FREE_GUIDE_WEBHOOK_URL ?? '';
+const guideDeliveryUrl = import.meta.env.PUBLIC_FREE_GUIDE_ASSET_URL ?? '/blog/';
+const consentVersion = 'free-guide-v1-2026-04-27';
 ---
-<BaseLayout title="Free AI Affiliate Guide" description="Download the complete AI Affiliate Flywheel blueprint for free.">
-  <div class="max-w-4xl mx-auto px-6 py-24 text-center">
-    <h1 class="text-4xl md:text-6xl font-black mb-6">The 2026 AI Affiliate<br/><span class="text-amber-500">Master Blueprint</span></h1>
-    <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-      How we built a $3,000/mo passive income stream using Claude Pro and the OpenClaw automation engine.
-    </p>
-    
-    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 md:p-12 max-w-lg mx-auto shadow-2xl">
-      <h3 class="text-2xl font-bold mb-6">Get the Free Guide</h3>
-      <form class="space-y-4">
-        <input type="email" placeholder="Your best email address..." class="w-full bg-gray-800 border border-gray-700 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors" required />
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all hover:-translate-y-0.5">
-          Send Me the PDF →
-        </button>
-      </form>
-      <p class="text-xs text-gray-500 mt-6">
-        Join 2,400+ marketers. No spam. Unsubscribe anytime.
-      </p>
+
+<BaseLayout
+  title="Free AI Affiliate Guide"
+  description="Get the MoltyFlywheel AI Affiliate Master Blueprint and join the email funnel for tools, offers, and workflow guidance."
+>
+  <section class="border-b border-[#0d2d40] bg-[radial-gradient(circle_at_top,#0B3B59_0%,#011826_58%,#01131d_100%)]">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,460px)] lg:items-start">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center rounded-full border border-[#2173A6]/40 bg-[#2173A6]/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#72DBF2]">
+            Free Guide
+          </div>
+          <h1 class="mt-6 text-4xl font-black leading-[1.03] text-[#daeef5] md:text-6xl">
+            The 2026 AI Affiliate
+            <span class="block text-[#72DBF2]">Master Blueprint</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-[#89c0d4]">
+            Get the MoltyFlywheel guide for building a cleaner AI affiliate system around tools, offers, content workflows, and decision-first monetization.
+          </p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-[#1a4560] bg-[#0B3B59]/35 p-4">
+              <p class="text-[11px] uppercase tracking-[0.2em] text-[#72DBF2]">Guide focus</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Tools, offers, content, and workflow structure</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#0B3B59]/35 p-4">
+              <p class="text-[11px] uppercase tracking-[0.2em] text-[#72DBF2]">Email follow-up</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Automated nurture for blog, tools, and offer paths</p>
+            </div>
+            <div class="rounded-2xl border border-[#1a4560] bg-[#0B3B59]/35 p-4">
+              <p class="text-[11px] uppercase tracking-[0.2em] text-[#72DBF2]">Best for</p>
+              <p class="mt-2 text-sm leading-6 text-[#daeef5]">Operators, creators, and AI affiliate builders</p>
+            </div>
+          </div>
+
+          <div class="mt-10 rounded-[28px] border border-[#1a4560] bg-[linear-gradient(180deg,rgba(11,59,89,0.4),rgba(1,24,38,0.75))] p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#72DBF2]">What happens after signup</p>
+            <ol class="mt-4 space-y-3 text-sm leading-7 text-[#b8d9e6]">
+              <li>1. Your email is captured with source and UTM data.</li>
+              <li>2. The guide delivery flow is triggered through the configured email automation system.</li>
+              <li>3. You move into the MoltyFlywheel nurture sequence for blog, tools, programs, and offers.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="rounded-[32px] border border-[#1a4560] bg-[linear-gradient(160deg,rgba(11,59,89,0.96),rgba(1,24,38,0.92))] p-8 shadow-[0_28px_90px_rgba(1,24,38,0.35)]">
+          <h2 class="text-2xl font-bold text-[#daeef5]">Get the free guide</h2>
+          <p class="mt-3 text-sm leading-7 text-[#89c0d4]">
+            Enter your email to receive the guide and the follow-up sequence. This form stores attribution data so the funnel can be measured properly.
+          </p>
+
+          <form
+            id="free-guide-form"
+            class="mt-6 space-y-4"
+            data-endpoint={signupEndpoint}
+            data-guide-url={guideDeliveryUrl}
+            data-consent-version={consentVersion}
+          >
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-[#daeef5]">Email address</span>
+              <input
+                id="free-guide-email"
+                name="email"
+                type="email"
+                placeholder="your@email.com"
+                class="w-full rounded-xl border border-[#1a4560] bg-[#011826] px-5 py-4 text-white outline-none transition-colors placeholder:text-[#3d7a96] focus:border-[#72DBF2]"
+                required
+                autocomplete="email"
+              />
+            </label>
+
+            <input type="text" name="company" id="free-guide-company" class="hidden" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="source_page" value="/free-guide/" />
+            <input type="hidden" name="lead_magnet" value="ai-affiliate-master-blueprint-2026" />
+            <input type="hidden" name="utm_source" id="free-guide-utm-source" />
+            <input type="hidden" name="utm_medium" id="free-guide-utm-medium" />
+            <input type="hidden" name="utm_campaign" id="free-guide-utm-campaign" />
+            <input type="hidden" name="utm_term" id="free-guide-utm-term" />
+            <input type="hidden" name="utm_content" id="free-guide-utm-content" />
+            <input type="hidden" name="referrer" id="free-guide-referrer" />
+            <input type="hidden" name="page_url" id="free-guide-page-url" />
+
+            <button
+              id="free-guide-submit"
+              type="submit"
+              class="w-full rounded-xl bg-[linear-gradient(135deg,#72DBF2,#2173A6)] px-6 py-4 text-sm font-bold text-[#011826] transition-transform hover:-translate-y-0.5"
+            >
+              Send me the guide →
+            </button>
+
+            <div id="free-guide-feedback" class="hidden rounded-2xl border px-4 py-4 text-sm leading-7"></div>
+          </form>
+
+          <div class="mt-6 space-y-3 text-xs leading-6 text-[#5ea4bf]">
+            <p>Join 2,400+ marketers. No spam. Unsubscribe anytime.</p>
+            <p>
+              By signing up, you agree to receive the guide and related emails from MoltyFlywheel. See
+              <a href="/privacy/" class="text-[#72DBF2] hover:text-white"> the privacy policy</a>.
+            </p>
+          </div>
+
+          <noscript>
+            <div class="mt-6 rounded-2xl border border-[#7a3a3a] bg-[#3f1515] px-4 py-4 text-sm leading-7 text-[#ffd9d9]">
+              JavaScript is required for the current signup flow because this static site submits the form to the configured automation endpoint.
+            </div>
+          </noscript>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="bg-[#011826] py-16">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-6 md:grid-cols-3">
+        <a href="/blog/" class="rounded-[24px] border border-[#0d2d40] bg-[linear-gradient(180deg,rgba(11,59,89,0.65),rgba(4,26,39,0.9))] p-6 transition hover:border-[#2173A6]">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#72DBF2]">Read next</p>
+          <h3 class="mt-3 text-xl font-black text-[#daeef5]">MoltyFlywheel AI affiliate blog</h3>
+          <p class="mt-3 text-sm leading-7 text-[#89c0d4]">Use the blog hub for guides, reviews, comparisons, and workflow education.</p>
+        </a>
+        <a href="/tools/" class="rounded-[24px] border border-[#0d2d40] bg-[linear-gradient(180deg,rgba(11,59,89,0.65),rgba(4,26,39,0.9))] p-6 transition hover:border-[#2173A6]">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#72DBF2]">Tool layer</p>
+          <h3 class="mt-3 text-xl font-black text-[#daeef5]">MoltyFlywheel tools</h3>
+          <p class="mt-3 text-sm leading-7 text-[#89c0d4]">Browse the tools library when the guide leads into software, routing, or workflow infrastructure.</p>
+        </a>
+        <a href="/offers/" class="rounded-[24px] border border-[#0d2d40] bg-[linear-gradient(180deg,rgba(11,59,89,0.65),rgba(4,26,39,0.9))] p-6 transition hover:border-[#2173A6]">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#72DBF2]">Decision pages</p>
+          <h3 class="mt-3 text-xl font-black text-[#daeef5]">MoltyFlywheel offers</h3>
+          <p class="mt-3 text-sm leading-7 text-[#89c0d4]">Use offer pages when the next step is choosing the right monetization path, not just reading more.</p>
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById('free-guide-form');
+  const feedback = document.getElementById('free-guide-feedback');
+  const submitButton = document.getElementById('free-guide-submit');
+  const pageUrlField = document.getElementById('free-guide-page-url');
+  const referrerField = document.getElementById('free-guide-referrer');
+  const params = new URLSearchParams(window.location.search);
+
+  const setFieldValue = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.value = value;
+  };
+
+  setFieldValue('free-guide-utm-source', params.get('utm_source') || '');
+  setFieldValue('free-guide-utm-medium', params.get('utm_medium') || '');
+  setFieldValue('free-guide-utm-campaign', params.get('utm_campaign') || '');
+  setFieldValue('free-guide-utm-term', params.get('utm_term') || '');
+  setFieldValue('free-guide-utm-content', params.get('utm_content') || '');
+  if (pageUrlField) pageUrlField.value = window.location.href;
+  if (referrerField) referrerField.value = document.referrer || '';
+
+  const showFeedback = (tone, message) => {
+    if (!feedback) return;
+    feedback.classList.remove('hidden', 'border-[#1f5f82]', 'bg-[#0B3B59]/40', 'text-[#b8d9e6]', 'border-[#7a3a3a]', 'bg-[#3f1515]', 'text-[#ffd9d9]');
+    if (tone === 'error') {
+      feedback.classList.add('border-[#7a3a3a]', 'bg-[#3f1515]', 'text-[#ffd9d9]');
+    } else {
+      feedback.classList.add('border-[#1f5f82]', 'bg-[#0B3B59]/40', 'text-[#b8d9e6]');
+    }
+    feedback.textContent = message;
+  };
+
+  const successMessage = (status, fallbackUrl) => {
+    if (status === 'duplicate') {
+      return 'This email is already in the MoltyFlywheel guide flow. Check your inbox, then continue with the blog or tools hub if you want the next step now.';
+    }
+    if (status === 'pending_confirm') {
+      return 'Check your inbox and confirm your email to receive the guide. If you do not see it, check Promotions or Spam.';
+    }
+    return `Success. The guide flow has started. Check your inbox now. If delivery is delayed, you can continue from ${fallbackUrl}.`;
+  };
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const endpoint = form.dataset.endpoint || '';
+    const fallbackUrl = form.dataset.guideUrl || '/blog/';
+    const consent = form.dataset.consentVersion || 'free-guide-v1';
+    const honeypot = document.getElementById('free-guide-company');
+
+    if (!endpoint) {
+      showFeedback('error', 'Signup is not configured yet. Add PUBLIC_FREE_GUIDE_WEBHOOK_URL before using this capture form.');
+      return;
+    }
+
+    if (honeypot && honeypot.value.trim() !== '') {
+      showFeedback('error', 'Submission blocked.');
+      return;
+    }
+
+    const emailInput = document.getElementById('free-guide-email');
+    const email = emailInput?.value?.trim() || '';
+    if (!email) {
+      showFeedback('error', 'Enter a valid email address.');
+      return;
+    }
+
+    const payload = {
+      email,
+      source_page: '/free-guide/',
+      lead_magnet: 'ai-affiliate-master-blueprint-2026',
+      page_url: pageUrlField?.value || window.location.href,
+      referrer: referrerField?.value || document.referrer || '',
+      utm_source: document.getElementById('free-guide-utm-source')?.value || '',
+      utm_medium: document.getElementById('free-guide-utm-medium')?.value || '',
+      utm_campaign: document.getElementById('free-guide-utm-campaign')?.value || '',
+      utm_term: document.getElementById('free-guide-utm-term')?.value || '',
+      utm_content: document.getElementById('free-guide-utm-content')?.value || '',
+      consent_version: consent,
+      submitted_at: new Date().toISOString(),
+      user_agent: navigator.userAgent,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+    };
+
+    if (submitButton) {
+      submitButton.setAttribute('disabled', 'true');
+      submitButton.textContent = 'Submitting...';
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(data?.message || 'The automation endpoint returned an error.');
+      }
+
+      const status = data?.status || 'created';
+      showFeedback('success', successMessage(status, fallbackUrl));
+      form.reset();
+      setFieldValue('free-guide-utm-source', params.get('utm_source') || '');
+      setFieldValue('free-guide-utm-medium', params.get('utm_medium') || '');
+      setFieldValue('free-guide-utm-campaign', params.get('utm_campaign') || '');
+      setFieldValue('free-guide-utm-term', params.get('utm_term') || '');
+      setFieldValue('free-guide-utm-content', params.get('utm_content') || '');
+      if (pageUrlField) pageUrlField.value = window.location.href;
+      if (referrerField) referrerField.value = document.referrer || '';
+    } catch (error) {
+      const message = error instanceof Error
+        ? error.message
+        : 'Signup failed. Check the automation endpoint or CORS configuration.';
+      showFeedback('error', message);
+    } finally {
+      if (submitButton) {
+        submitButton.removeAttribute('disabled');
+        submitButton.textContent = 'Send me the guide →';
+      }
+    }
+  });
+</script>
