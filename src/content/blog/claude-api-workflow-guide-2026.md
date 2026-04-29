@@ -7,7 +7,7 @@ tags: ["claude-api", "claude-ai", "automation", "workflow", "2026"]
 keyword: "Claude API guide"
 cluster: "cluster-b-claude-ai"
 ogImage: "/images/blog/claude-api-workflow-guide-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
