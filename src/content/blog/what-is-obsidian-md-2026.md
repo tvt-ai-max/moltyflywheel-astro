@@ -6,6 +6,7 @@ category: guide
 tags: ["obsidian", "knowledge-management", "markdown", "note-taking", "productivity"]
 keyword: "what is obsidian"
 cluster: "cluster-o-knowledge-systems"
+ogImage: "/images/blog/what-is-obsidian-md-2026-cover.webp"
 draft: false
 ---
 
