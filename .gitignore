@@ -26,6 +26,7 @@ pnpm-debug.log*
 # documentation and tools
 *.md
 !README.md
+!CLAUDE.md
 !src/**/*.md
 push.sh
 shared_context.json

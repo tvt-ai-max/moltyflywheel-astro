@@ -1,6 +1,41 @@
 # moltyflywheel.com
 
-A high-performance Astro-based project integrated with a local SEO and GEO (Generative Engine Optimization) writing workflow.
+Astro 6 affiliate marketing site with automated daily blog publishing via Claude Code remote agents.
+
+**For AI agents working in this repo: read `CLAUDE.md` first.**
+
+---
+
+## Automated Daily Blog System
+
+A remote Claude Code agent (CCR) runs every day at **8:00 AM Saigon** and writes the scheduled blog post from `docs/May_2026_Content_Plan_v1.md`.
+
+| | |
+|---|---|
+| **Routine ID** | `trig_019jfYfyTxgG5qSNsF2CWgsp` |
+| **Schedule** | Daily 8:00 AM Saigon (`0 1 * * *` UTC) |
+| **Output** | Draft post pushed to `src/content/blog/` |
+| **Manage** | https://claude.ai/code/routines/trig_019jfYfyTxgG5qSNsF2CWgsp |
+
+### Blog post schema (CRITICAL — build fails if violated)
+
+```yaml
+category: guide | review | comparison | case-study | tutorial  # ONLY these 5 values
+description: "Max 160 characters"                              # count carefully
+draft: true                                                    # always for new posts
+```
+
+### Cover image workflow
+
+After the agent pushes a draft, generate the cover manually via Canva MCP:
+1. Open repo in Claude Code
+2. Run: "Create and push cover image for [date] blog post"
+3. Claude generates via Canva → converts to WebP → saves to `public/images/blog/[slug]-cover.webp` → pushes
+
+### Publish workflow
+
+`scripts/auto_publish.sh` handles flipping `draft: true → false` on the scheduled date.
+Deploy: GitHub Actions → Cloudflare Pages.
 
 ---
 

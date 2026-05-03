@@ -11,7 +11,7 @@ Quy uoc cap nhat:
 
 ## Current Snapshot
 
-Last updated: 2026-04-17
+Last updated: 2026-05-03
 
 ### Stack
 - Astro 6 static site
@@ -71,13 +71,26 @@ Last updated: 2026-04-17
 - `src/data/tools/migration-map-v1.json`: migration map from legacy 52-record tools dataset
 - `docs/MoltyFlywheel_System_Snapshot_v1.md`: higher-level project snapshot for future sessions
 
+### Automation System (added 2026-05-03)
+- Remote CCR routine: `trig_019jfYfyTxgG5qSNsF2CWgsp`
+- Schedule: daily 8:00 AM Saigon (`0 1 * * *` UTC)
+- Task: write daily scheduled post from `docs/May_2026_Content_Plan_v1.md`, validate build, push draft
+- MCP attached: Canva, Gamma, Notion, Google Calendar
+- Manage: https://claude.ai/code/routines/trig_019jfYfyTxgG5qSNsF2CWgsp
+
+### Blog Schema Constraints (CRITICAL — build fails if violated)
+- `category`: must be exactly one of `guide | review | comparison | case-study | tutorial`
+- `description`: must be ≤160 characters
+- `draft`: boolean, always `true` for new posts
+- Validate with `npm run build` before every push
+
 ### Content Inventory At Last Read
-- Blog posts: 43
+- Blog posts: 49 total (47 published, 2 draft)
 - Program reviews: 20
 - Offer markdown files: 2
 - Static offer pages: 7
 - Niche pages: 6
-- Blog cover images: 48
+- Blog cover images: 51
 - Program logo files: 10
 
 ### Behavioral Notes
