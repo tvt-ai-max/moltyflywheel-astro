@@ -2,7 +2,7 @@
 title: "Programs, Offers, or Tools: How to Choose Without Wasting Time"
 description: "Not sure whether to start with Programs, Offers, or Tools on MoltyFlywheel? This framework shows exactly which route fits your current stage and goal."
 pubDate: 2026-05-03
-category: framework
+category: guide
 tags: ["affiliate-marketing", "programs", "offers", "tools", "decision-support"]
 keyword: "how to choose between programs offers and tools"
 cluster: "cluster-o-offer-decision"

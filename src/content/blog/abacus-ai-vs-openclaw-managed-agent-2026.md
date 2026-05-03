@@ -1,6 +1,6 @@
 ---
 title: "Abacus AI vs OpenClaw: When a Managed Agent Platform Makes More Sense"
-description: "A practical comparison of Abacus AI (managed Claw path) vs self-managed OpenClaw — which route fits your team's current stage, capability, and operating model."
+description: "Abacus AI managed Claw vs self-managed OpenClaw — which route fits your team's current stage, capability, and operating model."
 pubDate: 2026-05-05
 category: comparison
 tags: ["abacus-ai", "openclaw", "ai-agents", "managed-agents", "workflow-automation"]

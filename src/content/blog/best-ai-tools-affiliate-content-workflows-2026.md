@@ -1,6 +1,6 @@
 ---
 title: "Best AI Tools for Affiliate Content Workflows in 2026"
-description: "A practical guide to which AI tools actually support affiliate content workflows in 2026 — writing, research, video, automation, and email, matched to your current stage."
+description: "Which AI tools actually fit affiliate content workflows in 2026? Writing, research, video, automation, and email — matched to your current stage."
 pubDate: 2026-05-04
 category: guide
 tags: ["affiliate-marketing", "ai-tools", "content-workflow", "writing-tools", "automation"]
