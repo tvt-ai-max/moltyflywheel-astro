@@ -8,6 +8,88 @@ Last updated: 2026-05-03
 
 ---
 
+## DAILY BLOG AGENT — Run this if invoked by the scheduled routine
+
+If you are the daily blog writer agent (invoked automatically at 8am Saigon), execute the following 8-step SOP exactly. Do not stop until the final report is complete.
+
+### SOP Step 1 — Date and schedule
+```bash
+date +%Y-%m-%d   # save as TODAY
+```
+Read `docs/May_2026_Content_Plan_v1.md`. Find the row where Date = TODAY.
+Extract: ID, Working Title, Track, Type, Funnel, CTA_TARGET.
+If no row matches: stop and report "No post scheduled for TODAY".
+
+### SOP Step 2 — Duplicate check
+```bash
+grep -rl "pubDate: TODAY" src/content/blog/
+```
+If any file has `draft: false` → stop "Already published".
+If any file has `draft: true` → stop "Draft already exists: [filename]".
+
+### SOP Step 3 — Load context (3 files only — no full post reads)
+1. This file (CLAUDE.md) — already loaded
+2. `docs/Blog_Style_Reference_v1.md` — tone, structure, all patterns
+3. `docs/MoltyFlywheel_InternalLinking_Map_v1.md` — sections 2 and 3 only (link targets)
+
+### SOP Step 4 — Slug and paths
+Slug: lowercase Working Title, hyphens only, no special chars, add `-2026` if year absent.
+- Post: `src/content/blog/[slug].md`
+- Cover: `public/images/blog/[slug]-cover.webp`
+
+### SOP Step 5 — Write the blog post
+Follow `docs/Blog_Style_Reference_v1.md` for tone, structure, patterns.
+Frontmatter (build fails if violated):
+- `description`: count every character — must be ≤160
+- `category`: `guide` | `review` | `comparison` | `case-study` | `tutorial` ONLY
+- `draft: true`
+- `pubDate: TODAY`
+- `ogImage: /images/blog/[slug]-cover.webp`
+- `cluster: cluster-[track]-[topic]`
+
+Content: answer-first opening → Quick Answer blockquote → H2/H3 sections → trade-offs → FAQ (4–6) → CTA block.
+Internal links: 1 same-cluster + 1 cross-cluster + 1 route-support + UTM `?utm_source=blog&utm_medium=internal&utm_campaign=[slug]`.
+Min 1000 words. English only. No fabricated claims.
+
+### SOP Step 6 — Validate schema then build
+```bash
+python3 scripts/validate_blog.py src/content/blog/[slug].md
+```
+Fix all errors before proceeding. Re-run until clean.
+Then run: `npm run build 2>&1 | tail -15`
+If build fails: fix the schema error and re-run. Max 3 attempts.
+
+### SOP Step 7 — Canva cover image
+7a. `generate-design`: design_type `youtube_thumbnail`, query: "Blog cover for [Working Title]. Dark navy #0a1628 background, grid overlay, glowing teal/cyan #00d4ff icons or nodes representing [topic], minimal text, clean tech aesthetic, 16:9". user_intent: "Dark blue tech blog cover for MoltyFlywheel".
+7b. Take `candidates[0]`. Call `create-design-from-candidate` → save `design_id`.
+7c. Call `export-design`: type `png`, width 1280, height 720, export_quality `pro`.
+7d. Download:
+```bash
+curl -L -s "[export_url]" -o /tmp/cover.png && ls -lh /tmp/cover.png
+```
+If < 50KB: call `export-design` again for fresh URL, re-download.
+7e. Convert:
+```bash
+python3 -c "from PIL import Image; img=Image.open('/tmp/cover.png'); img.save('public/images/blog/[slug]-cover.webp','WEBP',quality=85)"
+ls -lh public/images/blog/[slug]-cover.webp
+```
+If Canva fails: set `ogImage: ""` in post, note failure, continue.
+
+### SOP Step 8 — Commit and push
+```bash
+TOKEN=$(grep GITHUB_TOKEN .env | cut -d= -f2)
+git add src/content/blog/[slug].md
+git add public/images/blog/[slug]-cover.webp 2>/dev/null || true
+git commit -m "Add TODAY [ID] draft — [Working Title]"
+git push "https://${TOKEN}@github.com/tvt-ai-max/moltyflywheel-astro.git" main
+```
+If rejected: `git pull "https://${TOKEN}@github.com/tvt-ai-max/moltyflywheel-astro.git" main --rebase` then push again.
+
+### SOP Final Report
+One-line per field: Status | File | Title | pubDate | Cover | Schema | Build | Commit | Push
+
+---
+
 ## 1. Read This First
 
 Before any content, code, or route work, read in order:
