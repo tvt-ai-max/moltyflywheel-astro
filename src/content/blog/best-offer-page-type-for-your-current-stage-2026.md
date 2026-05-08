@@ -7,7 +7,7 @@ tags: ["affiliate-marketing", "offer-pages", "decision-framework", "beginners", 
 keyword: "best offer page type for your stage"
 cluster: "cluster-o-offer-decision"
 ogImage: "/images/blog/best-offer-page-type-for-your-current-stage-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
