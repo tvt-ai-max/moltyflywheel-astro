@@ -7,7 +7,7 @@ tags: ["convertkit", "beehiiv", "email-marketing", "newsletter-tools", "affiliat
 keyword: "convertkit vs beehiiv"
 cluster: "cluster-p-affiliate-programs"
 ogImage: "/images/blog/convertkit-vs-beehiiv-for-ai-content-operators-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
