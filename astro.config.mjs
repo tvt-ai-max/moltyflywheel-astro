@@ -11,7 +11,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/newsletter') && !page.includes('/privacy'),
+      filter: (page) => !page.includes('/newsletter') && !page.includes('/privacy') && !page.includes('/search'),
       changefreq: 'weekly',
       priority: 0.7,
     }),

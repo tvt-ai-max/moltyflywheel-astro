@@ -2,20 +2,25 @@
 const {
   title,
   description,
-  canonical = new URL(`${Astro.url.pathname}${Astro.url.search}`, Astro.site).toString(),
-  ogImage = '/assets/og-default.png'
+  canonical = new URL(Astro.url.pathname, Astro.site).toString(),
+  ogImage = '/assets/og-default.png',
+  ogType = 'website',
+  robots,
+  structuredData,
 } = Astro.props;
-const fullTitle = `${title} | MoltyFlywheel`;
+const fullTitle = title.includes('MoltyFlywheel') ? title : `${title} | MoltyFlywheel`;
 ---
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
+{robots && <meta name="robots" content={robots} />}
 <link rel="canonical" href={canonical} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(ogImage, Astro.site)} />
 <meta property="og:url" content={canonical} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}

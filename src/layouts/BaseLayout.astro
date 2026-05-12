@@ -7,10 +7,14 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  canonical?: string;
   ogImage?: string;
+  ogType?: string;
+  robots?: string;
+  structuredData?: unknown;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, canonical, ogImage, ogType, robots, structuredData } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +23,15 @@ const { title, description, ogImage } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="ddeY6lw7wIYllf5jofjz9b0gNsEpUNehsFfW2jHXgxk" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <SEO title={title} description={description} ogImage={ogImage} />
+  <SEO
+    title={title}
+    description={description}
+    canonical={canonical}
+    ogImage={ogImage}
+    ogType={ogType}
+    robots={robots}
+    structuredData={structuredData}
+  />
   <!-- Plausible Analytics (self-hosted) — outbound-links + tagged-events variant -->
   <!-- outbound-links: auto-tracks external link clicks as "Outbound Link: Click" -->
   <!-- tagged-events: enables plausible() JS calls for custom named events -->

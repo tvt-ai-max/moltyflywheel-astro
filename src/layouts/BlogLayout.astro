@@ -43,6 +43,68 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const imageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
+const siteUrl = new URL('/', Astro.site).toString();
+const blogUrl = new URL('/blog/', Astro.site).toString();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BlogPosting',
+      '@id': `${canonicalUrl}#article`,
+      headline: title,
+      description,
+      url: canonicalUrl,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonicalUrl,
+      },
+      datePublished: pubDate.toISOString(),
+      dateModified: pubDate.toISOString(),
+      author: {
+        '@type': 'Organization',
+        name: 'MoltyFlywheel',
+        url: siteUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'MoltyFlywheel',
+        url: siteUrl,
+      },
+      image: imageUrl ? [imageUrl] : undefined,
+      articleSection: displayCategory,
+      keywords: tags,
+      isAccessibleForFree: true,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonicalUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: siteUrl,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Blog',
+          item: blogUrl,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: title,
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
+
 // Primary CTA affiliate program (first in list)
 const primaryProgram = affiliatePrograms[0] ?? null;
 
@@ -56,7 +118,14 @@ const categoryColorClass = category === 'comparison'
       : 'text-[#5ea4bf] bg-[#5ea4bf]/10 border border-[#5ea4bf]/25';
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonicalUrl}
+  ogImage={ogImage}
+  ogType="article"
+  structuredData={structuredData}
+>
   <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-10">
     <div class="flex gap-6 relative">
 
