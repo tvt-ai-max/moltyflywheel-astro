@@ -7,7 +7,7 @@ tags: ["affiliate-programs", "affiliate-platforms", "decision-framework", "offer
 keyword: "affiliate program vs affiliate platform"
 cluster: "cluster-o-offer-decision"
 ogImage: "/images/blog/affiliate-program-vs-affiliate-platform-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
