@@ -7,7 +7,7 @@ tags: ["n8n", "make", "workflow-automation", "ai-operations", "affiliate-program
 keyword: "n8n vs make"
 cluster: "cluster-p-affiliate-programs"
 ogImage: "/images/blog/n8n-vs-make-for-lean-ai-operations-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
