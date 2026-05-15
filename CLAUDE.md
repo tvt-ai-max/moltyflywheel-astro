@@ -4,7 +4,7 @@ Project: `moltyflywheel.com`
 Stack: Astro 6 + Tailwind CSS v4 + Cloudflare Pages
 Canonical host: `https://www.moltyflywheel.com`
 GitHub: `https://github.com/tvt-ai-max/moltyflywheel-astro`
-Last updated: 2026-05-03
+Last updated: 2026-05-15
 
 ---
 
@@ -364,3 +364,78 @@ Fix: `git pull --rebase` then push again.
 
 ### Canva export URL returns < 50KB file
 The signed URL expired. Call `export-design` again to get a fresh URL.
+
+---
+
+## 11. Site Architecture Rules — DO NOT VIOLATE
+
+These rules were audited and fixed on 2026-05-15. Violating them creates SEO issues or broken navigation.
+
+### Trailing slash — always required
+
+`astro.config.mjs` has `trailingSlash: 'always'`. Every internal link MUST end with `/`.
+
+```
+✅ /blog/          /tools/abacus-ai/     /programs/beehiiv/
+❌ /blog           /tools/abacus-ai      /programs/beehiiv
+```
+
+This applies to all links in: blog posts, component nav, offer pages, tool pages, anywhere.
+
+### Navigation — what exists and what does not
+
+The site has NO `/niches/` index page. Do NOT add a "Niches" link to the header or footer nav. The `/niche/[niche]/` dynamic route exists for SEO cluster pages only — they are not surfaced in navigation.
+
+Current valid nav links:
+```
+/          (Home)
+/blog/
+/programs/
+/offers/
+/tools/
+/search/
+/free-guide/
+/privacy/    (footer only)
+/contact/    (footer only)
+```
+
+### Placeholder tool category pages — noindex
+
+`/tools/link-tracking/`, `/tools/seo/`, `/tools/email-marketing/`, `/tools/funnel-building/` exist as placeholder pages with `robots="noindex, nofollow"` and are excluded from the sitemap. Do NOT link to them from blog posts or navigation. Do NOT remove the noindex.
+
+### Sitemap filter rules
+
+`astro.config.mjs` sitemap filter excludes:
+- `/newsletter` (reserved, not built)
+- `/privacy` (legal, no SEO value)
+- `/search` (utility page)
+- `/tools/link-tracking`, `/tools/seo/`, `/tools/email-marketing`, `/tools/funnel-building` (placeholders)
+
+When adding new placeholder or utility pages, add them to this filter.
+
+### Offer route namespaces
+
+Two separate offer route namespaces exist — they are NOT the same thing:
+- `/offers/[slug]/` — static offer detail pages in `src/pages/offers/` (7 pages)
+- `/p/[offer]/` — dynamic offer pages sourced from `src/content/offers/` collection (2 pages)
+
+Do not confuse them. Do not add content to one route when it belongs in the other.
+
+### Publishing a draft
+
+To publish a draft blog post: change `draft: true` → `draft: false` in the frontmatter and push.
+Do NOT change `pubDate`. Do NOT rebuild unless you also changed content.
+
+```bash
+# Example
+git add src/content/blog/[slug].md
+git commit -m "Publish YYYY-MM-DD [ID] — [Title] (draft: false)"
+git push "https://${TOKEN}@github.com/tvt-ai-max/moltyflywheel-astro.git" main
+```
+
+### GITHUB_TOKEN location
+
+`.env` is NOT committed and NOT present in git worktrees. Always read from the main repo:
+```bash
+TOKEN=$(grep GITHUB_TOKEN /Users/phiyen/Downloads/mrtonyai/openclaw/moltyflywheel.com/.env | cut -d= -f2)
+```

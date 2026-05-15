@@ -21,6 +21,34 @@ description: >
 - Always run `npm run build` before committing any blog post
 - A blog task is NOT complete until build passes and git push succeeds
 
+**TRAILING SLASH RULE — ALL INTERNAL LINKS MUST END WITH `/`:**
+`astro.config.mjs` enforces `trailingSlash: 'always'`. Every link written in blog content MUST use trailing slashes or Cloudflare will redirect, creating unnecessary redirect chains.
+```
+✅ /tools/abacus-ai/     /programs/beehiiv/     /offers/find-your-best-affiliate-fit/
+❌ /tools/abacus-ai      /programs/beehiiv      /offers/find-your-best-affiliate-fit
+```
+
+**VALID INTERNAL LINK TARGETS — only link to these routes:**
+```
+Tools:    /tools/abacus-ai/   /tools/topview-ai/   /tools/higgsfield/
+          /tools/openrouter/  /tools/kyma-api/      /tools/obsidian/   /tools/9router/
+Offers:   /offers/find-your-best-affiliate-fit/
+          /offers/affiliate-tools-for-content-creators/
+          /offers/compare-affiliate-platforms/
+          /offers/best-affiliate-programs-for-beginners/
+          /offers/high-ticket-affiliate-programs/
+          /offers/recurring-commission-affiliate-programs/
+Programs: /programs/convertkit/  /programs/beehiiv/  /programs/n8n/  /programs/make/
+          /programs/surfer-seo/  /programs/koala-writer/  /programs/semrush/
+Blog:     /blog/[slug]/  (no UTM needed for blog-to-blog)
+```
+Do NOT link to `/tools/link-tracking/`, `/tools/seo/`, `/tools/email-marketing/`, `/tools/funnel-building/` — these are placeholder pages with noindex.
+Do NOT link to `/niche/[anything]/` — niche pages are not in navigation and have no index page.
+
+**UTM RULE:**
+- Links to `/tools/`, `/offers/`, `/programs/` MUST include UTM: `?utm_source=blog&utm_medium=internal&utm_campaign=[slug]`
+- Links to other `/blog/` posts: no UTM needed
+
 
 Skill này giúp viết bài blog/content dài chuẩn SEO + GEO theo hệ thống **Antigravity Content Framework**,
 tích hợp Answer-first philosophy, tối ưu cho cả Google Search và AI-powered search engines (SGE, Perplexity, v.v.).
@@ -77,11 +105,13 @@ Luôn tuân thủ cấu trúc sau. Đọc chi tiết tại `references/blog-temp
 Đọc chi tiết quy tắc tại `references/internal-linking-rules.md`.
 
 **Tóm tắt nhanh:**
-- Mỗi bài PHẢI có đúng **2 internal links**
+- Mỗi bài PHẢI có **tối thiểu 3 internal links** (CLAUDE.md yêu cầu: 1 same-cluster + 1 cross-cluster + 1 route-support)
 - Link 1: Bài cùng cluster → đặt ở phần đầu bài (Intro hoặc Problem Diagnosis)
 - Link 2: Bài khác cluster → đặt ở phần cuối bài (Checklist hoặc CTA section)
+- Link 3: Route-support link tới `/tools/`, `/offers/`, hoặc `/programs/` (kèm UTM)
 - Anchor text phải mô tả nội dung đích, không dùng "click here" hay "xem thêm"
-- Tất cả link về Hub/Landing Page phải kèm UTM: `?utm_source=blog&utm_medium=internal&utm_campaign=[slug-bai-viet]`
+- Tất cả link tới `/tools/`, `/offers/`, `/programs/` PHẢI kèm UTM: `?utm_source=blog&utm_medium=internal&utm_campaign=[slug-bai-viet]`
+- Tất cả link PHẢI có trailing slash: `/tools/abacus-ai/` không phải `/tools/abacus-ai`
 
 ---
 
@@ -122,14 +152,19 @@ Trước khi xuất bài, tự kiểm tra:
 ```yaml
 ---
 title: "[H1 của bài]"
-description: "[Meta description 150-160 ký tự]"
+description: "[Meta description ≤160 ký tự — đếm từng ký tự]"
 pubDate: YYYY-MM-DD
+category: guide          # ONLY: guide | review | comparison | case-study | tutorial
 keyword: "[từ khóa chính]"
 cluster: "[cluster-slug]"
 tags: ["tag1", "tag2"]
-draft: false
+ogImage: "/images/blog/[slug]-cover.webp"
+draft: true              # LUÔN true khi tạo mới — flip sang false khi publish
+featured: false
 ---
 ```
+
+**PUBLISH WORKFLOW:** Bài mới luôn tạo với `draft: true`. Khi muốn publish: chỉ đổi sang `draft: false`, commit, push. Không rebuild nếu không thay đổi content.
 
 ---
 
