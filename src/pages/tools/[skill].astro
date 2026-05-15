@@ -16,9 +16,10 @@ const { skill } = Astro.params;
 const formattedTitle = skill ? skill.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'Tools';
 ---
 
-<BaseLayout 
-  title={`${formattedTitle} Tools for Affiliate Marketing`} 
+<BaseLayout
+  title={`${formattedTitle} Tools for Affiliate Marketing`}
   description={`Explore recommended ${formattedTitle.toLowerCase()} tools for your affiliate marketing workflow.`}
+  robots="noindex, nofollow"
 >
   <section class="py-20 bg-gray-900 border-b border-gray-800">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
