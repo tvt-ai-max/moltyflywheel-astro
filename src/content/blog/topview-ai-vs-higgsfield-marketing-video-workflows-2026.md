@@ -7,7 +7,7 @@ tags: ["topview-ai", "higgsfield", "ai-video", "marketing-video", "creator-tools
 keyword: "topview ai vs higgsfield"
 cluster: "cluster-t-topview-ai"
 ogImage: "/images/blog/topview-ai-vs-higgsfield-marketing-video-workflows-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
