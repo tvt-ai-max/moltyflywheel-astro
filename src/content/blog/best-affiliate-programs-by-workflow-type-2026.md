@@ -7,7 +7,7 @@ tags: ["affiliate-programs", "affiliate-marketing", "workflow", "commission", "m
 keyword: "best affiliate programs by workflow type"
 cluster: "cluster-o-offer-decision"
 ogImage: "/images/blog/best-affiliate-programs-by-workflow-type-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
