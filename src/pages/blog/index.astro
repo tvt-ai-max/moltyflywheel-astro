@@ -82,8 +82,7 @@ function getThumbnail(post: typeof allPosts[number]) {
 
 const featuredSource = urlCategory === 'all' ? allPosts : filteredPosts;
 const explicitlyFeatured = featuredSource.filter((post) => post.data.featured);
-const fallbackFeatured = featuredSource.filter((post) => !explicitlyFeatured.some((item) => item.id === post.id));
-const editorialFeatures = [...explicitlyFeatured, ...fallbackFeatured]
+const editorialFeatures = (explicitlyFeatured.length > 0 ? explicitlyFeatured : featuredSource)
   .slice(0, 2)
   .map((post) => ({
     ...post,
