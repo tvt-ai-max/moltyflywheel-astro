@@ -7,7 +7,7 @@ tags: ["hosted-agents", "abacus-ai", "ai-workflows", "agent-platforms", "workflo
 keyword: "hosted agent platform"
 cluster: "cluster-a-abacus-ai"
 ogImage: "/images/blog/how-to-evaluate-hosted-agent-platform-before-replacing-stack-2026-cover.webp"
-draft: true
+draft: false
 featured: false
 ---
 
