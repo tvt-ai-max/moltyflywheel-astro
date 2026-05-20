@@ -36,6 +36,14 @@ const { title, description, canonical, ogImage, ogType, robots, structuredData }
   <!-- outbound-links: auto-tracks external link clicks as "Outbound Link: Click" -->
   <!-- tagged-events: enables plausible() JS calls for custom named events -->
   <script defer data-domain="moltyflywheel.com" src="https://plausible.moltyflywheel.com/js/script.outbound-links.tagged-events.js"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JDFSM4YMSC"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JDFSM4YMSC');
+  </script>
 </head>
 <body class="bg-gray-950 text-gray-100 font-sans antialiased">
   <Header />
